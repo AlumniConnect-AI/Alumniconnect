@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.Sc.",
+    "field": "Multimedia & Graphics",
+    "year": 2023
+  },
+  "current_role": "3D Designer",
+  "skills": [
+    {
+      "name": "C#",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Wrote asset behavioral logic scripts."
+      ]
+    },
+    {
+      "name": "Unity",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Rendered simple UI scenes and objects in editor."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Interactive Object Demo",
+      "description": "Unity project containing rotating models with script triggers.",
+      "technologies": [
+        "Unity",
+        "C#"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Design Intern",
+      "company": "GameSpace",
+      "duration_months": 9.0,
+      "skills": [
+        "Unity"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "AR Development",
+    "Spatial Layouts"
+  ],
+  "target_career": "AR Developer",
+  "target_duration_months": 6
+}

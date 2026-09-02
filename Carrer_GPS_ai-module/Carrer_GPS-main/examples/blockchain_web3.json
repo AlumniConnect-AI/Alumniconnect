@@ -1,0 +1,63 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Software Engineering",
+    "year": 2022
+  },
+  "current_role": "Full Stack Developer",
+  "skills": [
+    {
+      "name": "JavaScript",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Developed React portals and Node endpoints."
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Maintained interfaces and configuration files."
+      ]
+    },
+    {
+      "name": "Git",
+      "level": 3,
+      "years": 3.0,
+      "evidence": [
+        "Managed source files and release tags."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Voting Interface",
+      "description": "React-based interface to record user inputs.",
+      "technologies": [
+        "JavaScript",
+        "TypeScript",
+        "Git"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Web Engineer",
+      "company": "SmartPortal",
+      "duration_months": 18.0,
+      "skills": [
+        "JavaScript",
+        "TypeScript"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Smart Contracts",
+    "Cryptography"
+  ],
+  "target_career": "Blockchain Developer",
+  "target_duration_months": 6
+}

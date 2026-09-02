@@ -1,0 +1,44 @@
+{
+  "education": {
+    "degree": "B.A.",
+    "field": "English Literature",
+    "year": 2022
+  },
+  "current_role": "Content Writer",
+  "skills": [
+    {
+      "name": "Communication",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Drafted public release summaries and tutorials."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Tutorial Guide Book",
+      "description": "Markdown book layout of software user guides.",
+      "technologies": [
+        "Communication"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Copywriter",
+      "company": "TechBlog",
+      "duration_months": 12.0,
+      "skills": [
+        "Communication"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Technical Writing",
+    "API Documentation"
+  ],
+  "target_career": "Technical Writer",
+  "target_duration_months": 6
+}

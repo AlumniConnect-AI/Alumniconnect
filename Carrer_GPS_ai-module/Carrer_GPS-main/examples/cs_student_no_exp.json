@@ -1,0 +1,59 @@
+{
+  "education": {
+    "degree": "B.Tech",
+    "field": "Computer Science & Engineering",
+    "year": 4
+  },
+  "current_role": "Student",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Completed class programming assignments."
+      ]
+    },
+    {
+      "name": "Java",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Completed OOP fundamentals curriculum."
+      ]
+    },
+    {
+      "name": "System Design",
+      "level": 3,
+      "years": 1.0,
+      "evidence": [
+        "Studied distributed systems architecture in coursework."
+      ]
+    },
+    {
+      "name": "Docker",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Created container configurations for academic apps."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CLI Library Manager",
+      "description": "Simple academic CLI program mapping stored items.",
+      "technologies": [
+        "Java"
+      ]
+    }
+  ],
+  "experience": [],
+  "certifications": [],
+  "interests": [
+    "Software Engineering",
+    "Systems Programming"
+  ],
+  "target_career": "Software Engineer",
+  "target_duration_months": 6
+}

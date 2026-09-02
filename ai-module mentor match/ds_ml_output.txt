@@ -1,0 +1,33 @@
+﻿============================================================
+  DATA SCIENTIST VS ML ENGINEER JD ΓÇö VERIFICATION REPORT
+============================================================
+
+1. JD Text Experience String : 'Experience Required: 3+ years'
+   Extracted JD Experience   : 3.0 years
+
+2. Extracted Candidate Profile Exp : 4.0 years
+   Extracted Candidate Education   : ['masters']
+   Extracted Tech Skills           : ['deep learning', 'docker', 'git', 'machine learning', 'nlp', 'postgresql', 'python', 'pytorch', 'scikit-learn', 'tensorflow']
+
+3. Overall Career Score     : 76.66 / 100
+   Tier                     : Strong Match Γ£à
+   Skill Match Score        : 90.91%
+   Semantic Similarity      : 35.51%
+   Experience Match Score   : 93.33%
+   Education Score          : 85.0%
+
+4. Matched Skills   : ['deep learning', 'docker', 'git', 'machine learning', 'nlp', 'postgresql', 'python', 'pytorch', 'scikit-learn', 'tensorflow']
+   Missing Skills   : ['mongodb']
+   Skill Strengths  : []
+   Skill Coverage % : 90.9%
+
+5. Recommended Roles:
+   ΓåÆ AI / ML Engineer                 (100.0%)
+   ΓåÆ Backend Developer                (66.7%)
+   ΓåÆ Data Scientist                   (66.7%)
+
+6. Recommendations:
+   ΓÇó ≡ƒÄ» Focus on acquiring: mongodb ΓÇö these are directly required by the role.
+   ΓÇó ≡ƒîƒ Excellent skill coverage! Highlight your matched skills prominently in your resume.
+
+Γ£à VERIFICATION COMPLETE: ALL ASSERTS PASSED SUCCESSFULLY!

@@ -1,0 +1,63 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Computer Science",
+    "year": 2024
+  },
+  "current_role": "Junior Software Engineer",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Maintained enterprise Django application backend."
+      ]
+    },
+    {
+      "name": "Java",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Refactored legacy Spring Boot API services."
+      ]
+    },
+    {
+      "name": "Git",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Used standard Git workflows for branching and pull requests."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "API Service Refactoring",
+      "description": "Optimized response time of Spring Boot microservices.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Git"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Software Engineering Intern",
+      "company": "DevCorp",
+      "duration_months": 6.0,
+      "skills": [
+        "Java",
+        "Git"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Backend Development",
+    "System Design"
+  ],
+  "target_career": "Software Engineer",
+  "target_duration_months": 6
+}

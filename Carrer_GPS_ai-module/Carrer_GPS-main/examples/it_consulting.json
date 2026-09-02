@@ -1,0 +1,54 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Information Systems",
+    "year": 2021
+  },
+  "current_role": "IT Analyst",
+  "skills": [
+    {
+      "name": "Communication",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Facilitated stakeholder architecture sessions."
+      ]
+    },
+    {
+      "name": "Business Analysis",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Calculated system deprecation timelines."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Cloud ROI Projection",
+      "description": "Spreadsheet calculations mapping host costs to future clouds.",
+      "technologies": [
+        "Business Analysis",
+        "Communication"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Consulting Associate",
+      "company": "ConsultCo",
+      "duration_months": 24.0,
+      "skills": [
+        "Business Analysis",
+        "Communication"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "IT Consulting",
+    "Digital Transformation"
+  ],
+  "target_career": "IT Consultant",
+  "target_duration_months": 12
+}

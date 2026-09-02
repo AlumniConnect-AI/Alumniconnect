@@ -1,0 +1,78 @@
+﻿
+==  TEST 1: Flutter Dev vs Flutter JD  ==
+Career Score     : 76.81 / 100
+Tier             : Strong Match Γ£à
+Skill Score      : 100.0%
+Semantic Score   : 33.23%
+Experience Score : 90.0%
+Education Score  : 70.0%
+Skill Coverage   : 100.0%
+Matched Skills   : ['android', 'dart', 'firebase', 'flutter', 'git', 'ios']
+Missing Skills   : []
+Skill Strengths  : []
+Suggested Roles  :
+  -> Mobile App Developer (Flutter) (83.3%)
+  -> Android Developer (75.0%)
+  -> DevOps Engineer (20.0%)
+Recommendations  :
+  - ≡ƒîƒ Excellent skill coverage! Highlight your matched skills prominently in your resume.
+
+==  TEST 2: Data Scientist vs ML Engineer JD  ==
+Career Score     : 76.66 / 100
+Tier             : Strong Match Γ£à
+Skill Score      : 90.91%
+Semantic Score   : 35.51%
+Experience Score : 93.33%
+Education Score  : 85.0%
+Skill Coverage   : 90.9%
+Matched Skills   : ['deep learning', 'docker', 'git', 'machine learning', 'nlp', 'postgresql', 'python', 'pytorch', 'scikit-learn', 'tensorflow']
+Missing Skills   : ['mongodb']
+Skill Strengths  : []
+Suggested Roles  :
+  -> AI / ML Engineer (100.0%)
+  -> Backend Developer (66.7%)
+  -> Data Scientist (66.7%)
+Recommendations  :
+  - ≡ƒÄ» Focus on acquiring: mongodb ΓÇö these are directly required by the role.
+  - ≡ƒîƒ Excellent skill coverage! Highlight your matched skills prominently in your resume.
+
+==  TEST 3: Fresh Grad vs Frontend JD  ==
+Career Score     : 54.05 / 100
+Tier             : Weak Match ΓÜá∩╕Å
+Skill Score      : 100.0%
+Semantic Score   : 14.19%
+Experience Score : 0.0%
+Education Score  : 70.0%
+Skill Coverage   : 100.0%
+Matched Skills   : ['css', 'git', 'html', 'javascript', 'react']
+Missing Skills   : []
+Skill Strengths  : ['mysql', 'python']
+Suggested Roles  :
+  -> Frontend Developer (83.3%)
+  -> Full-Stack Web Developer (71.4%)
+  -> Backend Developer (50.0%)
+Recommendations  :
+  - ≡ƒîƒ Excellent skill coverage! Highlight your matched skills prominently in your resume.
+  - Γ£¿ Highlight your extra strengths: mysql, python ΓÇö these differentiate you from other candidates.
+
+==  TEST 4: Mismatch - Mobile Dev vs ML JD  ==
+Career Score     : 29.48 / 100
+Tier             : Poor Match Γ¥î
+Skill Score      : 9.09%
+Semantic Score   : 8.03%
+Experience Score : 66.67%
+Education Score  : 70.0%
+Skill Coverage   : 9.1%
+Matched Skills   : ['git']
+Missing Skills   : ['deep learning', 'docker', 'machine learning', 'mongodb', 'nlp', 'postgresql', 'python', 'pytorch', 'scikit-learn', 'tensorflow']
+Skill Strengths  : ['android', 'dart', 'firebase', 'flutter', 'ios']
+Suggested Roles  :
+  -> Mobile App Developer (Flutter) (83.3%)
+  -> Android Developer (75.0%)
+  -> DevOps Engineer (20.0%)
+Recommendations  :
+  - ≡ƒÄ» Focus on acquiring: deep learning, docker, machine learning ΓÇö these are directly required by the role.
+  - ≡ƒôÜ Your skill coverage is below 60%. Consider targeted upskilling before applying.
+  - Γ£¿ Highlight your extra strengths: android, dart, firebase ΓÇö these differentiate you from other candidates.
+
+All tests completed successfully!

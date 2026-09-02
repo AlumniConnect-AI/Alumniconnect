@@ -1,0 +1,52 @@
+{
+  "education": {
+    "degree": "B.Sc.",
+    "field": "System Administration",
+    "year": 2023
+  },
+  "current_role": "IT Support Specialist",
+  "skills": [
+    {
+      "name": "Windows Administrator",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Managed Active Directory identities and domain policies."
+      ]
+    },
+    {
+      "name": "Linux",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Assembled basic virtual server components."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Domain Migration",
+      "description": "Migrated workstation identities to a newer Active Directory forest.",
+      "technologies": [
+        "Windows Administrator"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Desktop Engineer",
+      "company": "EnterpriseOffice",
+      "duration_months": 12.0,
+      "skills": [
+        "Windows Administrator"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "IT Infrastructure",
+    "Systems Integration"
+  ],
+  "target_career": "Infrastructure Engineer",
+  "target_duration_months": 6
+}

@@ -1,0 +1,150 @@
+{
+  "dependencies": {
+    "Python": [],
+    "Java": [],
+    "JavaScript": [],
+    "TypeScript": [
+      "JavaScript"
+    ],
+    "C": [],
+    "C++": [
+      "C"
+    ],
+    "C#": [],
+    "Go": [],
+    "Rust": [],
+    "Dart": [],
+    "Kotlin": [
+      "Java"
+    ],
+    "Swift": [],
+    "PHP": [],
+    "Ruby": [],
+    "R": [],
+    "Scala": [
+      "Java"
+    ],
+    "SQL": [],
+    "Bash": [],
+    "PowerShell": [],
+    "Solidity": [],
+    "Apex": [],
+    "HTML/CSS": [],
+    "Flutter": [
+      "Dart"
+    ],
+    "React": [
+      "JavaScript"
+    ],
+    "Next.js": [
+      "React",
+      "TypeScript"
+    ],
+    "Node.js": [
+      "JavaScript"
+    ],
+    "Express": [
+      "Node.js"
+    ],
+    "Django": [
+      "Python"
+    ],
+    "FastAPI": [
+      "Python"
+    ],
+    "Spring Boot": [
+      "Java"
+    ],
+    "TensorFlow": [
+      "Python"
+    ],
+    "PyTorch": [
+      "Deep Learning"
+    ],
+    "Scikit-Learn": [
+      "Python"
+    ],
+    "Pandas": [
+      "Python"
+    ],
+    "NumPy": [
+      "Python"
+    ],
+    "Unity": [
+      "C#"
+    ],
+    "Unreal Engine": [
+      "C++"
+    ],
+    "ROS": [
+      "C++",
+      "Python"
+    ],
+    "ROS 2": [
+      "ROS"
+    ],
+    "PostgreSQL": [
+      "SQL"
+    ],
+    "MySQL": [
+      "SQL"
+    ],
+    "MongoDB": [],
+    "Redis": [],
+    "Cassandra": [],
+    "DynamoDB": [],
+    "Snowflake": [
+      "SQL"
+    ],
+    "BigQuery": [
+      "SQL"
+    ],
+    "Oracle Database": [
+      "SQL"
+    ],
+    "SQL Server": [
+      "SQL"
+    ],
+    "AWS": [],
+    "Azure": [],
+    "GCP": [],
+    "Docker": [
+      "Linux"
+    ],
+    "Kubernetes": [
+      "Docker"
+    ],
+    "Terraform": [],
+    "Git": [],
+    "CI/CD": [
+      "Git"
+    ],
+    "Linux": [],
+    "Cryptography": [],
+    "Penetration Testing": [
+      "Linux"
+    ],
+    "Application Security": [],
+    "Network Security": [],
+    "IAM": [],
+    "Figma": [],
+    "Wireframing": [],
+    "UX Research": [],
+    "State Management": [],
+    "Clean Architecture": [],
+    "System Design": [],
+    "Testing": [],
+    "Communication": [],
+    "Native Android": [],
+    "REST APIs": [],
+    "Deep Learning": [
+      "Machine Learning"
+    ],
+    "Machine Learning": [
+      "Python"
+    ],
+    "Business Analysis": [],
+    "Product Strategy": [],
+    "Firebase": []
+  }
+}

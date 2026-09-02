@@ -1,0 +1,938 @@
+{
+  "learning_paths": {
+    "Flutter": {
+      "hours_per_level": 20,
+      "resources": [
+        "Official Flutter Tutorial",
+        "Advanced Flutter guide on GitHub"
+      ],
+      "milestones": [
+        "Learn basics of Flutter starting from Dart",
+        "Sequence: Dart Basics, Object-Oriented Dart, Async Dart, Flutter Fundamentals, State Management, Clean Architecture, Testing, CI/CD, Production Deployment"
+      ]
+    },
+    "PyTorch": {
+      "hours_per_level": 20,
+      "resources": [
+        "Official PyTorch Tutorial",
+        "Advanced PyTorch guide on GitHub"
+      ],
+      "milestones": [
+        "Learn basics of PyTorch starting from Python",
+        "Sequence: Python Basics, NumPy & Pandas data manipulation, Scikit-Learn algorithms, Deep Learning fundamentals, PyTorch neural model tuning"
+      ]
+    },
+    "Python": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Python Documentation",
+        "Google Search: Learn Python"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Python",
+        "Level 3: Apply Python in basic projects",
+        "Level 4: Master advanced configurations of Python"
+      ]
+    },
+    "Java": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Java Documentation",
+        "Google Search: Learn Java"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Java",
+        "Level 3: Apply Java in basic projects",
+        "Level 4: Master advanced configurations of Java"
+      ]
+    },
+    "JavaScript": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official JavaScript Documentation",
+        "Google Search: Learn JavaScript"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of JavaScript",
+        "Level 3: Apply JavaScript in basic projects",
+        "Level 4: Master advanced configurations of JavaScript"
+      ]
+    },
+    "TypeScript": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official TypeScript Documentation",
+        "Google Search: Learn TypeScript"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of TypeScript",
+        "Level 3: Apply TypeScript in basic projects",
+        "Level 4: Master advanced configurations of TypeScript"
+      ]
+    },
+    "C": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official C Documentation",
+        "Google Search: Learn C"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of C",
+        "Level 3: Apply C in basic projects",
+        "Level 4: Master advanced configurations of C"
+      ]
+    },
+    "C++": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official C++ Documentation",
+        "Google Search: Learn C++"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of C++",
+        "Level 3: Apply C++ in basic projects",
+        "Level 4: Master advanced configurations of C++"
+      ]
+    },
+    "C#": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official C# Documentation",
+        "Google Search: Learn C#"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of C#",
+        "Level 3: Apply C# in basic projects",
+        "Level 4: Master advanced configurations of C#"
+      ]
+    },
+    "Go": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Go Documentation",
+        "Google Search: Learn Go"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Go",
+        "Level 3: Apply Go in basic projects",
+        "Level 4: Master advanced configurations of Go"
+      ]
+    },
+    "Rust": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Rust Documentation",
+        "Google Search: Learn Rust"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Rust",
+        "Level 3: Apply Rust in basic projects",
+        "Level 4: Master advanced configurations of Rust"
+      ]
+    },
+    "Dart": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Dart Documentation",
+        "Google Search: Learn Dart"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Dart",
+        "Level 3: Apply Dart in basic projects",
+        "Level 4: Master advanced configurations of Dart"
+      ]
+    },
+    "Kotlin": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Kotlin Documentation",
+        "Google Search: Learn Kotlin"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Kotlin",
+        "Level 3: Apply Kotlin in basic projects",
+        "Level 4: Master advanced configurations of Kotlin"
+      ]
+    },
+    "Swift": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Swift Documentation",
+        "Google Search: Learn Swift"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Swift",
+        "Level 3: Apply Swift in basic projects",
+        "Level 4: Master advanced configurations of Swift"
+      ]
+    },
+    "PHP": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official PHP Documentation",
+        "Google Search: Learn PHP"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of PHP",
+        "Level 3: Apply PHP in basic projects",
+        "Level 4: Master advanced configurations of PHP"
+      ]
+    },
+    "Ruby": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Ruby Documentation",
+        "Google Search: Learn Ruby"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Ruby",
+        "Level 3: Apply Ruby in basic projects",
+        "Level 4: Master advanced configurations of Ruby"
+      ]
+    },
+    "R": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official R Documentation",
+        "Google Search: Learn R"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of R",
+        "Level 3: Apply R in basic projects",
+        "Level 4: Master advanced configurations of R"
+      ]
+    },
+    "Scala": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Scala Documentation",
+        "Google Search: Learn Scala"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Scala",
+        "Level 3: Apply Scala in basic projects",
+        "Level 4: Master advanced configurations of Scala"
+      ]
+    },
+    "SQL": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official SQL Documentation",
+        "Google Search: Learn SQL"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of SQL",
+        "Level 3: Apply SQL in basic projects",
+        "Level 4: Master advanced configurations of SQL"
+      ]
+    },
+    "Bash": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Bash Documentation",
+        "Google Search: Learn Bash"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Bash",
+        "Level 3: Apply Bash in basic projects",
+        "Level 4: Master advanced configurations of Bash"
+      ]
+    },
+    "PowerShell": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official PowerShell Documentation",
+        "Google Search: Learn PowerShell"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of PowerShell",
+        "Level 3: Apply PowerShell in basic projects",
+        "Level 4: Master advanced configurations of PowerShell"
+      ]
+    },
+    "Solidity": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Solidity Documentation",
+        "Google Search: Learn Solidity"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Solidity",
+        "Level 3: Apply Solidity in basic projects",
+        "Level 4: Master advanced configurations of Solidity"
+      ]
+    },
+    "Apex": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Apex Documentation",
+        "Google Search: Learn Apex"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Apex",
+        "Level 3: Apply Apex in basic projects",
+        "Level 4: Master advanced configurations of Apex"
+      ]
+    },
+    "HTML/CSS": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official HTML/CSS Documentation",
+        "Google Search: Learn HTML/CSS"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of HTML/CSS",
+        "Level 3: Apply HTML/CSS in basic projects",
+        "Level 4: Master advanced configurations of HTML/CSS"
+      ]
+    },
+    "React": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official React Documentation",
+        "Google Search: Learn React"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of React",
+        "Level 3: Apply React in basic projects",
+        "Level 4: Master advanced configurations of React"
+      ]
+    },
+    "Next.js": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Next.js Documentation",
+        "Google Search: Learn Next.js"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Next.js",
+        "Level 3: Apply Next.js in basic projects",
+        "Level 4: Master advanced configurations of Next.js"
+      ]
+    },
+    "Node.js": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Node.js Documentation",
+        "Google Search: Learn Node.js"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Node.js",
+        "Level 3: Apply Node.js in basic projects",
+        "Level 4: Master advanced configurations of Node.js"
+      ]
+    },
+    "Express": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Express Documentation",
+        "Google Search: Learn Express"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Express",
+        "Level 3: Apply Express in basic projects",
+        "Level 4: Master advanced configurations of Express"
+      ]
+    },
+    "Django": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Django Documentation",
+        "Google Search: Learn Django"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Django",
+        "Level 3: Apply Django in basic projects",
+        "Level 4: Master advanced configurations of Django"
+      ]
+    },
+    "FastAPI": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official FastAPI Documentation",
+        "Google Search: Learn FastAPI"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of FastAPI",
+        "Level 3: Apply FastAPI in basic projects",
+        "Level 4: Master advanced configurations of FastAPI"
+      ]
+    },
+    "Spring Boot": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Spring Boot Documentation",
+        "Google Search: Learn Spring Boot"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Spring Boot",
+        "Level 3: Apply Spring Boot in basic projects",
+        "Level 4: Master advanced configurations of Spring Boot"
+      ]
+    },
+    "TensorFlow": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official TensorFlow Documentation",
+        "Google Search: Learn TensorFlow"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of TensorFlow",
+        "Level 3: Apply TensorFlow in basic projects",
+        "Level 4: Master advanced configurations of TensorFlow"
+      ]
+    },
+    "Scikit-Learn": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Scikit-Learn Documentation",
+        "Google Search: Learn Scikit-Learn"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Scikit-Learn",
+        "Level 3: Apply Scikit-Learn in basic projects",
+        "Level 4: Master advanced configurations of Scikit-Learn"
+      ]
+    },
+    "Pandas": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Pandas Documentation",
+        "Google Search: Learn Pandas"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Pandas",
+        "Level 3: Apply Pandas in basic projects",
+        "Level 4: Master advanced configurations of Pandas"
+      ]
+    },
+    "NumPy": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official NumPy Documentation",
+        "Google Search: Learn NumPy"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of NumPy",
+        "Level 3: Apply NumPy in basic projects",
+        "Level 4: Master advanced configurations of NumPy"
+      ]
+    },
+    "Unity": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Unity Documentation",
+        "Google Search: Learn Unity"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Unity",
+        "Level 3: Apply Unity in basic projects",
+        "Level 4: Master advanced configurations of Unity"
+      ]
+    },
+    "Unreal Engine": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Unreal Engine Documentation",
+        "Google Search: Learn Unreal Engine"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Unreal Engine",
+        "Level 3: Apply Unreal Engine in basic projects",
+        "Level 4: Master advanced configurations of Unreal Engine"
+      ]
+    },
+    "ROS": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official ROS Documentation",
+        "Google Search: Learn ROS"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of ROS",
+        "Level 3: Apply ROS in basic projects",
+        "Level 4: Master advanced configurations of ROS"
+      ]
+    },
+    "ROS 2": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official ROS 2 Documentation",
+        "Google Search: Learn ROS 2"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of ROS 2",
+        "Level 3: Apply ROS 2 in basic projects",
+        "Level 4: Master advanced configurations of ROS 2"
+      ]
+    },
+    "PostgreSQL": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official PostgreSQL Documentation",
+        "Google Search: Learn PostgreSQL"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of PostgreSQL",
+        "Level 3: Apply PostgreSQL in basic projects",
+        "Level 4: Master advanced configurations of PostgreSQL"
+      ]
+    },
+    "MySQL": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official MySQL Documentation",
+        "Google Search: Learn MySQL"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of MySQL",
+        "Level 3: Apply MySQL in basic projects",
+        "Level 4: Master advanced configurations of MySQL"
+      ]
+    },
+    "MongoDB": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official MongoDB Documentation",
+        "Google Search: Learn MongoDB"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of MongoDB",
+        "Level 3: Apply MongoDB in basic projects",
+        "Level 4: Master advanced configurations of MongoDB"
+      ]
+    },
+    "Redis": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Redis Documentation",
+        "Google Search: Learn Redis"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Redis",
+        "Level 3: Apply Redis in basic projects",
+        "Level 4: Master advanced configurations of Redis"
+      ]
+    },
+    "Cassandra": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Cassandra Documentation",
+        "Google Search: Learn Cassandra"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Cassandra",
+        "Level 3: Apply Cassandra in basic projects",
+        "Level 4: Master advanced configurations of Cassandra"
+      ]
+    },
+    "DynamoDB": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official DynamoDB Documentation",
+        "Google Search: Learn DynamoDB"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of DynamoDB",
+        "Level 3: Apply DynamoDB in basic projects",
+        "Level 4: Master advanced configurations of DynamoDB"
+      ]
+    },
+    "Snowflake": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Snowflake Documentation",
+        "Google Search: Learn Snowflake"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Snowflake",
+        "Level 3: Apply Snowflake in basic projects",
+        "Level 4: Master advanced configurations of Snowflake"
+      ]
+    },
+    "BigQuery": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official BigQuery Documentation",
+        "Google Search: Learn BigQuery"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of BigQuery",
+        "Level 3: Apply BigQuery in basic projects",
+        "Level 4: Master advanced configurations of BigQuery"
+      ]
+    },
+    "Oracle Database": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Oracle Database Documentation",
+        "Google Search: Learn Oracle Database"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Oracle Database",
+        "Level 3: Apply Oracle Database in basic projects",
+        "Level 4: Master advanced configurations of Oracle Database"
+      ]
+    },
+    "SQL Server": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official SQL Server Documentation",
+        "Google Search: Learn SQL Server"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of SQL Server",
+        "Level 3: Apply SQL Server in basic projects",
+        "Level 4: Master advanced configurations of SQL Server"
+      ]
+    },
+    "AWS": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official AWS Documentation",
+        "Google Search: Learn AWS"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of AWS",
+        "Level 3: Apply AWS in basic projects",
+        "Level 4: Master advanced configurations of AWS"
+      ]
+    },
+    "Azure": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Azure Documentation",
+        "Google Search: Learn Azure"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Azure",
+        "Level 3: Apply Azure in basic projects",
+        "Level 4: Master advanced configurations of Azure"
+      ]
+    },
+    "GCP": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official GCP Documentation",
+        "Google Search: Learn GCP"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of GCP",
+        "Level 3: Apply GCP in basic projects",
+        "Level 4: Master advanced configurations of GCP"
+      ]
+    },
+    "Docker": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Docker Documentation",
+        "Google Search: Learn Docker"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Docker",
+        "Level 3: Apply Docker in basic projects",
+        "Level 4: Master advanced configurations of Docker"
+      ]
+    },
+    "Kubernetes": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Kubernetes Documentation",
+        "Google Search: Learn Kubernetes"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Kubernetes",
+        "Level 3: Apply Kubernetes in basic projects",
+        "Level 4: Master advanced configurations of Kubernetes"
+      ]
+    },
+    "Terraform": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Terraform Documentation",
+        "Google Search: Learn Terraform"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Terraform",
+        "Level 3: Apply Terraform in basic projects",
+        "Level 4: Master advanced configurations of Terraform"
+      ]
+    },
+    "Git": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Git Documentation",
+        "Google Search: Learn Git"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Git",
+        "Level 3: Apply Git in basic projects",
+        "Level 4: Master advanced configurations of Git"
+      ]
+    },
+    "CI/CD": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official CI/CD Documentation",
+        "Google Search: Learn CI/CD"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of CI/CD",
+        "Level 3: Apply CI/CD in basic projects",
+        "Level 4: Master advanced configurations of CI/CD"
+      ]
+    },
+    "Linux": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Linux Documentation",
+        "Google Search: Learn Linux"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Linux",
+        "Level 3: Apply Linux in basic projects",
+        "Level 4: Master advanced configurations of Linux"
+      ]
+    },
+    "Cryptography": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Cryptography Documentation",
+        "Google Search: Learn Cryptography"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Cryptography",
+        "Level 3: Apply Cryptography in basic projects",
+        "Level 4: Master advanced configurations of Cryptography"
+      ]
+    },
+    "Penetration Testing": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Penetration Testing Documentation",
+        "Google Search: Learn Penetration Testing"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Penetration Testing",
+        "Level 3: Apply Penetration Testing in basic projects",
+        "Level 4: Master advanced configurations of Penetration Testing"
+      ]
+    },
+    "Application Security": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Application Security Documentation",
+        "Google Search: Learn Application Security"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Application Security",
+        "Level 3: Apply Application Security in basic projects",
+        "Level 4: Master advanced configurations of Application Security"
+      ]
+    },
+    "Network Security": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Network Security Documentation",
+        "Google Search: Learn Network Security"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Network Security",
+        "Level 3: Apply Network Security in basic projects",
+        "Level 4: Master advanced configurations of Network Security"
+      ]
+    },
+    "IAM": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official IAM Documentation",
+        "Google Search: Learn IAM"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of IAM",
+        "Level 3: Apply IAM in basic projects",
+        "Level 4: Master advanced configurations of IAM"
+      ]
+    },
+    "Figma": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Figma Documentation",
+        "Google Search: Learn Figma"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Figma",
+        "Level 3: Apply Figma in basic projects",
+        "Level 4: Master advanced configurations of Figma"
+      ]
+    },
+    "Wireframing": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Wireframing Documentation",
+        "Google Search: Learn Wireframing"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Wireframing",
+        "Level 3: Apply Wireframing in basic projects",
+        "Level 4: Master advanced configurations of Wireframing"
+      ]
+    },
+    "UX Research": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official UX Research Documentation",
+        "Google Search: Learn UX Research"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of UX Research",
+        "Level 3: Apply UX Research in basic projects",
+        "Level 4: Master advanced configurations of UX Research"
+      ]
+    },
+    "State Management": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official State Management Documentation",
+        "Google Search: Learn State Management"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of State Management",
+        "Level 3: Apply State Management in basic projects",
+        "Level 4: Master advanced configurations of State Management"
+      ]
+    },
+    "Clean Architecture": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Clean Architecture Documentation",
+        "Google Search: Learn Clean Architecture"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Clean Architecture",
+        "Level 3: Apply Clean Architecture in basic projects",
+        "Level 4: Master advanced configurations of Clean Architecture"
+      ]
+    },
+    "System Design": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official System Design Documentation",
+        "Google Search: Learn System Design"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of System Design",
+        "Level 3: Apply System Design in basic projects",
+        "Level 4: Master advanced configurations of System Design"
+      ]
+    },
+    "Testing": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Testing Documentation",
+        "Google Search: Learn Testing"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Testing",
+        "Level 3: Apply Testing in basic projects",
+        "Level 4: Master advanced configurations of Testing"
+      ]
+    },
+    "Communication": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Communication Documentation",
+        "Google Search: Learn Communication"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Communication",
+        "Level 3: Apply Communication in basic projects",
+        "Level 4: Master advanced configurations of Communication"
+      ]
+    },
+    "Native Android": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Native Android Documentation",
+        "Google Search: Learn Native Android"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Native Android",
+        "Level 3: Apply Native Android in basic projects",
+        "Level 4: Master advanced configurations of Native Android"
+      ]
+    },
+    "REST APIs": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official REST APIs Documentation",
+        "Google Search: Learn REST APIs"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of REST APIs",
+        "Level 3: Apply REST APIs in basic projects",
+        "Level 4: Master advanced configurations of REST APIs"
+      ]
+    },
+    "Deep Learning": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Deep Learning Documentation",
+        "Google Search: Learn Deep Learning"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Deep Learning",
+        "Level 3: Apply Deep Learning in basic projects",
+        "Level 4: Master advanced configurations of Deep Learning"
+      ]
+    },
+    "Machine Learning": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Machine Learning Documentation",
+        "Google Search: Learn Machine Learning"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Machine Learning",
+        "Level 3: Apply Machine Learning in basic projects",
+        "Level 4: Master advanced configurations of Machine Learning"
+      ]
+    },
+    "Business Analysis": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Business Analysis Documentation",
+        "Google Search: Learn Business Analysis"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Business Analysis",
+        "Level 3: Apply Business Analysis in basic projects",
+        "Level 4: Master advanced configurations of Business Analysis"
+      ]
+    },
+    "Product Strategy": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Product Strategy Documentation",
+        "Google Search: Learn Product Strategy"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Product Strategy",
+        "Level 3: Apply Product Strategy in basic projects",
+        "Level 4: Master advanced configurations of Product Strategy"
+      ]
+    },
+    "Firebase": {
+      "hours_per_level": 15,
+      "resources": [
+        "Official Firebase Documentation",
+        "Google Search: Learn Firebase"
+      ],
+      "milestones": [
+        "Level 1-2: Understand foundational concepts of Firebase",
+        "Level 3: Apply Firebase in basic projects",
+        "Level 4: Master advanced configurations of Firebase"
+      ]
+    }
+  }
+}

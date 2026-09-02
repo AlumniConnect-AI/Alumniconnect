@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.Des.",
+    "field": "Communication Design",
+    "year": 2023
+  },
+  "current_role": "Graphic Designer",
+  "skills": [
+    {
+      "name": "Figma",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Created branding graphics and simple mockups in Figma."
+      ]
+    },
+    {
+      "name": "Wireframing",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Created low-fidelity page schematics."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Landing Design Drafts",
+      "description": "Designed product registration layouts.",
+      "technologies": [
+        "Figma",
+        "Wireframing"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Design Intern",
+      "company": "CreativeAgency",
+      "duration_months": 8.0,
+      "skills": [
+        "Figma"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Interaction Design",
+    "User Research"
+  ],
+  "target_career": "Product Designer",
+  "target_duration_months": 6
+}

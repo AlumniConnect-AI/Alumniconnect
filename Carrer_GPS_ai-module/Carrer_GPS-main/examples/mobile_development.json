@@ -1,0 +1,54 @@
+{
+  "education": {
+    "degree": "B.Tech",
+    "field": "Information Technology",
+    "year": 2024
+  },
+  "current_role": "Mobile Developer",
+  "skills": [
+    {
+      "name": "Dart",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Wrote utility functions and networking scripts in Dart."
+      ]
+    },
+    {
+      "name": "Flutter",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Designed mobile user interfaces and state components."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Task Scheduler App",
+      "description": "Cross-platform mobile scheduler dashboard.",
+      "technologies": [
+        "Flutter",
+        "Dart"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Mobile Intern",
+      "company": "AppZone",
+      "duration_months": 6.0,
+      "skills": [
+        "Flutter",
+        "Dart"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Mobile Development",
+    "Cross-Platform Tech"
+  ],
+  "target_career": "Flutter Developer",
+  "target_duration_months": 6
+}

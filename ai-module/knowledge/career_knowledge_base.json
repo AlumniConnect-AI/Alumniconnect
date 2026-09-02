@@ -1,0 +1,69 @@
+{
+  "skills": {
+    "programming_languages": [
+      "python", "dart", "javascript", "typescript", "java", "kotlin", "swift", "c++", "c#", "go", "rust", "php", "ruby", "sql", "html", "css"
+    ],
+    "frameworks": [
+      "flutter", "react", "react native", "angular", "vue", "next.js", "express", "django", "fastapi", "flask", "spring boot", "laravel", "tailwind", "bootstrap"
+    ],
+    "databases": [
+      "firebase", "supabase", "postgresql", "mongodb", "mysql", "sqlite", "redis", "dynamodb", "elasticsearch", "cassandra"
+    ],
+    "cloud": [
+      "aws", "gcp", "azure", "google cloud", "amazon web services", "docker", "kubernetes", "terraform", "serverless", "cloud functions"
+    ],
+    "ai_ml": [
+      "machine learning", "deep learning", "nlp", "computer vision", "tensorflow", "pytorch", "scikit-learn", "keras", "opencv", "gemini", "openai", "huggingface", "llm", "vertex ai", "pandas", "numpy"
+    ],
+    "tools": [
+      "git", "github", "gitlab", "postman", "figma", "jira", "docker", "vscode", "android studio", "xcode", "bash", "linux"
+    ],
+    "soft_skills": [
+      "communication", "leadership", "teamwork", "problem solving", "critical thinking", "agile", "scrum", "time management", "collaboration"
+    ]
+  },
+  "job_roles": {
+    "Mobile App Developer (Flutter)": {
+      "domain": "Mobile Development",
+      "required_skills": ["flutter", "dart", "firebase", "supabase", "git", "android", "state management", "rest api"],
+      "recommended_certs": ["Google Associate Android Developer", "Flutter Certified Application Developer"],
+      "salary_estimate": "$70,000 - $120,000",
+      "interview_topics": ["State Management (Provider/Bloc)", "Flutter Rendering Engine", "Method Channels", "Widget Lifecycle", "Async Programming in Dart"]
+    },
+    "AI / ML Engineer": {
+      "domain": "Artificial Intelligence",
+      "required_skills": ["python", "machine learning", "deep learning", "tensorflow", "pytorch", "nlp", "scikit-learn", "git"],
+      "recommended_certs": ["AWS Certified Machine Learning - Specialty", "TensorFlow Developer Certificate"],
+      "salary_estimate": "$90,000 - $150,000",
+      "interview_topics": ["Overfitting & Regularization", "Transformer Architecture", "Gradient Descent", "Feature Engineering", "Model Optimization & Quantization"]
+    },
+    "Data Scientist": {
+      "domain": "Data Analytics",
+      "required_skills": ["python", "sql", "machine learning", "scikit-learn", "pandas", "numpy", "data visualization", "statistics"],
+      "recommended_certs": ["IBM Data Science Professional Certificate", "Google Data Analytics Professional"],
+      "salary_estimate": "$85,000 - $140,000",
+      "interview_topics": ["Hypothesis Testing", "SQL Window Functions", "Linear & Logistic Regression", "Data Wrangling", "A/B Testing"]
+    },
+    "Full-Stack Web Developer": {
+      "domain": "Web Development",
+      "required_skills": ["html", "css", "javascript", "typescript", "react", "nodejs", "express", "mongodb", "postgresql", "git"],
+      "recommended_certs": ["Meta Full-Stack Developer Professional Certificate", "AWS Certified Developer"],
+      "salary_estimate": "$75,000 - $130,000",
+      "interview_topics": ["REST vs GraphQL", "Event Loop in Node.js", "DOM Optimization", "Authentication & JWT", "Database Indexing"]
+    },
+    "Backend Developer": {
+      "domain": "Backend Engineering",
+      "required_skills": ["python", "fastapi", "django", "postgresql", "redis", "docker", "git", "microservices"],
+      "recommended_certs": ["AWS Certified Solutions Architect", "Docker Certified Associate"],
+      "salary_estimate": "$80,000 - $135,000",
+      "interview_topics": ["Database Normalization", "Caching Strategies", "Concurrency vs Parallelism", "API Gateway Architecture", "Message Queues"]
+    },
+    "DevOps Engineer": {
+      "domain": "Infrastructure & Cloud",
+      "required_skills": ["docker", "kubernetes", "aws", "gcp", "ci/cd", "terraform", "linux", "git"],
+      "recommended_certs": ["Certified Kubernetes Administrator (CKA)", "AWS Certified DevOps Engineer"],
+      "salary_estimate": "$95,000 - $155,000",
+      "interview_topics": ["Containerization Best Practices", "Kubernetes Pod Lifecycle", "Infrastructure as Code", "CI/CD Pipeline Optimization", "Monitoring & Logging"]
+    }
+  }
+}

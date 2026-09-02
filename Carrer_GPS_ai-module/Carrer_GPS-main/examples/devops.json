@@ -1,0 +1,77 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Information Systems",
+    "year": 2023
+  },
+  "current_role": "Junior Systems Administrator",
+  "skills": [
+    {
+      "name": "Linux",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Administered virtual server clusters."
+      ]
+    },
+    {
+      "name": "Bash",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Wrote backup automation and log rotation scripts."
+      ]
+    },
+    {
+      "name": "Docker",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Containerized dev microservices."
+      ]
+    },
+    {
+      "name": "Git",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Collaborated on infrastructural repositories."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Lab System Provisioner",
+      "description": "Provisioned automated virtual clusters via docker scripts.",
+      "technologies": [
+        "Linux",
+        "Docker",
+        "Bash"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "System Operations Intern",
+      "company": "EduSolutions",
+      "duration_months": 6.0,
+      "skills": [
+        "Linux",
+        "Bash"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CompTIA Network+",
+      "issuer": "CompTIA",
+      "year": 2023
+    }
+  ],
+  "interests": [
+    "DevOps",
+    "Infrastructure as Code"
+  ],
+  "target_career": "DevOps Engineer",
+  "target_duration_months": 6
+}

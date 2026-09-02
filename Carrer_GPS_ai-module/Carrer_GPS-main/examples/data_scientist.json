@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.Sc.",
+    "field": "Data Science",
+    "year": 2024
+  },
+  "current_role": "Data Analyst Intern",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Wrote clean data manipulation scripts."
+      ]
+    },
+    {
+      "name": "Pandas",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Manipulated structural data frames."
+      ]
+    },
+    {
+      "name": "NumPy",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Utilized matrix arrays computation."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Linear Regression Classifier",
+      "description": "Mathematical prediction model built with NumPy.",
+      "technologies": [
+        "Python",
+        "NumPy",
+        "Pandas"
+      ]
+    }
+  ],
+  "experience": [],
+  "certifications": [],
+  "interests": [
+    "Machine Learning Engineer",
+    "Neural Networks"
+  ],
+  "target_career": "Machine Learning Engineer",
+  "target_duration_months": 12
+}

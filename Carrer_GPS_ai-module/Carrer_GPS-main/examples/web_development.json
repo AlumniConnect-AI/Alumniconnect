@@ -1,0 +1,55 @@
+{
+  "education": {
+    "degree": "Associate Degree",
+    "field": "Web Design",
+    "year": 2023
+  },
+  "current_role": "Frontend Developer",
+  "skills": [
+    {
+      "name": "JavaScript",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Built web interfaces with React."
+      ]
+    },
+    {
+      "name": "HTML/CSS",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Styled responsive layouts using CSS grid."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "E-Commerce Frontend",
+      "description": "Product storefront UI with search and filter.",
+      "technologies": [
+        "JavaScript",
+        "HTML/CSS",
+        "React"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Junior Web Developer",
+      "company": "WebShop",
+      "duration_months": 12.0,
+      "skills": [
+        "JavaScript",
+        "HTML/CSS"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Frontend Engineering",
+    "UI/UX Design"
+  ],
+  "target_career": "Backend Developer",
+  "target_duration_months": 12
+}

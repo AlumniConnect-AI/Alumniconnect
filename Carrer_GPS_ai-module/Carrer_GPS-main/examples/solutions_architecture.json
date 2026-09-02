@@ -1,0 +1,62 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Computer Science",
+    "year": 2020
+  },
+  "current_role": "Senior Developer",
+  "skills": [
+    {
+      "name": "Clean Architecture",
+      "level": 4,
+      "years": 4.0,
+      "evidence": [
+        "Structured domain entity abstractions."
+      ]
+    },
+    {
+      "name": "System Design",
+      "level": 4,
+      "years": 4.0,
+      "evidence": [
+        "Designed load-balancer clusters."
+      ]
+    },
+    {
+      "name": "AWS",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Provisioned S3 storage containers."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Distributed Portal migration",
+      "description": "Migrated monolithic portal structure into AWS EC2 configurations.",
+      "technologies": [
+        "AWS",
+        "System Design"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Engineer",
+      "company": "DevFactory",
+      "duration_months": 36.0,
+      "skills": [
+        "Clean Architecture",
+        "System Design"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Enterprise Architecture",
+    "Cloud Optimization"
+  ],
+  "target_career": "Solutions Architect",
+  "target_duration_months": 12
+}

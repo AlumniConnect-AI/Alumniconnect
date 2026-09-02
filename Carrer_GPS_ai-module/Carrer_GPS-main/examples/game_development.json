@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.Sc.",
+    "field": "Computer Science",
+    "year": 2023
+  },
+  "current_role": "Gameplay Programmer",
+  "skills": [
+    {
+      "name": "C++",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Implemented object lifecycle and state scripts."
+      ]
+    },
+    {
+      "name": "Unreal Engine",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Bound blueprint triggers to C++ classes."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Physics Trigger Demo",
+      "description": "C++ mechanics script inside Unreal environment.",
+      "technologies": [
+        "C++",
+        "Unreal Engine"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Game Intern",
+      "company": "LevelUp",
+      "duration_months": 6.0,
+      "skills": [
+        "C++"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Engine Programming",
+    "Graphics"
+  ],
+  "target_career": "Game Developer",
+  "target_duration_months": 12
+}

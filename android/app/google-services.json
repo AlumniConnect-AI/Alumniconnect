@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "169272546770",
+    "firebase_url": "https://alumniconnect-722b6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "alumniconnect-722b6",
+    "storage_bucket": "alumniconnect-722b6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169272546770:android:0b0fa9ee116b4d43f3a40b",
+        "android_client_info": {
+          "package_name": "com.example.alumniconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169272546770-s8243cavpael5hjkaotit6v356vjvjgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCj1TKtjujUBbXul01URMq4uYl8qcc2zE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169272546770-s8243cavpael5hjkaotit6v356vjvjgj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169272546770-3jp62rr6u1f8dc9i4i9haacck9eula0o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alumniconnect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

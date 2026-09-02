@@ -1,0 +1,197 @@
+[
+  {
+    "id": "production-flutter-app",
+    "name": "Production Flutter Application",
+    "difficulty": "advanced",
+    "skills": [
+      "flutter",
+      "dart",
+      "state-management",
+      "testing-skill",
+      "ci-cd"
+    ],
+    "description": "Construct a secure mobile app utilizing REST APIs, repository patterns, unit test cases, and container deployment config.",
+    "career_relevance": [
+      "flutter-developer"
+    ],
+    "estimated_hours": 120,
+    "milestones": [
+      "Layout development",
+      "Auth integration",
+      "State Management architecture",
+      "CI/CD pipeline configuration"
+    ]
+  },
+  {
+    "id": "distributed-kv-store",
+    "name": "Distributed Key-Value Store",
+    "difficulty": "advanced",
+    "skills": [
+      "java",
+      "clean-architecture",
+      "testing-skill",
+      "system-design-skill"
+    ],
+    "description": "Build a robust key-value store database focusing on thread safety, consensus protocols, and persistence.",
+    "career_relevance": [
+      "software-engineer"
+    ],
+    "estimated_hours": 100,
+    "milestones": [
+      "Thread-safe storage engine",
+      "Consensus protocol setup",
+      "Client API hooks"
+    ]
+  },
+  {
+    "id": "ecommerce-backend-api",
+    "name": "E-Commerce Backend REST API",
+    "difficulty": "intermediate",
+    "skills": [
+      "python",
+      "sql",
+      "fastapi",
+      "postgresql",
+      "docker"
+    ],
+    "description": "Design and build a secure e-commerce REST API backend complete with payment integration simulations, database migrations, and unit tests.",
+    "career_relevance": [
+      "backend-developer-se",
+      "web-backend-developer"
+    ],
+    "estimated_hours": 80,
+    "milestones": [
+      "Database schemas",
+      "Payment gateways integration",
+      "Unit test suite"
+    ]
+  },
+  {
+    "id": "interactive-dashboard",
+    "name": "Interactive Dashboard Portal",
+    "difficulty": "beginner",
+    "skills": [
+      "javascript",
+      "typescript",
+      "react",
+      "figma"
+    ],
+    "description": "Create a responsive, accessible dashboard admin panel to monitor and control system parameters.",
+    "career_relevance": [
+      "web-frontend-developer",
+      "web-full-stack-developer"
+    ],
+    "estimated_hours": 50,
+    "milestones": [
+      "Wireframing mockup",
+      "Component styling",
+      "API data bindings"
+    ]
+  },
+  {
+    "id": "churn-model",
+    "name": "Customer Churn Prediction Model",
+    "difficulty": "intermediate",
+    "skills": [
+      "python",
+      "pandas",
+      "numpy",
+      "scikit-learn"
+    ],
+    "description": "Cleanse raw profile data, train Random Forest and Gradient Boosting models, and write a classification report.",
+    "career_relevance": [
+      "data-scientist"
+    ],
+    "estimated_hours": 60,
+    "milestones": [
+      "Data cleansing pipeline",
+      "Model training runs",
+      "Diagnostic report synthesis"
+    ]
+  },
+  {
+    "id": "inference-api",
+    "name": "Model Inference API Service",
+    "difficulty": "advanced",
+    "skills": [
+      "python",
+      "pytorch",
+      "docker",
+      "fastapi"
+    ],
+    "description": "Package an image classifier deep learning model as a highly-efficient production API service.",
+    "career_relevance": [
+      "ml-engineer"
+    ],
+    "estimated_hours": 40,
+    "milestones": [
+      "Model serialization",
+      "API endpoint wrappers",
+      "Docker containerization"
+    ]
+  },
+  {
+    "id": "gitops-pipeline",
+    "name": "Automated GitOps CI/CD Pipeline",
+    "difficulty": "advanced",
+    "skills": [
+      "linux",
+      "docker",
+      "ci-cd",
+      "kubernetes",
+      "aws"
+    ],
+    "description": "Configure an automated, secure pipeline infrastructure using Git commits to deploy containerized software services.",
+    "career_relevance": [
+      "devops-engineer"
+    ],
+    "estimated_hours": 70,
+    "milestones": [
+      "Pipeline script",
+      "Docker setup",
+      "Kubernetes cluster configuration"
+    ]
+  },
+  {
+    "id": "secure-gateway",
+    "name": "Secure Auth Token Gateway",
+    "difficulty": "advanced",
+    "skills": [
+      "network-security-skill",
+      "cryptography",
+      "app-security",
+      "sql"
+    ],
+    "description": "Develop a lightweight security gateway proxy responsible for network traffic filtering, rate limiting, and cryptographic token issuance.",
+    "career_relevance": [
+      "cybersecurity-engineer"
+    ],
+    "estimated_hours": 90,
+    "milestones": [
+      "Proxy configuration",
+      "Rate limiting filters",
+      "Crypto authentication integrations"
+    ]
+  },
+  {
+    "id": "fintech-ux-redesign",
+    "name": "Mobile Fintech UX Redesign",
+    "difficulty": "intermediate",
+    "skills": [
+      "figma",
+      "wireframing",
+      "ux-research-skill"
+    ],
+    "description": "Research, wireframe, and prototype a modern mobile banking user interface focusing on accessibility and seamless transactions.",
+    "career_relevance": [
+      "ui-designer",
+      "ux-designer"
+    ],
+    "estimated_hours": 40,
+    "milestones": [
+      "User interviews",
+      "Figma prototype",
+      "Usability test metrics"
+    ]
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Mechatronics Engineering",
+    "year": 2023
+  },
+  "current_role": "Junior Robotics Technician",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Wrote image acquisition wrappers."
+      ]
+    },
+    {
+      "name": "C++",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Wrote core math libraries."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Motor Driver Node",
+      "description": "C++ controller logic reading rotary ticks.",
+      "technologies": [
+        "C++",
+        "Python"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Mechatronics Intern",
+      "company": "RoboSystems",
+      "duration_months": 6.0,
+      "skills": [
+        "C++",
+        "Python"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Kinematics Planning",
+    "SLAM"
+  ],
+  "target_career": "Robotics Engineer",
+  "target_duration_months": 12
+}

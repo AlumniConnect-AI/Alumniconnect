@@ -1,0 +1,44 @@
+{
+  "education": {
+    "degree": "B.A.",
+    "field": "Computer Science",
+    "year": 2024
+  },
+  "current_role": "Manual Tester",
+  "skills": [
+    {
+      "name": "Testing",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Documented manual regression steps and logged bug reports."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "UI Verification Suite",
+      "description": "Drafted matrix mappings of test cases for e-commerce sites.",
+      "technologies": [
+        "Testing"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "QA Intern",
+      "company": "TestGroup",
+      "duration_months": 6.0,
+      "skills": [
+        "Testing"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Quality Assurance",
+    "Test Automation"
+  ],
+  "target_career": "QA Engineer",
+  "target_duration_months": 6
+}

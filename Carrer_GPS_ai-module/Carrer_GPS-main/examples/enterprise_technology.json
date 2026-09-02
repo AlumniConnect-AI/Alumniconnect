@@ -1,0 +1,44 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Computer Science",
+    "year": 2023
+  },
+  "current_role": "IT Analyst",
+  "skills": [
+    {
+      "name": "SQL",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Queried basic database data for CRM customization."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CRM Custom Trigger",
+      "description": "Configured user validation flow scripts in enterprise CRM.",
+      "technologies": [
+        "SQL"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "CRM Intern",
+      "company": "EnterpriseSolutions",
+      "duration_months": 6.0,
+      "skills": [
+        "SQL"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Salesforce Engineering",
+    "ERP Adaptations"
+  ],
+  "target_career": "Salesforce Developer",
+  "target_duration_months": 6
+}

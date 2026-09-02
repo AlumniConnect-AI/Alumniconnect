@@ -1,0 +1,15 @@
+"""
+Career Twin Engine — Requirements
+All dependencies are part of the standard Python data-science stack.
+No external LLM API keys needed for the core module.
+"""
+scikit-learn>=1.0.0
+numpy>=1.21.0
+pandas>=1.3.0
+streamlit>=1.20.0
+scipy>=1.7.0
+
+# Mentor Match Engine dependencies
+sentence-transformers>=2.2.0
+torch>=2.0.0
+

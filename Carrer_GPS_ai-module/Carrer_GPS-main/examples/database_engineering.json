@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Information Technology",
+    "year": 2022
+  },
+  "current_role": "SQL Developer",
+  "skills": [
+    {
+      "name": "SQL",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Wrote stored procedures and window function queries."
+      ]
+    },
+    {
+      "name": "MySQL",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Managed schema modifications and connection pooling."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Database Partitioning",
+      "description": "Partitioned history archives to enhance retrieval time.",
+      "technologies": [
+        "SQL",
+        "MySQL"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Database Assistant",
+      "company": "StoreSolutions",
+      "duration_months": 18.0,
+      "skills": [
+        "SQL"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Database Administration",
+    "Query Tuning"
+  ],
+  "target_career": "Database Engineer",
+  "target_duration_months": 6
+}

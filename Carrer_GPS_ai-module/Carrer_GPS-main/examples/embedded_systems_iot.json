@@ -1,0 +1,35 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Electrical Engineering",
+    "year": 2024
+  },
+  "current_role": "Hardware Hobbyist",
+  "skills": [
+    {
+      "name": "C",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Wrote firmware loops on microcontrollers."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Sensor Logger Node",
+      "description": "C codebase reading serial data off basic temp probes.",
+      "technologies": [
+        "C"
+      ]
+    }
+  ],
+  "experience": [],
+  "certifications": [],
+  "interests": [
+    "IoT Infrastructure",
+    "Firmware Engineering"
+  ],
+  "target_career": "Embedded Systems Engineer",
+  "target_duration_months": 12
+}

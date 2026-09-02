@@ -1,0 +1,44 @@
+{
+  "education": {
+    "degree": "Diploma",
+    "field": "Computer Networking",
+    "year": 2023
+  },
+  "current_role": "Helpdesk Technician",
+  "skills": [
+    {
+      "name": "Linux",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Configured SSH connections and static routes."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Home Lab Gateway",
+      "description": "Set up a routing gateway to segregate LAN traffic.",
+      "technologies": [
+        "Linux"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "IT Intern",
+      "company": "NetConnect",
+      "duration_months": 12.0,
+      "skills": [
+        "Linux"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Routing & Switching",
+    "Network Security"
+  ],
+  "target_career": "Network Engineer",
+  "target_duration_months": 6
+}

@@ -1,0 +1,77 @@
+{
+  "education": {
+    "degree": "B.Tech",
+    "field": "Computer Science & Engineering",
+    "year": 2024
+  },
+  "current_role": "Security Operations Intern",
+  "skills": [
+    {
+      "name": "Network Security",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Configured firewall filters and packet log inspection."
+      ]
+    },
+    {
+      "name": "Linux",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Maintained penetration testing distributions."
+      ]
+    },
+    {
+      "name": "Git",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Audited version control logs."
+      ]
+    },
+    {
+      "name": "Python",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Scripted network scans."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "IDS Node Deployment",
+      "description": "Deployed local IDS configurations to capture traffic anomalies.",
+      "technologies": [
+        "Linux",
+        "Python",
+        "Network Security"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Cybersecurity Analyst Intern",
+      "company": "SecureNet",
+      "duration_months": 3.0,
+      "skills": [
+        "Network Security",
+        "Linux"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CompTIA Security+",
+      "issuer": "CompTIA",
+      "year": 2024
+    }
+  ],
+  "interests": [
+    "Ethical Hacking",
+    "Security Engineering"
+  ],
+  "target_career": "Cybersecurity Engineer",
+  "target_duration_months": 8
+}

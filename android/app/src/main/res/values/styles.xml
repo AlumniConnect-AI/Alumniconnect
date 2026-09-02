@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Splash Theme -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+
+    <!-- Main App Theme -->
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+
+    <!-- UCrop Theme (Matches Your App Green) -->
+    <style name="UCropTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Toolbar color (Your primary green) -->
+        <item name="colorPrimary">#2BB673</item>
+        <item name="colorPrimaryDark">#239e62</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">#2BB673</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation bar -->
+        <item name="android:navigationBarColor">#FFFFFF</item>
+
+        <!-- Prevent fullscreen overlap -->
+        <item name="android:windowFullscreen">false</item>
+
+    </style>
+
+</resources>

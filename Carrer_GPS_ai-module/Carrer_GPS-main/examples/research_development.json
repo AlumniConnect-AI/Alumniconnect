@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "M.S.",
+    "field": "Computer Science",
+    "year": 2023
+  },
+  "current_role": "Graduate Researcher",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Implemented neural nets in academic papers."
+      ]
+    },
+    {
+      "name": "Machine Learning",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Audited classifier math proofs."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Academic Paper Codebase",
+      "description": "Python repository testing custom training loops.",
+      "technologies": [
+        "Python",
+        "Machine Learning"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Research Assistant",
+      "company": "UniLabs",
+      "duration_months": 12.0,
+      "skills": [
+        "Python"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Algorithm Research",
+    "Advanced Architectures"
+  ],
+  "target_career": "Research Scientist",
+  "target_duration_months": 12
+}

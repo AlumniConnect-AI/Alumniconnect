@@ -1,0 +1,345 @@
+{
+  "aliases": {
+    "flutter sdk": "Flutter",
+    "flutter framework": "Flutter",
+    "flutter development": "Flutter",
+    "flutter dev": "Flutter",
+    "react framework": "React",
+    "react.js": "React",
+    "reactjs": "React",
+    "react js": "React",
+    "next.js framework": "Next.js",
+    "next-js": "Next.js",
+    "nextjs": "Next.js",
+    "next js": "Next.js",
+    "nodejs": "Node.js",
+    "node js": "Node.js",
+    "fastapi web": "FastAPI",
+    "django framework": "Django",
+    "springboot": "Spring Boot",
+    "spring boot framework": "Spring Boot",
+    "postgresql db": "PostgreSQL",
+    "mongodb database": "MongoDB",
+    "scikitlearn": "Scikit-Learn",
+    "scikit learn": "Scikit-Learn",
+    "tensorflow framework": "TensorFlow",
+    "pytorch framework": "PyTorch",
+    "kubernetes engine": "Kubernetes",
+    "docker container": "Docker",
+    "javascript library": "JavaScript"
+  },
+  "skills": [
+    {
+      "name": "Python",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Java",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "JavaScript",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "C",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "C++",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "C#",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Go",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Rust",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Dart",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Kotlin",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Swift",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "PHP",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Ruby",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "R",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Scala",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "SQL",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Bash",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "PowerShell",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Solidity",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Apex",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "HTML/CSS",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Flutter",
+      "category": "Frameworks"
+    },
+    {
+      "name": "React",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Next.js",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Node.js",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Express",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Django",
+      "category": "Frameworks"
+    },
+    {
+      "name": "FastAPI",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Frameworks"
+    },
+    {
+      "name": "TensorFlow",
+      "category": "Frameworks"
+    },
+    {
+      "name": "PyTorch",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Scikit-Learn",
+      "category": "Libraries"
+    },
+    {
+      "name": "Pandas",
+      "category": "Libraries"
+    },
+    {
+      "name": "NumPy",
+      "category": "Libraries"
+    },
+    {
+      "name": "Unity",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Unreal Engine",
+      "category": "Frameworks"
+    },
+    {
+      "name": "ROS",
+      "category": "Frameworks"
+    },
+    {
+      "name": "ROS 2",
+      "category": "Frameworks"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Databases"
+    },
+    {
+      "name": "MySQL",
+      "category": "Databases"
+    },
+    {
+      "name": "MongoDB",
+      "category": "Databases"
+    },
+    {
+      "name": "Redis",
+      "category": "Databases"
+    },
+    {
+      "name": "Cassandra",
+      "category": "Databases"
+    },
+    {
+      "name": "DynamoDB",
+      "category": "Databases"
+    },
+    {
+      "name": "Snowflake",
+      "category": "Databases"
+    },
+    {
+      "name": "BigQuery",
+      "category": "Databases"
+    },
+    {
+      "name": "Oracle Database",
+      "category": "Databases"
+    },
+    {
+      "name": "SQL Server",
+      "category": "Databases"
+    },
+    {
+      "name": "AWS",
+      "category": "Cloud Platforms"
+    },
+    {
+      "name": "Azure",
+      "category": "Cloud Platforms"
+    },
+    {
+      "name": "GCP",
+      "category": "Cloud Platforms"
+    },
+    {
+      "name": "Docker",
+      "category": "DevOps"
+    },
+    {
+      "name": "Kubernetes",
+      "category": "DevOps"
+    },
+    {
+      "name": "Terraform",
+      "category": "DevOps"
+    },
+    {
+      "name": "Git",
+      "category": "Tools"
+    },
+    {
+      "name": "CI/CD",
+      "category": "DevOps"
+    },
+    {
+      "name": "Linux",
+      "category": "Tools"
+    },
+    {
+      "name": "Cryptography",
+      "category": "Security"
+    },
+    {
+      "name": "Penetration Testing",
+      "category": "Security"
+    },
+    {
+      "name": "Application Security",
+      "category": "Security"
+    },
+    {
+      "name": "Network Security",
+      "category": "Security"
+    },
+    {
+      "name": "IAM",
+      "category": "Security"
+    },
+    {
+      "name": "Figma",
+      "category": "Design"
+    },
+    {
+      "name": "Wireframing",
+      "category": "Design"
+    },
+    {
+      "name": "UX Research",
+      "category": "Design"
+    },
+    {
+      "name": "State Management",
+      "category": "Architecture"
+    },
+    {
+      "name": "Clean Architecture",
+      "category": "Architecture"
+    },
+    {
+      "name": "System Design",
+      "category": "Architecture"
+    },
+    {
+      "name": "Testing",
+      "category": "Testing"
+    },
+    {
+      "name": "Communication",
+      "category": "Soft Skills"
+    },
+    {
+      "name": "Native Android",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "REST APIs",
+      "category": "Architecture"
+    },
+    {
+      "name": "Deep Learning",
+      "category": "AI/ML"
+    },
+    {
+      "name": "Machine Learning",
+      "category": "AI/ML"
+    },
+    {
+      "name": "Business Analysis",
+      "category": "Business Analysis"
+    },
+    {
+      "name": "Product Strategy",
+      "category": "Product Management"
+    },
+    {
+      "name": "Firebase",
+      "category": "Databases"
+    }
+  ]
+}

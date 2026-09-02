@@ -1,0 +1,54 @@
+{
+  "education": {
+    "degree": "B.B.A.",
+    "field": "Management Information Systems",
+    "year": 2022
+  },
+  "current_role": "Associate Product Owner",
+  "skills": [
+    {
+      "name": "Business Analysis",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Documented user stories and acceptance criteria."
+      ]
+    },
+    {
+      "name": "Communication",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Chaired scrum planning ceremonies."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Feature Rollout Track",
+      "description": "Coordinated feature milestone dependencies.",
+      "technologies": [
+        "Business Analysis",
+        "Communication"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Product Analyst",
+      "company": "BizApp",
+      "duration_months": 18.0,
+      "skills": [
+        "Business Analysis",
+        "Communication"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Product Management",
+    "Growth Hacking"
+  ],
+  "target_career": "Product Manager",
+  "target_duration_months": 12
+}

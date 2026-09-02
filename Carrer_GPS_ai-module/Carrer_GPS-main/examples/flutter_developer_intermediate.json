@@ -1,0 +1,87 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Information Technology",
+    "year": 2024
+  },
+  "current_role": "Junior Mobile Developer",
+  "skills": [
+    {
+      "name": "Flutter",
+      "level": 4,
+      "years": 2.0,
+      "evidence": [
+        "Published two Flutter applications to Google Play Store."
+      ]
+    },
+    {
+      "name": "Dart",
+      "level": 4,
+      "years": 2.0,
+      "evidence": [
+        "Utilized Dart isolates and native interop calls."
+      ]
+    },
+    {
+      "name": "State Management",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Managed complex nested application states."
+      ]
+    },
+    {
+      "name": "REST APIs",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Built robust HTTP clients."
+      ]
+    },
+    {
+      "name": "Git",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Handled branching, merging, and release configuration."
+      ]
+    },
+    {
+      "name": "Native Android",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Maintained basic Android modules."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Productivity Hub App",
+      "description": "A cross-platform mobile client for tasks planning.",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "Git"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Mobile Intern",
+      "company": "MobSoft",
+      "duration_months": 6.0,
+      "skills": [
+        "Flutter",
+        "Dart"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Mobile Development",
+    "CI/CD"
+  ],
+  "target_career": "Flutter Developer",
+  "target_duration_months": 6
+}

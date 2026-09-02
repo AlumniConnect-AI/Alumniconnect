@@ -1,0 +1,38 @@
+python : Traceback (most 
+recent call last):
+At line:1 char:1
++ python tests/test_engine.py 
+2>&1 | Out-File -FilePath 
+C:\Users\Perara ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo          : 
+    NotSpecified: (Traceback  
+   (most recent call last):   
+ :String) [], RemoteExcept    
+ion
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+  File "C:\Users\Perarasu\Down
+loads\Alumniconnect-master\ai-
+module\tests\test_engine.py", 
+line 200, in <module>
+    print("\n\U0001f680  
+Career Twin Engine ? Test 
+Suite")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encod
+ings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_enco
+de(input,self.errors,encoding_
+table)[0]
+           ~~~~~~~~~~~~~~~~~~~
+~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^
+UnicodeEncodeError: 'charmap' 
+codec can't encode character 
+'\U0001f680' in position 2: 
+character maps to <undefined>

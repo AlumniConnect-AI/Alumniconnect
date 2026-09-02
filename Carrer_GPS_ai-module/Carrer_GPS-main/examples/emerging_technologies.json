@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.S.",
+    "field": "Physics & Computing",
+    "year": 2023
+  },
+  "current_role": "AI Specialist",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 4,
+      "years": 2.0,
+      "evidence": [
+        "Wrote experimental numerical methods scripts."
+      ]
+    },
+    {
+      "name": "PyTorch",
+      "level": 3,
+      "years": 1.5,
+      "evidence": [
+        "Constructed customized network layer matrices."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Numerical Simulator",
+      "description": "Python scripts solving state equations.",
+      "technologies": [
+        "Python",
+        "PyTorch"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Tech Analyst",
+      "company": "FuturLabs",
+      "duration_months": 12.0,
+      "skills": [
+        "Python"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Quantum Computing",
+    "Edge AI"
+  ],
+  "target_career": "Quantum Computing Engineer",
+  "target_duration_months": 12
+}

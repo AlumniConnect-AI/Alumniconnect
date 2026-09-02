@@ -1,0 +1,61 @@
+{
+  "education": {
+    "degree": "B.Tech",
+    "field": "Computer Science",
+    "year": 3
+  },
+  "current_role": "Student",
+  "skills": [
+    {
+      "name": "Flutter",
+      "level": 4,
+      "years": 1.0,
+      "evidence": [
+        "Built AlumniConnect mobile interface"
+      ]
+    },
+    {
+      "name": "Dart",
+      "level": 4,
+      "years": 1.0,
+      "evidence": [
+        "Used Dart asynchronous Streams for real-time networking in AlumniConnect"
+      ]
+    },
+    {
+      "name": "Firebase",
+      "level": 3,
+      "years": 1.0,
+      "evidence": [
+        "Configured Firebase Auth and Firestore for AlumniConnect database"
+      ]
+    },
+    {
+      "name": "State Management",
+      "level": 3,
+      "years": 1.0,
+      "evidence": [
+        "Managed complex app states with Provider."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "AlumniConnect",
+      "description": "Flutter-based alumni networking application enabling real-time chatting and mentorship matching.",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "Firebase"
+      ]
+    }
+  ],
+  "experience": [],
+  "certifications": [],
+  "interests": [
+    "Mobile Development",
+    "Software Engineering"
+  ],
+  "target_career": "Flutter Developer",
+  "target_duration_months": 6
+}

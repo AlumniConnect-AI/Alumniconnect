@@ -1,0 +1,63 @@
+{
+  "education": {
+    "degree": "M.S.",
+    "field": "Data Science",
+    "year": 2024
+  },
+  "current_role": "ML Engineer Intern",
+  "skills": [
+    {
+      "name": "Python",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "Developed predictive regression classifiers."
+      ]
+    },
+    {
+      "name": "NumPy",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Vector computation models."
+      ]
+    },
+    {
+      "name": "Pandas",
+      "level": 4,
+      "years": 3.0,
+      "evidence": [
+        "ETL pipeline structures."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Recommendation Service",
+      "description": "Content-based filtering model built on NumPy matrices.",
+      "technologies": [
+        "Python",
+        "NumPy",
+        "Pandas"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Data Scientist Intern",
+      "company": "AILabs",
+      "duration_months": 6.0,
+      "skills": [
+        "Python",
+        "Pandas"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Machine Learning",
+    "Neural Networks"
+  ],
+  "target_career": "Machine Learning Engineer",
+  "target_duration_months": 12
+}

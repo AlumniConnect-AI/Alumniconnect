@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduBridge AI — Skill Gap Analyzer & Readiness Engine</title>
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+    .gradient-primary { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+    .gradient-card { background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%); }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+  <!-- Navigation Bar -->
+  <header class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-lg shadow-blue-500/30">
+          <i class="fa-solid fa-chart-pie text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            EduBridge AI <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">SIH 2026</span>
+          </h1>
+          <p class="text-xs text-slate-400">Skill Gap Analyzer & Placement Readiness Engine</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3 text-sm">
+        <a href="/docs" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-code"></i> API Docs (Swagger)
+        </a>
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Engine Active
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      <!-- Left Panel: Input & Profile Config (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+          <h2 class="text-base font-semibold text-white flex items-center gap-2">
+            <i class="fa-solid fa-user-gear text-blue-400"></i> Student Profile & Target Goal
+          </h2>
+
+          <!-- Presets -->
+          <div>
+            <label class="text-xs font-medium text-slate-400 uppercase tracking-wider block mb-2">Quick Presets</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="loadPreset('beginner_web')" class="px-2 py-1.5 text-xs rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-center transition">
+                🌐 Web Dev (Junior)
+              </button>
+              <button onclick="loadPreset('data_analyst')" class="px-2 py-1.5 text-xs rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-center transition">
+                📊 AI/ML Student
+              </button>
+              <button onclick="loadPreset('backend_aspirant')" class="px-2 py-1.5 text-xs rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-center transition">
+                ⚙️ Backend Switch
+              </button>
+            </div>
+          </div>
+
+          <!-- Student Name -->
+          <div>
+            <label class="text-xs font-medium text-slate-400 uppercase tracking-wider block mb-1">Student Name</label>
+            <input id="studentName" type="text" value="Aarav Sharma" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          </div>
+
+          <!-- Target Role Selection -->
+          <div>
+            <label class="text-xs font-medium text-slate-400 uppercase tracking-wider block mb-1">Target Benchmark Role</label>
+            <select id="targetRoleSelect" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500 transition">
+              <option value="full_stack_developer">Full Stack Web Developer</option>
+              <option value="ai_ml_engineer">AI & Machine Learning Engineer</option>
+              <option value="data_scientist">Data Scientist / Business Analytics</option>
+              <option value="cloud_devops_engineer">Cloud & DevOps Engineer</option>
+              <option value="backend_engineer">Backend & Microservices Engineer</option>
+              <option value="frontend_engineer">Frontend Web Engineer</option>
+              <option value="mobile_developer">Mobile App Developer (Flutter)</option>
+              <option value="cybersecurity_analyst">Cybersecurity & InfoSec Analyst</option>
+            </select>
+          </div>
+
+          <!-- Current Student Skills -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-xs font-medium text-slate-400 uppercase tracking-wider">Current Student Skills (Comma Separated)</label>
+              <span class="text-xs text-blue-400 cursor-pointer hover:underline" onclick="clearSkills()">Clear</span>
+            </div>
+            <textarea id="studentSkillsInput" rows="3" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500 transition" placeholder="e.g. JavaScript, HTML5, CSS3, Python, Git"></textarea>
+            <p class="text-[11px] text-slate-500 mt-1">Accepts informal aliases (e.g. "py", "reactjs", "k8s", "dsa").</p>
+          </div>
+
+          <!-- Mode Toggle: Role Benchmark vs Raw Job Description -->
+          <div class="pt-2 border-t border-slate-800/80">
+            <details class="group">
+              <summary class="text-xs font-medium text-slate-400 hover:text-slate-300 cursor-pointer flex items-center justify-between py-1">
+                <span><i class="fa-solid fa-file-lines mr-1 text-slate-500"></i> Or Compare Against Job Posting (JD)</span>
+                <i class="fa-solid fa-chevron-down text-[10px] group-open:rotate-180 transition"></i>
+              </summary>
+              <div class="mt-2 space-y-2">
+                <textarea id="jobDescriptionInput" rows="3" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-blue-500 transition" placeholder="Paste custom Job Description text here..."></textarea>
+              </div>
+            </details>
+          </div>
+
+          <!-- Analyze Action Button -->
+          <button id="analyzeBtn" onclick="runAnalysis()" class="w-full py-3 px-4 rounded-xl gradient-primary text-white font-semibold text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:opacity-95 active:scale-[0.99] transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Run Skill Gap Analysis
+          </button>
+        </div>
+
+        <!-- 4-Module System Context Card -->
+        <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 space-y-3">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-network-wired text-blue-400"></i> EduBridge AI 4 Core Engines
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300">
+              <div class="font-medium text-pink-400">🧠 Career Twin</div>
+              <div class="text-[11px] text-slate-500">Skill profile extraction</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300">
+              <div class="font-medium text-amber-400">🤝 Mentor Match</div>
+              <div class="text-[11px] text-slate-500">Alumni recommendations</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300">
+              <div class="font-medium text-cyan-400">🗺️ Career GPS</div>
+              <div class="text-[11px] text-slate-500">Personalized roadmap</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-blue-950/50 border border-blue-800/50 text-slate-300">
+              <div class="font-medium text-blue-400">📊 Skill Gap Analyzer</div>
+              <div class="text-[11px] text-slate-400">Active Module</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Results & Intelligence Dashboard (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Welcome Placeholder -->
+        <div id="placeholderState" class="bg-slate-950 border border-slate-800 rounded-2xl p-12 text-center space-y-4">
+          <div class="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto text-2xl">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold text-white">Ready for Skill Gap Analysis</h3>
+            <p class="text-sm text-slate-400 max-w-md mx-auto mt-1">
+              Select or enter the student's current skills and choose a target role to calculate readiness, detect gaps, and generate course & project roadmaps.
+            </p>
+          </div>
+          <button onclick="loadPreset('beginner_web'); runAnalysis();" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition">
+            ⚡ Run Demo Analysis Now
+          </button>
+        </div>
+
+        <!-- Dynamic Results Container -->
+        <div id="resultsContainer" class="hidden space-y-6">
+
+          <!-- Readiness Score Card -->
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+              <div>
+                <span class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Placement Readiness</span>
+                <h3 id="resRoleTitle" class="text-xl font-bold text-white mt-0.5">Full Stack Web Developer</h3>
+                <p id="resStudentSub" class="text-xs text-slate-400 mt-0.5">Candidate: <span class="text-slate-200 font-medium">Aarav Sharma</span></p>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right">
+                  <div id="scoreBadge" class="text-3xl font-extrabold text-blue-400">65.0%</div>
+                  <div id="readinessLevelTag" class="text-xs font-semibold text-amber-400">Needs Upskilling</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mt-5 space-y-1.5">
+              <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+                <div id="scoreProgressBar" class="h-3 rounded-full gradient-primary transition-all duration-700" style="width: 65%;"></div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-500 font-medium">
+                <span>0% Foundational</span>
+                <span>50% Intermediate</span>
+                <span>80%+ Job Ready</span>
+              </div>
+            </div>
+
+            <!-- Category Breakdown Grid -->
+            <div class="mt-6 pt-5 border-t border-slate-800">
+              <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Domain Category Breakdown</h4>
+              <div id="categoryBreakdownList" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Gap Detection Badges -->
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <i class="fa-solid fa-layer-group text-blue-400"></i> Skill Gap Classification
+            </h3>
+
+            <!-- Matched Skills -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-check"></i> Matched Skills (<span id="matchedCount">0</span>)
+                </span>
+              </div>
+              <div id="matchedSkillsBadges" class="flex flex-wrap gap-2">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Missing Critical Skills -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-rose-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Missing Critical Skills (High Priority) (<span id="missingCritCount">0</span>)
+                </span>
+              </div>
+              <div id="missingCritSkillsBadges" class="flex flex-wrap gap-2">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Missing Secondary Skills -->
+            <div id="secondarySection">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-amber-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-plus"></i> Good to Have / Secondary Skills (<span id="missingSecCount">0</span>)
+                </span>
+              </div>
+              <div id="missingSecSkillsBadges" class="flex flex-wrap gap-2">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Bonus Strengths -->
+            <div id="bonusSection">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-purple-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-star"></i> Bonus Strengths / Unmatched Skills
+                </span>
+              </div>
+              <div id="bonusSkillsBadges" class="flex flex-wrap gap-2">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommended Courses -->
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap text-indigo-400"></i> Targeted Course Recommendations
+            </h3>
+            <p class="text-xs text-slate-400">Curated high-impact learning tracks directly mapped to bridge your identified missing skills.</p>
+            <div id="coursesList" class="space-y-3">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <!-- Recommended Hands-On Projects -->
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <i class="fa-solid fa-laptop-code text-cyan-400"></i> Hands-On Portfolio Projects
+            </h3>
+            <p class="text-xs text-slate-400">Real-world projects designed to build practical proof-of-work in your missing skills.</p>
+            <div id="projectsList" class="space-y-4">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <!-- Personalized Action Plan -->
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <i class="fa-solid fa-route text-emerald-400"></i> Step-by-Step Skilling Action Plan
+            </h3>
+            <div id="actionPlanList" class="space-y-2 text-xs text-slate-300">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const PRESETS = {
+      beginner_web: {
+        name: "Rahul Verma",
+        role: "full_stack_developer",
+        skills: "JavaScript, HTML5, CSS3, Python, Git"
+      },
+      data_analyst: {
+        name: "Ananya Iyer",
+        role: "ai_ml_engineer",
+        skills: "Python, Pandas, NumPy, SQL, Data Analysis, Scikit-Learn"
+      },
+      backend_aspirant: {
+        name: "Devendra Patil",
+        role: "backend_engineer",
+        skills: "Java, MySQL, Git, Data Structures & Algorithms, Object-Oriented Programming"
+      }
+    };
+
+    function loadPreset(key) {
+      const p = PRESETS[key];
+      if (!p) return;
+      document.getElementById('studentName').value = p.name;
+      document.getElementById('targetRoleSelect').value = p.role;
+      document.getElementById('studentSkillsInput').value = p.skills;
+    }
+
+    function clearSkills() {
+      document.getElementById('studentSkillsInput').value = '';
+    }
+
+    async function runAnalysis() {
+      const studentName = document.getElementById('studentName').value || 'Student';
+      const skillsRaw = document.getElementById('studentSkillsInput').value;
+      const targetRole = document.getElementById('targetRoleSelect').value;
+      const jdText = document.getElementById('jobDescriptionInput').value;
+
+      const skillsList = skillsRaw.split(',').map(s => s.trim()).filter(s => s.length > 0);
+
+      const btn = document.getElementById('analyzeBtn');
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Analyzing...';
+      btn.disabled = true;
+
+      try {
+        let endpoint = '/api/v1/skill-gap/analyze';
+        let payload = {
+          student_name: studentName,
+          student_skills: skillsList,
+          target_role: targetRole,
+          experience_level: 'Entry Level'
+        };
+
+        if (jdText && jdText.trim().length > 10) {
+          endpoint = '/api/v1/skill-gap/analyze-jd';
+          payload = {
+            student_name: studentName,
+            student_skills: skillsList,
+            job_description_text: jdText,
+            target_role: 'Job Posting'
+          };
+        }
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Analysis failed: ' + res.statusText);
+        const data = await res.json();
+        renderResults(data);
+      } catch (err) {
+        alert('Error performing analysis: ' + err.message);
+      } finally {
+        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass-chart"></i> Run Skill Gap Analysis';
+        btn.disabled = false;
+      }
+    }
+
+    function renderResults(data) {
+      document.getElementById('placeholderState').classList.add('hidden');
+      document.getElementById('resultsContainer').classList.remove('hidden');
+
+      // Top Score Card
+      document.getElementById('resRoleTitle').textContent = data.target_role;
+      document.getElementById('resStudentSub').innerHTML = `Candidate: <span class="text-slate-200 font-medium">${data.student_name}</span>`;
+      document.getElementById('scoreBadge').textContent = `${data.placement_readiness_score}%`;
+      document.getElementById('readinessLevelTag').textContent = data.readiness_level;
+      document.getElementById('scoreProgressBar').style.width = `${data.placement_readiness_score}%`;
+
+      // Category Breakdown
+      const catList = document.getElementById('categoryBreakdownList');
+      catList.innerHTML = '';
+      data.category_breakdown.forEach(cat => {
+        catList.innerHTML += `
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium text-slate-300">${cat.category}</span>
+              <span class="text-slate-400">${cat.matched_count}/${cat.total_count} (${cat.score_percentage}%)</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5">
+              <div class="bg-blue-500 h-1.5 rounded-full" style="width: ${cat.score_percentage}%;"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Badges
+      document.getElementById('matchedCount').textContent = data.matched_skills.length;
+      document.getElementById('matchedSkillsBadges').innerHTML = data.matched_skills.map(s => 
+        `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 text-xs font-medium flex items-center gap-1.5">
+          <i class="fa-solid fa-check text-[10px]"></i> ${s.skill_name}
+        </span>`
+      ).join('') || '<span class="text-xs text-slate-500">None matched</span>';
+
+      document.getElementById('missingCritCount').textContent = data.missing_critical_skills.length;
+      document.getElementById('missingCritSkillsBadges').innerHTML = data.missing_critical_skills.map(s => 
+        `<span class="px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/30 text-xs font-medium flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-exclamation text-[10px]"></i> ${s.skill_name}
+        </span>`
+      ).join('') || '<span class="text-xs text-emerald-400">No critical skills missing!</span>';
+
+      document.getElementById('missingSecCount').textContent = data.missing_secondary_skills.length;
+      document.getElementById('missingSecSkillsBadges').innerHTML = data.missing_secondary_skills.map(s => 
+        `<span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-medium">
+          + ${s.skill_name}
+        </span>`
+      ).join('') || '<span class="text-xs text-slate-500">None</span>';
+
+      document.getElementById('bonusSkillsBadges').innerHTML = data.strengths_or_bonus_skills.map(s => 
+        `<span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/30 text-xs font-medium">
+          ★ ${s}
+        </span>`
+      ).join('') || '<span class="text-xs text-slate-500">None</span>';
+
+      // Courses
+      const courseList = document.getElementById('coursesList');
+      courseList.innerHTML = '';
+      data.recommended_courses.forEach(c => {
+        courseList.innerHTML += `
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-700 transition">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${c.skill}</span>
+                <span class="text-xs font-medium text-slate-400">${c.provider} • ⭐ ${c.rating}</span>
+              </div>
+              <h5 class="text-xs font-semibold text-white">${c.title}</h5>
+              <p class="text-[11px] text-slate-400">${c.description}</p>
+            </div>
+            <a href="${c.url}" target="_blank" class="shrink-0 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition">
+              View Course <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        `;
+      });
+
+      // Projects
+      const projList = document.getElementById('projectsList');
+      projList.innerHTML = '';
+      data.recommended_projects.forEach(p => {
+        projList.innerHTML += `
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2.5 hover:border-slate-700 transition">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-white flex items-center gap-2">
+                <i class="fa-solid fa-code-fork text-cyan-400"></i> ${p.title}
+              </h4>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                ${p.difficulty} • ~${p.estimated_hours} hrs
+              </span>
+            </div>
+            <p class="text-xs text-slate-300">${p.summary}</p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="text-[11px] text-slate-500">Skills covered:</span>
+              ${p.missing_skills_covered.map(sk => `<span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-cyan-300 border border-slate-700">${sk}</span>`).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      // Action Plan
+      const planList = document.getElementById('actionPlanList');
+      planList.innerHTML = '';
+      data.action_plan.forEach(item => {
+        planList.innerHTML += `
+          <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-start gap-2.5">
+            <div class="text-slate-300">${item}</div>
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "education": {
+    "degree": "B.Sc.",
+    "field": "Statistics",
+    "year": 2023
+  },
+  "current_role": "Junior Data Analyst",
+  "skills": [
+    {
+      "name": "SQL",
+      "level": 3,
+      "years": 2.0,
+      "evidence": [
+        "Queried client transactions and analytical data stores."
+      ]
+    },
+    {
+      "name": "Python",
+      "level": 2,
+      "years": 1.0,
+      "evidence": [
+        "Cleaned data frames using Pandas."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Sales Dashboard",
+      "description": "Extracted quarterly sales metrics and aggregated metrics.",
+      "technologies": [
+        "SQL",
+        "Python"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Data Assistant",
+      "company": "StatAnalytics",
+      "duration_months": 9.0,
+      "skills": [
+        "SQL"
+      ]
+    }
+  ],
+  "certifications": [],
+  "interests": [
+    "Data Engineering",
+    "Data Analytics"
+  ],
+  "target_career": "Data Analyst",
+  "target_duration_months": 8
+}

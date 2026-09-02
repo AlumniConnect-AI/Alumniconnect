@@ -1,0 +1,10 @@
+﻿Experience Required: 3+ years       -> 3.0
+3+ years                            -> 3.0
+3 years                             -> 3.0
+3-5 years                           -> 5.0
+5+ years                            -> 5.0
+Minimum 3 years                     -> 3.0
+3+ yrs                              -> 3.0
+experience required: 3+ yrs         -> 3.0
+experience of 4 years               -> 4.0
+min 2 years experience              -> 2.0

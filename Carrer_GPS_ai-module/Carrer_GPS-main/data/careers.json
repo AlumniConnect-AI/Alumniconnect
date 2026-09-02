@@ -1,0 +1,4107 @@
+[
+  {
+    "id": "software-engineer",
+    "title": "Software Engineer",
+    "description": "Professional role responsible for Software Engineer duties in the software-engineering domain.",
+    "required_skills": {
+      "Python": 4,
+      "Java": 3,
+      "Git": 3,
+      "Testing": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3,
+      "Docker": 3,
+      "SQL": 3,
+      "REST APIs": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Software Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "software-developer",
+    "title": "Software Developer",
+    "description": "Professional role responsible for Software Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "Java": 3,
+      "JavaScript": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "HTML/CSS": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Software Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "application-developer",
+    "title": "Application Developer",
+    "description": "Professional role responsible for Application Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "Java": 3,
+      "C#": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Application Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "backend-developer-se",
+    "title": "Backend Developer",
+    "description": "Professional role responsible for Backend Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "Python": 4,
+      "SQL": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "FastAPI": 3,
+      "PostgreSQL": 3,
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Backend Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "frontend-developer-se",
+    "title": "Frontend Developer",
+    "description": "Professional role responsible for Frontend Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "React": 3,
+      "HTML/CSS": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Frontend Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "full-stack-developer-se",
+    "title": "Full Stack Developer",
+    "description": "Professional role responsible for Full Stack Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "SQL": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "React": 3,
+      "Node.js": 3,
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Full Stack Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "software-architect",
+    "title": "Software Architect",
+    "description": "Professional role responsible for Software Architect duties in the software-engineering domain.",
+    "required_skills": {
+      "Java": 3,
+      "Clean Architecture": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Kubernetes": 3,
+      "Terraform": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Software Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "systems-engineer",
+    "title": "Systems Engineer",
+    "description": "Professional role responsible for Systems Engineer duties in the software-engineering domain.",
+    "required_skills": {
+      "C": 3,
+      "C++": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Systems Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "api-developer",
+    "title": "API Developer",
+    "description": "Professional role responsible for API Developer duties in the software-engineering domain.",
+    "required_skills": {
+      "Python": 4,
+      "FastAPI": 3,
+      "SQL": 3
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior API Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "platform-engineer-se",
+    "title": "Platform Engineer",
+    "description": "Professional role responsible for Platform Engineer duties in the software-engineering domain.",
+    "required_skills": {
+      "Go": 3,
+      "Docker": 3,
+      "Kubernetes": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3,
+      "Linux": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Platform Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "developer-tools-engineer",
+    "title": "Developer Tools Engineer",
+    "description": "Professional role responsible for Developer Tools Engineer duties in the software-engineering domain.",
+    "required_skills": {
+      "TypeScript": 3,
+      "Python": 4,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Developer Tools Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web-frontend-developer",
+    "title": "Frontend Developer",
+    "description": "Professional role responsible for Frontend Developer duties in the web-development domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "HTML/CSS": 3
+    },
+    "preferred_skills": {
+      "React": 3,
+      "Next.js": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Frontend Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web-backend-developer",
+    "title": "Backend Developer",
+    "description": "Professional role responsible for Backend Developer duties in the web-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "SQL": 3,
+      "Node.js": 3
+    },
+    "preferred_skills": {
+      "Express": 3,
+      "PostgreSQL": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Backend Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web-full-stack-developer",
+    "title": "Full Stack Developer",
+    "description": "Professional role responsible for Full Stack Developer duties in the web-development domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "SQL": 3
+    },
+    "preferred_skills": {
+      "React": 3,
+      "Next.js": 3,
+      "PostgreSQL": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Full Stack Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web-developer",
+    "title": "Web Developer",
+    "description": "Professional role responsible for Web Developer duties in the web-development domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "HTML/CSS": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "PHP": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Web Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web-app-engineer",
+    "title": "Web Application Engineer",
+    "description": "Professional role responsible for Web Application Engineer duties in the web-development domain.",
+    "required_skills": {
+      "TypeScript": 3,
+      "React": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Next.js": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Web Application Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "android-developer",
+    "title": "Android Developer",
+    "description": "Professional role responsible for Android Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "Kotlin": 3,
+      "Java": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Android Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ios-developer",
+    "title": "iOS Developer",
+    "description": "Professional role responsible for iOS Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "Swift": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior iOS Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "flutter-developer",
+    "title": "Flutter Developer",
+    "description": "Professional role responsible for Flutter Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "Dart": 4,
+      "Flutter": 4,
+      "State Management": 3,
+      "Testing": 3
+    },
+    "preferred_skills": {
+      "CI/CD": 3,
+      "Native Android": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Flutter Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "react-native-developer",
+    "title": "React Native Developer",
+    "description": "Professional role responsible for React Native Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "React": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "State Management": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior React Native Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "kotlin-multiplatform-developer",
+    "title": "Kotlin Multiplatform Developer",
+    "description": "Professional role responsible for Kotlin Multiplatform Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "Kotlin": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Kotlin Multiplatform Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "mobile-app-developer",
+    "title": "Mobile Application Developer",
+    "description": "Professional role responsible for Mobile Application Developer duties in the mobile-development domain.",
+    "required_skills": {
+      "Kotlin": 3,
+      "Swift": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Flutter": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Mobile Application Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "mobile-software-engineer",
+    "title": "Mobile Software Engineer",
+    "description": "Professional role responsible for Mobile Software Engineer duties in the mobile-development domain.",
+    "required_skills": {
+      "Kotlin": 3,
+      "Swift": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Mobile Software Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "mobile-architect",
+    "title": "Mobile Architect",
+    "description": "Professional role responsible for Mobile Architect duties in the mobile-development domain.",
+    "required_skills": {
+      "Kotlin": 3,
+      "Swift": 3,
+      "Clean Architecture": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "State Management": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Mobile Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "data-analyst",
+    "title": "Data Analyst",
+    "description": "Professional role responsible for Data Analyst duties in the data domain.",
+    "required_skills": {
+      "SQL": 3,
+      "Python": 4,
+      "Pandas": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Data Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "data-scientist",
+    "title": "Data Scientist",
+    "description": "Professional role responsible for Data Scientist duties in the data domain.",
+    "required_skills": {
+      "Python": 4,
+      "SQL": 3,
+      "Pandas": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "Scikit-Learn": 3,
+      "PyTorch": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Data Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "data-engineer",
+    "title": "Data Engineer",
+    "description": "Professional role responsible for Data Engineer duties in the data domain.",
+    "required_skills": {
+      "Python": 4,
+      "SQL": 3,
+      "Bash": 3
+    },
+    "preferred_skills": {
+      "PostgreSQL": 3,
+      "Snowflake": 3,
+      "BigQuery": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Data Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "bi-analyst",
+    "title": "BI Analyst",
+    "description": "Professional role responsible for BI Analyst duties in the data domain.",
+    "required_skills": {
+      "SQL": 3,
+      "Pandas": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior BI Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "bi-developer",
+    "title": "BI Developer",
+    "description": "Professional role responsible for BI Developer duties in the data domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3
+    },
+    "preferred_skills": {
+      "Snowflake": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior BI Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "analytics-engineer",
+    "title": "Analytics Engineer",
+    "description": "Professional role responsible for Analytics Engineer duties in the data domain.",
+    "required_skills": {
+      "SQL": 3,
+      "Python": 4,
+      "PostgreSQL": 3
+    },
+    "preferred_skills": {
+      "Snowflake": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Analytics Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "data-architect",
+    "title": "Data Architect",
+    "description": "Professional role responsible for Data Architect duties in the data domain.",
+    "required_skills": {
+      "SQL": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "PostgreSQL": 3,
+      "Snowflake": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Data Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "big-data-engineer",
+    "title": "Big Data Engineer",
+    "description": "Professional role responsible for Big Data Engineer duties in the data domain.",
+    "required_skills": {
+      "Python": 4,
+      "Scala": 3,
+      "SQL": 3
+    },
+    "preferred_skills": {
+      "Cassandra": 3,
+      "BigQuery": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Big Data Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ml-engineer",
+    "title": "Machine Learning Engineer",
+    "description": "Professional role responsible for Machine Learning Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "Machine Learning": 4,
+      "Deep Learning": 3,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "Docker": 3,
+      "System Design": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Machine Learning Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ai-engineer",
+    "title": "AI Engineer",
+    "description": "Professional role responsible for AI Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "TypeScript": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "PyTorch": 3,
+      "FastAPI": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior AI Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ml-researcher",
+    "title": "ML Researcher",
+    "description": "Professional role responsible for ML Researcher duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "TensorFlow": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior ML Researcher"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "nlp-engineer",
+    "title": "NLP Engineer",
+    "description": "Professional role responsible for NLP Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior NLP Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "computer-vision-engineer",
+    "title": "Computer Vision Engineer",
+    "description": "Professional role responsible for Computer Vision Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "C++": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Computer Vision Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "generative-ai-engineer",
+    "title": "Generative AI Engineer",
+    "description": "Professional role responsible for Generative AI Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "FastAPI": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Generative AI Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "llm-engineer",
+    "title": "LLM Engineer",
+    "description": "Professional role responsible for LLM Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "FastAPI": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior LLM Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "mlops-engineer",
+    "title": "MLOps Engineer",
+    "description": "Professional role responsible for MLOps Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "Docker": 3,
+      "Kubernetes": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3,
+      "CI/CD": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior MLOps Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "applied-scientist",
+    "title": "Applied Scientist",
+    "description": "Professional role responsible for Applied Scientist duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "Scikit-Learn": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Applied Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ai-research-scientist",
+    "title": "AI Research Scientist",
+    "description": "Professional role responsible for AI Research Scientist duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "TensorFlow": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior AI Research Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "prompt-engineer",
+    "title": "Prompt Engineer",
+    "description": "Professional role responsible for Prompt Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Python": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Prompt Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ai-product-engineer",
+    "title": "AI Product Engineer",
+    "description": "Professional role responsible for AI Product Engineer duties in the ai-ml domain.",
+    "required_skills": {
+      "Python": 4,
+      "TypeScript": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "FastAPI": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior AI Product Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-engineer",
+    "title": "Cloud Engineer",
+    "description": "Professional role responsible for Cloud Engineer duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "Linux": 3,
+      "Docker": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-architect",
+    "title": "Cloud Architect",
+    "description": "Professional role responsible for Cloud Architect duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3,
+      "Kubernetes": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-developer",
+    "title": "Cloud Developer",
+    "description": "Professional role responsible for Cloud Developer duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "Python": 4,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-security-engineer",
+    "title": "Cloud Security Engineer",
+    "description": "Professional role responsible for Cloud Security Engineer duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "IAM": 3,
+      "Network Security": 3
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Security Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-solutions-architect",
+    "title": "Cloud Solutions Architect",
+    "description": "Professional role responsible for Cloud Solutions Architect duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Solutions Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-consultant",
+    "title": "Cloud Consultant",
+    "description": "Professional role responsible for Cloud Consultant duties in the cloud-computing domain.",
+    "required_skills": {
+      "AWS": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "devops-engineer",
+    "title": "DevOps Engineer",
+    "description": "Professional role responsible for DevOps Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Docker": 3,
+      "CI/CD": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Kubernetes": 3,
+      "Terraform": 3,
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior DevOps Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "sre-engineer",
+    "title": "Site Reliability Engineer",
+    "description": "Professional role responsible for Site Reliability Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Docker": 3,
+      "Kubernetes": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3,
+      "System Design": 3,
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Site Reliability Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "platform-engineer",
+    "title": "Platform Engineer",
+    "description": "Professional role responsible for Platform Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Docker": 3,
+      "Kubernetes": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3,
+      "CI/CD": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Platform Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "release-engineer",
+    "title": "Release Engineer",
+    "description": "Professional role responsible for Release Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Git": 3,
+      "CI/CD": 3
+    },
+    "preferred_skills": {
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Release Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "build-engineer",
+    "title": "Build Engineer",
+    "description": "Professional role responsible for Build Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Git": 3,
+      "CI/CD": 3
+    },
+    "preferred_skills": {
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Build Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "infrastructure-engineer",
+    "title": "Infrastructure Engineer",
+    "description": "Professional role responsible for Infrastructure Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Terraform": 3,
+      "Docker": 3
+    },
+    "preferred_skills": {
+      "Kubernetes": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Infrastructure Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "devsecops-engineer",
+    "title": "DevSecOps Engineer",
+    "description": "Professional role responsible for DevSecOps Engineer duties in the devops-sre domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Docker": 3,
+      "CI/CD": 3,
+      "Application Security": 3
+    },
+    "preferred_skills": {
+      "Kubernetes": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior DevSecOps Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cybersecurity-engineer",
+    "title": "Cybersecurity Engineer",
+    "description": "Professional role responsible for Cybersecurity Engineer duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3,
+      "Git": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Penetration Testing": 3,
+      "IAM": 3,
+      "Application Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cybersecurity Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "security-engineer",
+    "title": "Security Engineer",
+    "description": "Professional role responsible for Security Engineer duties in the cybersecurity domain.",
+    "required_skills": {
+      "Application Security": 3,
+      "Linux": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Security Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "soc-analyst",
+    "title": "SOC Analyst",
+    "description": "Professional role responsible for SOC Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "IAM": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior SOC Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "security-analyst",
+    "title": "Security Analyst",
+    "description": "Professional role responsible for Security Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "IAM": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Security Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "penetration-tester",
+    "title": "Penetration Tester",
+    "description": "Professional role responsible for Penetration Tester duties in the cybersecurity domain.",
+    "required_skills": {
+      "Penetration Testing": 3,
+      "Linux": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Application Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Penetration Tester"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ethical-hacker",
+    "title": "Ethical Hacker",
+    "description": "Professional role responsible for Ethical Hacker duties in the cybersecurity domain.",
+    "required_skills": {
+      "Penetration Testing": 3,
+      "Linux": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Application Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Ethical Hacker"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "security-architect",
+    "title": "Security Architect",
+    "description": "Professional role responsible for Security Architect duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Cryptography": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "IAM": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Security Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "app-security-engineer",
+    "title": "Application Security Engineer",
+    "description": "Professional role responsible for Application Security Engineer duties in the cybersecurity domain.",
+    "required_skills": {
+      "Application Security": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Application Security Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "incident-response-analyst",
+    "title": "Incident Response Analyst",
+    "description": "Professional role responsible for Incident Response Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Incident Response Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "forensics-analyst",
+    "title": "Digital Forensics Analyst",
+    "description": "Professional role responsible for Digital Forensics Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Network Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Digital Forensics Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "threat-intel-analyst",
+    "title": "Threat Intelligence Analyst",
+    "description": "Professional role responsible for Threat Intelligence Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Threat Intelligence Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "security-consultant",
+    "title": "Security Consultant",
+    "description": "Professional role responsible for Security Consultant duties in the cybersecurity domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Security Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "grc-analyst",
+    "title": "GRC Analyst",
+    "description": "Professional role responsible for GRC Analyst duties in the cybersecurity domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Network Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior GRC Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "database-administrator",
+    "title": "Database Administrator",
+    "description": "Professional role responsible for Database Administrator duties in the database-engineering domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3,
+      "MySQL": 3
+    },
+    "preferred_skills": {
+      "Linux": 3,
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Database Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "database-engineer",
+    "title": "Database Engineer",
+    "description": "Professional role responsible for Database Engineer duties in the database-engineering domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3,
+      "MySQL": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Redis": 3,
+      "MongoDB": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Database Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "database-developer",
+    "title": "Database Developer",
+    "description": "Professional role responsible for Database Developer duties in the database-engineering domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3,
+      "MySQL": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Database Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "database-architect",
+    "title": "Database Architect",
+    "description": "Professional role responsible for Database Architect duties in the database-engineering domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "MongoDB": 3,
+      "Redis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Database Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "data-warehouse-engineer",
+    "title": "Data Warehouse Engineer",
+    "description": "Professional role responsible for Data Warehouse Engineer duties in the database-engineering domain.",
+    "required_skills": {
+      "SQL": 3,
+      "PostgreSQL": 3,
+      "Snowflake": 3
+    },
+    "preferred_skills": {
+      "BigQuery": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Data Warehouse Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "network-engineer",
+    "title": "Network Engineer",
+    "description": "Professional role responsible for Network Engineer duties in the networking domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "Bash": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Network Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "network-administrator",
+    "title": "Network Administrator",
+    "description": "Professional role responsible for Network Administrator duties in the networking domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Network Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "network-architect",
+    "title": "Network Architect",
+    "description": "Professional role responsible for Network Architect duties in the networking domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Linux": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Network Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "network-security-engineer",
+    "title": "Network Security Engineer",
+    "description": "Professional role responsible for Network Security Engineer duties in the networking domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Linux": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Penetration Testing": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Network Security Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "wireless-network-engineer",
+    "title": "Wireless Network Engineer",
+    "description": "Professional role responsible for Wireless Network Engineer duties in the networking domain.",
+    "required_skills": {
+      "Network Security": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Wireless Network Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "system-administrator",
+    "title": "System Administrator",
+    "description": "Professional role responsible for System Administrator duties in the it-infrastructure domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Bash": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Network Security": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior System Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "linux-administrator",
+    "title": "Linux Administrator",
+    "description": "Professional role responsible for Linux Administrator duties in the it-infrastructure domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Bash": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Linux Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "windows-administrator",
+    "title": "Windows Administrator",
+    "description": "Professional role responsible for Windows Administrator duties in the it-infrastructure domain.",
+    "required_skills": {
+      "PowerShell": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Windows Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "it-infrastructure-engineer",
+    "title": "Infrastructure Engineer",
+    "description": "Professional role responsible for Infrastructure Engineer duties in the it-infrastructure domain.",
+    "required_skills": {
+      "Linux": 3,
+      "Terraform": 3
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Infrastructure Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "qa-engineer",
+    "title": "QA Engineer",
+    "description": "Professional role responsible for QA Engineer duties in the qa-testing domain.",
+    "required_skills": {
+      "Testing": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Communication": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior QA Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "qa-analyst",
+    "title": "QA Analyst",
+    "description": "Professional role responsible for QA Analyst duties in the qa-testing domain.",
+    "required_skills": {
+      "Testing": 3
+    },
+    "preferred_skills": {
+      "Communication": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior QA Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "automation-tester",
+    "title": "Automation Tester",
+    "description": "Professional role responsible for Automation Tester duties in the qa-testing domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "Testing": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Automation Tester"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "test-engineer",
+    "title": "Test Engineer",
+    "description": "Professional role responsible for Test Engineer duties in the qa-testing domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "Testing": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Test Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "sdet",
+    "title": "SDET",
+    "description": "Professional role responsible for SDET duties in the qa-testing domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "Testing": 3,
+      "Git": 3,
+      "Python": 4
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior SDET"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "performance-test-engineer",
+    "title": "Performance Test Engineer",
+    "description": "Professional role responsible for Performance Test Engineer duties in the qa-testing domain.",
+    "required_skills": {
+      "Testing": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Python": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Performance Test Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "mobile-qa-engineer",
+    "title": "Mobile QA Engineer",
+    "description": "Professional role responsible for Mobile QA Engineer duties in the qa-testing domain.",
+    "required_skills": {
+      "Testing": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Dart": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Mobile QA Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "test-architect",
+    "title": "Test Architect",
+    "description": "Professional role responsible for Test Architect duties in the qa-testing domain.",
+    "required_skills": {
+      "Testing": 3,
+      "Git": 3,
+      "CI/CD": 3
+    },
+    "preferred_skills": {
+      "Docker": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Test Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ui-designer",
+    "title": "UI Designer",
+    "description": "Professional role responsible for UI Designer duties in the ui-ux domain.",
+    "required_skills": {
+      "Figma": 3,
+      "Wireframing": 3
+    },
+    "preferred_skills": {
+      "HTML/CSS": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior UI Designer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ux-designer",
+    "title": "UX Designer",
+    "description": "Professional role responsible for UX Designer duties in the ui-ux domain.",
+    "required_skills": {
+      "Figma": 3,
+      "Wireframing": 3,
+      "UX Research": 3
+    },
+    "preferred_skills": {
+      "Communication": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior UX Designer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "product-designer",
+    "title": "Product Designer",
+    "description": "Professional role responsible for Product Designer duties in the ui-ux domain.",
+    "required_skills": {
+      "Figma": 3,
+      "Wireframing": 3,
+      "UX Research": 3
+    },
+    "preferred_skills": {
+      "Communication": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Product Designer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ux-researcher",
+    "title": "UX Researcher",
+    "description": "Professional role responsible for UX Researcher duties in the ui-ux domain.",
+    "required_skills": {
+      "UX Research": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior UX Researcher"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "interaction-designer",
+    "title": "Interaction Designer",
+    "description": "Professional role responsible for Interaction Designer duties in the ui-ux domain.",
+    "required_skills": {
+      "Figma": 3,
+      "Wireframing": 3
+    },
+    "preferred_skills": {
+      "Communication": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Interaction Designer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "design-systems-designer",
+    "title": "Design Systems Designer",
+    "description": "Professional role responsible for Design Systems Designer duties in the ui-ux domain.",
+    "required_skills": {
+      "Figma": 3,
+      "Wireframing": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Design Systems Designer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "accessibility-specialist",
+    "title": "Accessibility Specialist",
+    "description": "Professional role responsible for Accessibility Specialist duties in the ui-ux domain.",
+    "required_skills": {
+      "HTML/CSS": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Accessibility Specialist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "product-manager",
+    "title": "Product Manager",
+    "description": "Professional role responsible for Product Manager duties in the product-management domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Product Strategy": 3
+    },
+    "preferred_skills": {
+      "Business Analysis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Product Manager"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "technical-product-manager",
+    "title": "Technical Product Manager",
+    "description": "Professional role responsible for Technical Product Manager duties in the product-management domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Product Strategy": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Business Analysis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Technical Product Manager"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "associate-product-manager",
+    "title": "Associate Product Manager",
+    "description": "Professional role responsible for Associate Product Manager duties in the product-management domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Product Strategy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Associate Product Manager"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "product-owner",
+    "title": "Product Owner",
+    "description": "Professional role responsible for Product Owner duties in the product-management domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Product Strategy": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Product Owner"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "growth-product-manager",
+    "title": "Growth Product Manager",
+    "description": "Professional role responsible for Growth Product Manager duties in the product-management domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Product Strategy": 3,
+      "Pandas": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Growth Product Manager"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "business-analyst",
+    "title": "Business Analyst",
+    "description": "Professional role responsible for Business Analyst duties in the business-analysis domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Business Analysis": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Business Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "it-business-analyst",
+    "title": "IT Business Analyst",
+    "description": "Professional role responsible for IT Business Analyst duties in the business-analysis domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Business Analysis": 3,
+      "SQL": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior IT Business Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "systems-analyst",
+    "title": "Systems Analyst",
+    "description": "Professional role responsible for Systems Analyst duties in the business-analysis domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Business Analysis": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Systems Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "product-analyst",
+    "title": "Product Analyst",
+    "description": "Professional role responsible for Product Analyst duties in the business-analysis domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Business Analysis": 3,
+      "Pandas": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Product Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "requirements-analyst",
+    "title": "Requirements Analyst",
+    "description": "Professional role responsible for Requirements Analyst duties in the business-analysis domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Business Analysis": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Requirements Analyst"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "sap-consultant",
+    "title": "SAP Consultant",
+    "description": "Professional role responsible for SAP Consultant duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "SQL": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior SAP Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "sap-developer",
+    "title": "SAP Developer",
+    "description": "Professional role responsible for SAP Developer duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Java": 3,
+      "SQL": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior SAP Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "salesforce-developer",
+    "title": "Salesforce Developer",
+    "description": "Professional role responsible for Salesforce Developer duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Apex": 3,
+      "JavaScript": 3,
+      "SQL": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Salesforce Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "salesforce-administrator",
+    "title": "Salesforce Administrator",
+    "description": "Professional role responsible for Salesforce Administrator duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Salesforce Administrator"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "erp-consultant",
+    "title": "ERP Consultant",
+    "description": "Professional role responsible for ERP Consultant duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior ERP Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "crm-consultant",
+    "title": "CRM Consultant",
+    "description": "Professional role responsible for CRM Consultant duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior CRM Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "enterprise-app-consultant",
+    "title": "Enterprise Application Consultant",
+    "description": "Professional role responsible for Enterprise Application Consultant duties in the enterprise-technology domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Enterprise Application Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "blockchain-developer",
+    "title": "Blockchain Developer",
+    "description": "Professional role responsible for Blockchain Developer duties in the blockchain-web3 domain.",
+    "required_skills": {
+      "Solidity": 3,
+      "Rust": 3,
+      "Cryptography": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "TypeScript": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Blockchain Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "smart-contract-developer",
+    "title": "Smart Contract Developer",
+    "description": "Professional role responsible for Smart Contract Developer duties in the blockchain-web3 domain.",
+    "required_skills": {
+      "Solidity": 3,
+      "Cryptography": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "TypeScript": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Smart Contract Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "web3-developer",
+    "title": "Web3 Developer",
+    "description": "Professional role responsible for Web3 Developer duties in the blockchain-web3 domain.",
+    "required_skills": {
+      "JavaScript": 3,
+      "TypeScript": 3,
+      "Solidity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "React": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Web3 Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "blockchain-engineer",
+    "title": "Blockchain Engineer",
+    "description": "Professional role responsible for Blockchain Engineer duties in the blockchain-web3 domain.",
+    "required_skills": {
+      "Go": 3,
+      "Rust": 3,
+      "Cryptography": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Blockchain Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "blockchain-security-engineer",
+    "title": "Blockchain Security Engineer",
+    "description": "Professional role responsible for Blockchain Security Engineer duties in the blockchain-web3 domain.",
+    "required_skills": {
+      "Solidity": 3,
+      "Cryptography": 3,
+      "Application Security": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Blockchain Security Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ar-developer",
+    "title": "AR Developer",
+    "description": "Professional role responsible for AR Developer duties in the ar-vr-xr domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior AR Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "vr-developer",
+    "title": "VR Developer",
+    "description": "Professional role responsible for VR Developer duties in the ar-vr-xr domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior VR Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "xr-developer",
+    "title": "XR Developer",
+    "description": "Professional role responsible for XR Developer duties in the ar-vr-xr domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior XR Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "xr-engineer",
+    "title": "XR Engineer",
+    "description": "Professional role responsible for XR Engineer duties in the ar-vr-xr domain.",
+    "required_skills": {
+      "C++": 3,
+      "Unreal Engine": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior XR Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "game-developer",
+    "title": "Game Developer",
+    "description": "Professional role responsible for Game Developer duties in the game-development domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Game Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "gameplay-programmer",
+    "title": "Gameplay Programmer",
+    "description": "Professional role responsible for Gameplay Programmer duties in the game-development domain.",
+    "required_skills": {
+      "C++": 3,
+      "Unreal Engine": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Gameplay Programmer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "unity-developer",
+    "title": "Unity Developer",
+    "description": "Professional role responsible for Unity Developer duties in the game-development domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Unity Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "unreal-engine-developer",
+    "title": "Unreal Engine Developer",
+    "description": "Professional role responsible for Unreal Engine Developer duties in the game-development domain.",
+    "required_skills": {
+      "C++": 3,
+      "Unreal Engine": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Unreal Engine Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "game-engine-programmer",
+    "title": "Game Engine Programmer",
+    "description": "Professional role responsible for Game Engine Programmer duties in the game-development domain.",
+    "required_skills": {
+      "C++": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Game Engine Programmer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "graphics-programmer",
+    "title": "Graphics Programmer",
+    "description": "Professional role responsible for Graphics Programmer duties in the game-development domain.",
+    "required_skills": {
+      "C++": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Graphics Programmer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "embedded-systems-engineer",
+    "title": "Embedded Systems Engineer",
+    "description": "Professional role responsible for Embedded Systems Engineer duties in the embedded-systems-iot domain.",
+    "required_skills": {
+      "C": 3,
+      "C++": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Embedded Systems Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "firmware-engineer",
+    "title": "Firmware Engineer",
+    "description": "Professional role responsible for Firmware Engineer duties in the embedded-systems-iot domain.",
+    "required_skills": {
+      "C": 3
+    },
+    "preferred_skills": {
+      "Linux": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Firmware Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "iot-engineer",
+    "title": "IoT Engineer",
+    "description": "Professional role responsible for IoT Engineer duties in the embedded-systems-iot domain.",
+    "required_skills": {
+      "Python": 4,
+      "C++": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Linux": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior IoT Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "edge-computing-engineer",
+    "title": "Edge Computing Engineer",
+    "description": "Professional role responsible for Edge Computing Engineer duties in the embedded-systems-iot domain.",
+    "required_skills": {
+      "Python": 4,
+      "Docker": 3,
+      "Linux": 3
+    },
+    "preferred_skills": {
+      "PyTorch": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Edge Computing Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "embedded-software-developer",
+    "title": "Embedded Software Developer",
+    "description": "Professional role responsible for Embedded Software Developer duties in the embedded-systems-iot domain.",
+    "required_skills": {
+      "C": 3,
+      "Git": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Embedded Software Developer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "robotics-engineer",
+    "title": "Robotics Engineer",
+    "description": "Professional role responsible for Robotics Engineer duties in the robotics domain.",
+    "required_skills": {
+      "C++": 3,
+      "Python": 4,
+      "ROS": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "ROS 2": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Robotics Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "robotics-software-engineer",
+    "title": "Robotics Software Engineer",
+    "description": "Professional role responsible for Robotics Software Engineer duties in the robotics domain.",
+    "required_skills": {
+      "C++": 3,
+      "Python": 4,
+      "ROS 2": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "ROS": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Robotics Software Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "autonomous-systems-engineer",
+    "title": "Autonomous Systems Engineer",
+    "description": "Professional role responsible for Autonomous Systems Engineer duties in the robotics domain.",
+    "required_skills": {
+      "Python": 4,
+      "C++": 3,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "ROS 2": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Autonomous Systems Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "robotics-research-engineer",
+    "title": "Robotics Research Engineer",
+    "description": "Professional role responsible for Robotics Research Engineer duties in the robotics domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "ROS": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Robotics Research Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "technical-writer",
+    "title": "Technical Writer",
+    "description": "Professional role responsible for Technical Writer duties in the technical-writing domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "HTML/CSS": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Technical Writer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "documentation-engineer",
+    "title": "Documentation Engineer",
+    "description": "Professional role responsible for Documentation Engineer duties in the technical-writing domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Git": 3,
+      "JavaScript": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Documentation Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "api-documentation-specialist",
+    "title": "API Documentation Specialist",
+    "description": "Professional role responsible for API Documentation Specialist duties in the technical-writing domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "Python": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior API Documentation Specialist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "developer-advocate",
+    "title": "Developer Advocate",
+    "description": "Professional role responsible for Developer Advocate duties in the technical-writing domain.",
+    "required_skills": {
+      "Communication": 3,
+      "Git": 3,
+      "JavaScript": 3
+    },
+    "preferred_skills": {
+      "Python": 4
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Developer Advocate"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "solutions-architect",
+    "title": "Solutions Architect",
+    "description": "Professional role responsible for Solutions Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "AWS": 3,
+      "System Design": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Clean Architecture": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Solutions Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "sa-cloud-architect",
+    "title": "Cloud Architect",
+    "description": "Professional role responsible for Cloud Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "AWS": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Terraform": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "enterprise-architect",
+    "title": "Enterprise Architect",
+    "description": "Professional role responsible for Enterprise Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "System Design": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Enterprise Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "technical-architect",
+    "title": "Technical Architect",
+    "description": "Professional role responsible for Technical Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "Clean Architecture": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Technical Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "application-architect",
+    "title": "Application Architect",
+    "description": "Professional role responsible for Application Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "Clean Architecture": 3,
+      "System Design": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Application Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "integration-architect",
+    "title": "Integration Architect",
+    "description": "Professional role responsible for Integration Architect duties in the solutions-architecture domain.",
+    "required_skills": {
+      "System Design": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Integration Architect"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "it-consultant",
+    "title": "IT Consultant",
+    "description": "Professional role responsible for IT Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Business Analysis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior IT Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "technology-consultant",
+    "title": "Technology Consultant",
+    "description": "Professional role responsible for Technology Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Business Analysis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Technology Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cloud-consultant-it",
+    "title": "Cloud Consultant",
+    "description": "Professional role responsible for Cloud Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "AWS": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cloud Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "cybersecurity-consultant",
+    "title": "Cybersecurity Consultant",
+    "description": "Professional role responsible for Cybersecurity Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "Network Security": 3,
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Cryptography": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Cybersecurity Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "digital-transformation-consultant",
+    "title": "Digital Transformation Consultant",
+    "description": "Professional role responsible for Digital Transformation Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Business Analysis": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Digital Transformation Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "technology-strategy-consultant",
+    "title": "Technology Strategy Consultant",
+    "description": "Professional role responsible for Technology Strategy Consultant duties in the it-consulting domain.",
+    "required_skills": {
+      "Communication": 3
+    },
+    "preferred_skills": {
+      "Product Strategy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Technology Strategy Consultant"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "research-engineer",
+    "title": "Research Engineer",
+    "description": "Professional role responsible for Research Engineer duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "Git": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Research Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "research-scientist",
+    "title": "Research Scientist",
+    "description": "Professional role responsible for Research Scientist duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Research Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "applied-scientist-rd",
+    "title": "Applied Scientist",
+    "description": "Professional role responsible for Applied Scientist duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "Scikit-Learn": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Applied Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "ai-research-scientist-rd",
+    "title": "AI Research Scientist",
+    "description": "Professional role responsible for AI Research Scientist duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "TensorFlow": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior AI Research Scientist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "computer-vision-researcher",
+    "title": "Computer Vision Researcher",
+    "description": "Professional role responsible for Computer Vision Researcher duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "NumPy": 3
+    },
+    "preferred_skills": {
+      "C++": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Computer Vision Researcher"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "robotics-researcher",
+    "title": "Robotics Researcher",
+    "description": "Professional role responsible for Robotics Researcher duties in the research-development domain.",
+    "required_skills": {
+      "Python": 4,
+      "ROS": 3,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "NumPy": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Robotics Researcher"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "generative-ai-engineer-emerging",
+    "title": "Generative AI Engineer",
+    "description": "Professional role responsible for Generative AI Engineer duties in the emerging-technologies domain.",
+    "required_skills": {
+      "Python": 4,
+      "PyTorch": 3,
+      "Git": 3
+    },
+    "preferred_skills": {
+      "FastAPI": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Generative AI Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "quantum-computing-engineer",
+    "title": "Quantum Computing Engineer",
+    "description": "Professional role responsible for Quantum Computing Engineer duties in the emerging-technologies domain.",
+    "required_skills": {
+      "Python": 4,
+      "NumPy": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Quantum Computing Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "spatial-computing-specialist",
+    "title": "Spatial Computing Specialist",
+    "description": "Professional role responsible for Spatial Computing Specialist duties in the emerging-technologies domain.",
+    "required_skills": {
+      "C#": 3,
+      "Unity": 3,
+      "Figma": 3
+    },
+    "preferred_skills": {},
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Spatial Computing Specialist"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "edge-ai-engineer",
+    "title": "Edge AI Engineer",
+    "description": "Professional role responsible for Edge AI Engineer duties in the emerging-technologies domain.",
+    "required_skills": {
+      "Python": 4,
+      "Docker": 3,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "Linux": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Edge AI Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "autonomous-systems-engineer-emerging",
+    "title": "Autonomous Systems Engineer",
+    "description": "Professional role responsible for Autonomous Systems Engineer duties in the emerging-technologies domain.",
+    "required_skills": {
+      "Python": 4,
+      "C++": 3,
+      "PyTorch": 3
+    },
+    "preferred_skills": {
+      "ROS 2": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Autonomous Systems Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  },
+  {
+    "id": "advanced-robotics-engineer",
+    "title": "Advanced Robotics Engineer",
+    "description": "Professional role responsible for Advanced Robotics Engineer duties in the emerging-technologies domain.",
+    "required_skills": {
+      "C++": 3,
+      "Python": 4,
+      "ROS 2": 3
+    },
+    "preferred_skills": {
+      "PyTorch": 3
+    },
+    "recommended_projects": [
+      "Interactive Dashboard Portal"
+    ],
+    "career_progression": [
+      "Senior Advanced Robotics Engineer"
+    ],
+    "related_careers": [],
+    "education_relevance": {
+      "Computer Science": 1.0,
+      "Information Technology": 1.0
+    },
+    "typical_experience_years": 0
+  }
+]
