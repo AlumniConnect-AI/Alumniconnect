@@ -226,6 +226,7 @@ class AIService {
       'filename': filename,
       'extracted_text_length': rawText.length,
       'profile': {
+        'isOfflineFallback': true,
         'personalInfo': {
           'name': cleanName.isNotEmpty ? cleanName : 'Candidate',
           'email': '',

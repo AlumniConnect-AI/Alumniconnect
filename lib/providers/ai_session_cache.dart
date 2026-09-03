@@ -20,12 +20,13 @@ class AISessionCache {
   /// Timestamp of when the profile was parsed
   DateTime? parsedAt;
 
-  /// Whether a valid parsed profile is cached
-  bool get hasProfile => parsedProfile != null && parsedAt != null;
+  /// Whether the cached profile came from the offline local fallback
+  bool get isOfflineFallback => parsedProfile?['isOfflineFallback'] == true;
 
-  /// Whether the cache is still fresh (< 30 minutes old)
+  /// Whether the cache is still fresh (< 30 minutes old and not an offline fallback)
   bool get isFresh {
     if (parsedAt == null) return false;
+    if (isOfflineFallback) return false; // Never reuse offline fallback profiles!
     return DateTime.now().difference(parsedAt!).inMinutes < 30;
   }
 

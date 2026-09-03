@@ -195,8 +195,9 @@ class AlumniSkillProvider extends ChangeNotifier {
 
       if (_cache.hasProfile &&
           _cache.isFresh &&
+          !_cache.isOfflineFallback &&
           _cache.filename == filename) {
-        // Reuse cached profile if same file
+        // Reuse cached profile if same file and from live server
         profile = _cache.parsedProfile;
       } else {
         // Upload to Python server
