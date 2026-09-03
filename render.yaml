@@ -4,12 +4,12 @@ services:
     runtime: python
     rootDir: ai-module
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    startCommand: python -c "import sys; print(f'Python {sys.version}')" && uvicorn api.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.12"
       - key: PYTHONPATH
-        value: /opt/render/project/src/ai-module
+        value: /opt/render/project/src/ai-module:/opt/render/project/src/alumini_skill/alumini_skill:/opt/render/project/src/ai-module mentor match
       - key: FIREBASE_PROJECT_ID
         sync: false
       - key: FIREBASE_CLIENT_EMAIL

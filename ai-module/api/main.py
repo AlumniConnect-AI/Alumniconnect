@@ -1,19 +1,36 @@
 import sys
 import os
 
-# ── Resolve ai-module root reliably regardless of uvicorn invocation style ──
-# __file__ = .../Alumniconnect-master/ai-module/api/main.py
-_api_dir     = os.path.abspath(os.path.dirname(__file__))           # .../ai-module/api
-_ai_module_dir = os.path.abspath(os.path.join(_api_dir, ".."))     # .../ai-module
-_project_dir = os.path.abspath(os.path.join(_ai_module_dir, "..")) # .../Alumniconnect-master
+# ── Resolve ai-module root reliably for BOTH local AND Render deployment ──
+# __file__ = .../ai-module/api/main.py
+_api_dir       = os.path.abspath(os.path.dirname(__file__))            # .../ai-module/api
+_ai_module_dir = os.path.abspath(os.path.join(_api_dir, ".."))        # .../ai-module
+_project_dir   = os.path.abspath(os.path.join(_ai_module_dir, ".."))  # .../Alumniconnect-master
+_cwd           = os.path.abspath(os.getcwd())                         # Render CWD fallback
 
 _alumini_skill_dir = os.path.join(_project_dir, "alumini_skill", "alumini_skill")
 _mentor_match_dir  = os.path.join(_project_dir, "ai-module mentor match")
 
-# Insert paths so all sub-packages are importable
-for _p in [_ai_module_dir, os.path.abspath(_alumini_skill_dir), os.path.abspath(_mentor_match_dir)]:
-    if _p not in sys.path:
+# Build list of paths to add — includes CWD as Render fallback
+_paths_to_add = [
+    _ai_module_dir,
+    _cwd,  # On Render with rootDir=ai-module, CWD IS the ai-module dir
+    os.path.abspath(_alumini_skill_dir),
+    os.path.abspath(_mentor_match_dir),
+]
+
+# Insert all valid paths at the front of sys.path
+for _p in _paths_to_add:
+    if _p and os.path.isdir(_p) and _p not in sys.path:
         sys.path.insert(0, _p)
+
+# Debug: log resolved paths (visible in Render logs)
+print(f"[BOOT] __file__       = {__file__}")
+print(f"[BOOT] CWD            = {_cwd}")
+print(f"[BOOT] ai-module dir  = {_ai_module_dir}")
+print(f"[BOOT] project dir    = {_project_dir}")
+print(f"[BOOT] sys.path[0:5]  = {sys.path[:5]}")
+print(f"[BOOT] career_twin exists? {os.path.isdir(os.path.join(_ai_module_dir, 'career_twin'))}")
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware

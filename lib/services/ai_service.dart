@@ -474,12 +474,70 @@ class AIService {
       }
     });
 
+    // ── Experience: parse multiple strategies like the Python parser ──────────
     double expYears = 0.0;
-    final expRegex = RegExp(r'(\d+(?:\.\d+)?)\s*(?:\+|\-)?\s*(?:years?|yrs?)\b', caseSensitive: false);
-    for (final match in expRegex.allMatches(lower)) {
+    int totalExpMonths = 0;
+
+    // Strategy 1: Explicit "X years" / "X+ years"
+    final expYearsRegex = RegExp(r'(\d+(?:\.\d+)?)\s*(?:\+|\-)?\s*(?:years?|yrs?)\b', caseSensitive: false);
+    for (final match in expYearsRegex.allMatches(lower)) {
       final val = double.tryParse(match.group(1) ?? '0') ?? 0.0;
       if (val > expYears && val < 50) expYears = val;
     }
+
+    // Strategy 2: Explicit "X months"
+    final expMonthsRegex = RegExp(r'(\d+)\s*(?:months?|mos?)\b', caseSensitive: false);
+    for (final match in expMonthsRegex.allMatches(lower)) {
+      final val = int.tryParse(match.group(1) ?? '0') ?? 0;
+      if (val > 0 && val < 120) totalExpMonths += val;
+    }
+
+    // Strategy 3: Named month-year date ranges (Jan 2023 – Apr 2024 / present)
+    final monthNames = 'jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?';
+    final dateRangeRegex = RegExp(
+      '($monthNames)[\\s.\\-]*(\\d{4})\\s*[–\\-—to]+\\s*($monthNames|present|current|ongoing)[\\s.\\-]*(\\d{4})?',
+      caseSensitive: false,
+    );
+    final monthMap = {
+      'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+      'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+    };
+
+    for (final match in dateRangeRegex.allMatches(lower)) {
+      final startMonStr = match.group(1)!.substring(0, 3);
+      final startYear = int.tryParse(match.group(2) ?? '') ?? 0;
+      final endMonStr = match.group(3)!;
+      final endYearStr = match.group(4);
+
+      final startMon = monthMap[startMonStr] ?? 1;
+      int endMon;
+      int endYear;
+
+      if (['present', 'current', 'ongoing'].contains(endMonStr)) {
+        final now = DateTime.now();
+        endMon = now.month;
+        endYear = now.year;
+      } else {
+        endMon = monthMap[endMonStr.substring(0, 3)] ?? 1;
+        endYear = int.tryParse(endYearStr ?? '') ?? startYear;
+      }
+
+      final months = (endYear - startYear) * 12 + (endMon - startMon);
+      if (months > 0 && months < 240) {
+        totalExpMonths += months;
+      }
+    }
+
+    // Combine: use whichever is higher — explicit years or summed date ranges
+    if (totalExpMonths > 0) {
+      final dateRangeYears = totalExpMonths / 12.0;
+      if (dateRangeYears > expYears) {
+        expYears = double.parse(dateRangeYears.toStringAsFixed(1));
+      }
+    }
+
+    // Cap at 10 years for students (prevents education year range contamination)
+    if (expYears > 10) expYears = 10.0;
 
     final education = <String>[];
     if (RegExp(r'\b(phd|doctorate|doctor of philosophy)\b').hasMatch(lower)) {
