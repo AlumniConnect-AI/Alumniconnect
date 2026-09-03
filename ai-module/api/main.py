@@ -31,6 +31,12 @@ print(f"[BOOT] ai-module dir  = {_ai_module_dir}")
 print(f"[BOOT] project dir    = {_project_dir}")
 print(f"[BOOT] sys.path[0:5]  = {sys.path[:5]}")
 print(f"[BOOT] career_twin exists? {os.path.isdir(os.path.join(_ai_module_dir, 'career_twin'))}")
+_ct_dir = os.path.join(_ai_module_dir, 'career_twin')
+if os.path.isdir(_ct_dir):
+    print(f"[BOOT] career_twin/ files: {os.listdir(_ct_dir)}")
+    _cmm = os.path.join(_ct_dir, 'career_match_model.py')
+    print(f"[BOOT] career_match_model.py exists? {os.path.isfile(_cmm)} size={os.path.getsize(_cmm) if os.path.isfile(_cmm) else 'N/A'}")
+print(f"[BOOT] Python version: {sys.version}")
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -50,15 +56,30 @@ except Exception as _e:
     print(f"[ERROR] PDF Parser failed to load: {_e}")
     import traceback; traceback.print_exc()
 
-# ── Import Career Twin ────────────────────────────────────────────────────────
+# ── Import Career Twin (step-by-step diagnosis for Render) ────────────────────
 try:
+    print("[DIAG] Step 1: Testing 'import career_twin'...")
+    import career_twin
+    print(f"[DIAG] Step 1 OK. career_twin loaded from: {career_twin.__file__}")
+
+    print("[DIAG] Step 2: Testing 'from career_twin.similarity_engine import ...'...")
+    from career_twin.similarity_engine import SemanticSimilarityEngine
+    print("[DIAG] Step 2 OK. SemanticSimilarityEngine loaded.")
+
+    print("[DIAG] Step 3: Testing 'from career_twin.ats_score import ...'...")
+    from career_twin.ats_score import ATSScoreEngine
+    print("[DIAG] Step 3 OK. ATSScoreEngine loaded.")
+
+    print("[DIAG] Step 4: Testing 'from career_twin.career_match_model import ...'...")
     from career_twin.career_match_model import CareerTwinModel
+    print("[DIAG] Step 4 OK. CareerTwinModel loaded.")
+
     _career_twin_available = True
     print("[INFO] Career Twin loaded successfully.")
 except Exception as _e:
     _career_twin_available = False
     CareerTwinModel = None
-    print(f"[ERROR] Career Twin failed to load: {_e}")
+    print(f"[ERROR] Career Twin failed to load: {type(_e).__name__}: {_e}")
     import traceback; traceback.print_exc()
 
 # ── Import Career GPS ─────────────────────────────────────────────────────────
