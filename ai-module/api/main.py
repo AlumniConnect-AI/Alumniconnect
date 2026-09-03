@@ -37,10 +37,40 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 
-from pdf_parser.resume_parser import ResumePDFParser
-from pdf_parser.candidate_profile_builder import CandidateProfileBuilder
-from career_twin.career_match_model import CareerTwinModel
-from career_gps.career_gps_model import CareerGPSModel
+# ── Import PDF Parser ─────────────────────────────────────────────────────────
+try:
+    from pdf_parser.resume_parser import ResumePDFParser
+    from pdf_parser.candidate_profile_builder import CandidateProfileBuilder
+    _pdf_parser_available = True
+    print("[INFO] PDF Parser loaded successfully.")
+except Exception as _e:
+    _pdf_parser_available = False
+    ResumePDFParser = None
+    CandidateProfileBuilder = None
+    print(f"[ERROR] PDF Parser failed to load: {_e}")
+    import traceback; traceback.print_exc()
+
+# ── Import Career Twin ────────────────────────────────────────────────────────
+try:
+    from career_twin.career_match_model import CareerTwinModel
+    _career_twin_available = True
+    print("[INFO] Career Twin loaded successfully.")
+except Exception as _e:
+    _career_twin_available = False
+    CareerTwinModel = None
+    print(f"[ERROR] Career Twin failed to load: {_e}")
+    import traceback; traceback.print_exc()
+
+# ── Import Career GPS ─────────────────────────────────────────────────────────
+try:
+    from career_gps.career_gps_model import CareerGPSModel
+    _career_gps_available = True
+    print("[INFO] Career GPS loaded successfully.")
+except Exception as _e:
+    _career_gps_available = False
+    CareerGPSModel = None
+    print(f"[ERROR] Career GPS failed to load: {_e}")
+    import traceback; traceback.print_exc()
 
 # ── Import Alumni Skill Gap Analyzer ──────────────────────────────────────────
 try:
@@ -88,8 +118,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-profile_builder = CandidateProfileBuilder()
-gps_model = CareerGPSModel()
+profile_builder = CandidateProfileBuilder() if _pdf_parser_available else None
+gps_model = CareerGPSModel() if _career_gps_available else None
 
 
 # ── Request / Response Schemas ────────────────────────────────────────────────
@@ -162,6 +192,9 @@ async def upload_resume(file: UploadFile = File(...)):
     """
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF resume files are supported.")
+
+    if not _pdf_parser_available:
+        raise HTTPException(status_code=503, detail="PDF parser module not available on this server. Check deploy logs.")
 
     try:
         contents = await file.read()
