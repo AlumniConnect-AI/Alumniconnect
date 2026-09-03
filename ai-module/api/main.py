@@ -11,18 +11,24 @@ _cwd           = os.path.abspath(os.getcwd())                         # Render C
 _alumini_skill_dir = os.path.join(_project_dir, "alumini_skill", "alumini_skill")
 _mentor_match_dir  = os.path.join(_project_dir, "ai-module mentor match")
 
-# Build list of paths to add — includes CWD as Render fallback
-_paths_to_add = [
-    _ai_module_dir,
-    _cwd,  # On Render with rootDir=ai-module, CWD IS the ai-module dir
+# Secondary paths: append (not insert) so they don't shadow ai-module packages
+_secondary_paths = [
     os.path.abspath(_alumini_skill_dir),
     os.path.abspath(_mentor_match_dir),
 ]
+for _p in _secondary_paths:
+    if _p and os.path.isdir(_p) and _p not in sys.path:
+        sys.path.append(_p)
 
-# Insert all valid paths at the front of sys.path
-for _p in _paths_to_add:
+# PRIMARY: ai-module dir MUST be at position 0 to take priority
+# (ai-module mentor match has a partial career_twin/ that shadows the real one)
+for _p in [_cwd, _ai_module_dir]:
     if _p and os.path.isdir(_p) and _p not in sys.path:
         sys.path.insert(0, _p)
+# Ensure ai-module is at the very front even if already present
+if _ai_module_dir in sys.path:
+    sys.path.remove(_ai_module_dir)
+    sys.path.insert(0, _ai_module_dir)
 
 # Debug: log resolved paths (visible in Render logs)
 print(f"[BOOT] __file__       = {__file__}")
