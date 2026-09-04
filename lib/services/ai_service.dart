@@ -293,46 +293,207 @@ class AIService {
           .timeout(ApiConfig.analyzeTimeout);
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
+        final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+
+        // ── KEY MISMATCH FIX (BUG 1) ─────────────────────────────────────────
+        // Python ATSScoreEngine returns keys:
+        //   ats_score, skill_match_contrib, semantic_contrib,
+        //   experience_contrib, formatting_contrib, ats_recommendations
+        //
+        // Flutter career_twin_screen.dart reads:
+        //   skill_match_score, semantic_sim_score, experience_score,
+        //   education_score, projects_score
+        //
+        // Remap here so the UI always receives the expected keys regardless
+        // of whether the Python or native Dart engine produced the result.
+        final analysis = (decoded['analysis'] as Map<String, dynamic>?) ?? {};
+        final rawBreakdown = (analysis['atsBreakdown'] as Map<String, dynamic>?) ?? {};
+
+        if (rawBreakdown.isNotEmpty) {
+          // Build a normalized breakdown using Python key names → Flutter key names
+          final normalised = <String, dynamic>{
+            'skill_match_score': (rawBreakdown['skill_match_score']     // native dart key (already correct)
+                ?? rawBreakdown['skill_match_contrib']                  // Python key
+                ?? 0.0),
+            'semantic_sim_score': (rawBreakdown['semantic_sim_score']   // native dart key
+                ?? rawBreakdown['semantic_contrib']                     // Python key
+                ?? 0.0),
+            'experience_score': (rawBreakdown['experience_score']       // native dart key
+                ?? rawBreakdown['experience_contrib']                   // Python key
+                ?? 0.0),
+            // Python has no education_score — derive from ATS completeness contrib split evenly
+            'education_score': (rawBreakdown['education_score']         // native dart key (if already set)
+                ?? _deriveEducationScore(rawBreakdown, profile)),
+            // Python has no projects_score — derive from formatting_contrib
+            'projects_score': (rawBreakdown['projects_score']           // native dart key (if already set)
+                ?? _deriveProjectsScore(rawBreakdown, profile)),
+          };
+          analysis['atsBreakdown'] = normalised;
+          decoded['analysis'] = analysis;
+        }
+
+        print('[AIService] Python 200 — matchScore=${analysis['matchScore']}  '
+            'atsBreakdown=${analysis['atsBreakdown']}');
+
+        return decoded;
       }
     } catch (e) {
       print('[AIService] Python Career Twin server error ($e). Using native Dart engine fallback.');
     }
 
-    // Native Dart TF-IDF fallback engine guarantees calculations succeed offline
+    // Native Dart TF-IDF fallback — already uses correct key names
     return _analyzeNativeFromProfile(profile, jdText, requiredExpYears);
   }
 
-  /// Native Dart Career Twin calculation engine (offline fallback).
+  /// Derives an education_score from available Python response data.
+  /// Python doesn't compute a standalone education score; we reconstruct
+  /// it from the formatting_contrib (which includes education presence)
+  /// and the profile's education list.
+  double _deriveEducationScore(Map<String, dynamic> breakdown, Map<String, dynamic> profile) {
+    // Check if profile has real education data
+    final education = (profile['education'] as List? ?? []).join(' ').toLowerCase();
+    if (education.contains('phd') || education.contains('doctorate')) return 100.0;
+    if (education.contains('mca') || education.contains('master') || education.contains('mba')) return 88.0;
+    if (education.contains('b.tech') || education.contains('btech') ||
+        education.contains('bachelor') || education.contains('b.e') ||
+        education.contains('bca') || education.contains('degree')) return 75.0;
+    if (education.contains('diploma')) return 55.0;
+    // If Python saw has_education = true, formatting_contrib includes 6pts from education
+    final formattingContrib = (breakdown['formatting_contrib'] as num?)?.toDouble() ?? 0.0;
+    if (formattingContrib >= 6.0) return 70.0; // education section detected
+    return 50.0; // unknown — conservative estimate
+  }
+
+  /// Derives a projects_score from available Python response data.
+  double _deriveProjectsScore(Map<String, dynamic> breakdown, Map<String, dynamic> profile) {
+    final projects = profile['projects'] as List? ?? [];
+    final count = projects.length;
+    if (count >= 5) return 100.0;
+    if (count >= 3) return 85.0;
+    if (count >= 1) return 70.0;
+    // If Python saw has_projects = true, formatting_contrib includes 6pts from projects
+    final formattingContrib = (breakdown['formatting_contrib'] as num?)?.toDouble() ?? 0.0;
+    if (formattingContrib >= 6.0) return 65.0; // projects section detected
+    return 50.0;
+  }
+
+
+  /// Native Dart Career Twin calculation engine (offline fallback + primary
+  /// engine when Python server is slow/unavailable).
+  ///
+  /// BUG 1 FIX: derives education_score and projects_score from actual profile
+  /// data rather than hardcoded values. Also adds full dev.log of inputs.
   Map<String, dynamic> _analyzeNativeFromProfile(
     Map<String, dynamic> profile,
     String jdText,
     double requiredExpYears,
   ) {
+    // ── Normalize all skills to lowercase + trim to fix case-mismatch bug ──
     final candSkills = (profile['allSkills'] as List? ?? [])
         .map((s) => s.toString().toLowerCase().trim())
+        .where((s) => s.isNotEmpty)
+        .toSet()  // deduplicate
         .toList();
-    final candText = profile['rawText']?.toString() ?? candSkills.join(' ');
-    final candExp = (profile['totalExperienceYears'] as num?)?.toDouble() ?? 0.0;
+
+    final candText = [
+      profile['rawText']?.toString() ?? '',
+      (profile['objective'] ?? '').toString(),
+      ...(profile['experience'] as List? ?? []).map((e) => e.toString()),
+    ].join(' ');
+
+    final candExp =
+        (profile['totalExperienceYears'] as num?)?.toDouble() ?? 0.0;
+
+    // ── Also scan rawText for skills that allSkills might have missed ────────
+    final lowerCandText = candText.toLowerCase();
+    final allCandSkills = <String>{
+      ...candSkills,
+      ..._techSkillsRegexMap.entries
+          .where((e) => e.value
+              .any((kw) => RegExp('\\b${RegExp.escape(kw)}\\b',
+                      caseSensitive: false)
+                  .hasMatch(lowerCandText)))
+          .map((e) => e.key),
+    }.toList();
 
     final parsedJd = _parseProfile(jdText);
     final jdTech = List<String>.from(parsedJd['tech_skills'] as List? ?? []);
 
+    print('[AIService] CandSkills (${allCandSkills.length}): $allCandSkills');
+    print('[AIService] JD skills  (${jdTech.length}): $jdTech');
+    print('[AIService] CandExp: ${candExp}y  ReqExp: ${requiredExpYears}y');
+
     final semanticSim = _calculateSemanticSimilarity(candText, jdText);
-    final overlap = _getSkillOverlap(candSkills, jdTech);
+    final overlap = _getSkillOverlap(allCandSkills, jdTech);
     final matched = List<String>.from(overlap['matched'] as List);
     final missing = List<String>.from(overlap['missing'] as List);
 
-    final ratio = jdTech.isNotEmpty ? matched.length / jdTech.length : 0.5;
-    final expRatio = (requiredExpYears > 0)
-        ? (candExp / requiredExpYears).clamp(0.0, 1.0)
-        : 0.8;
+    print('[AIService] Matched: $matched');
+    print('[AIService] Missing: $missing');
 
-    final compositeScore =
-        (ratio * 40.0 + semanticSim * 25.0 + expRatio * 20.0 + 15.0).clamp(0.0, 100.0);
+    final ratio =
+        jdTech.isNotEmpty ? matched.length / jdTech.length : 0.5;
+    final expRatio = requiredExpYears > 0
+        ? (candExp / requiredExpYears).clamp(0.0, 1.0)
+        : (candExp > 0 ? (candExp / 2.0).clamp(0.0, 1.0) : 0.6);
+
+    // ── Education score from actual profile data ──────────────────────────
+    final education =
+        (profile['education'] as List? ?? []).join(' ').toLowerCase();
+    double eduScore = 0.55; // default: any degree assumed
+    if (education.contains('phd') || education.contains('doctorate')) {
+      eduScore = 1.0;
+    } else if (education.contains('master') || education.contains('mba')) {
+      eduScore = 0.88;
+    } else if (education.contains('b.tech') ||
+        education.contains('btech') ||
+        education.contains('bachelor') ||
+        education.contains('b.e') ||
+        education.contains('degree')) {
+      eduScore = 0.75;
+    } else if (education.contains('diploma')) {
+      eduScore = 0.55;
+    }
+
+    // ── Projects score from actual profile data ───────────────────────────
+    final projectsList = profile['projects'] as List? ?? [];
+    final projectCount = projectsList.length;
+    final projScore = projectCount >= 5
+        ? 1.0
+        : projectCount >= 3
+            ? 0.85
+            : projectCount >= 1
+                ? 0.70
+                : 0.50;
+
+    final compositeScore = (ratio * 40.0 +
+            semanticSim * 20.0 +
+            expRatio * 20.0 +
+            eduScore * 10.0 +
+            projScore * 10.0)
+        .clamp(0.0, 100.0);
+
     final tier = compositeScore >= 75
         ? 'Strong Match ✅'
-        : (compositeScore >= 55 ? 'Moderate Match 🔶' : 'Weak Match ⚠️');
+        : compositeScore >= 55
+            ? 'Moderate Match 🔶'
+            : compositeScore >= 35
+                ? 'Weak Match ⚠️'
+                : 'Poor Match ❌';
+
+    print('[AIService] Final score: $compositeScore  Tier: $tier');
+
+    final recommendations = <String>[
+      if (missing.isNotEmpty)
+        '🎯 Focus on: ${missing.take(3).join(', ')} — directly required by JD.',
+      if (matched.isNotEmpty)
+        '✅ Highlight these matched skills prominently: ${matched.take(3).join(', ')}.',
+      if (expRatio < 0.5)
+        '⏳ Gain more experience — required: ${requiredExpYears.toStringAsFixed(1)}y, you have: ${candExp.toStringAsFixed(1)}y.',
+      if (projectCount == 0)
+        '📁 Add portfolio projects to your resume to improve project score.',
+      'Add quantitative metrics to project bullets for maximum ATS impact.',
+    ];
 
     return {
       'success': true,
@@ -341,25 +502,26 @@ class AIService {
         'tier': tier,
         'matchedSkills': matched,
         'missingSkills': missing,
-        'candidateSkills': candSkills,
+        'candidateSkills': allCandSkills,
         'jdSkillsExtracted': jdTech,
         'experienceMatch': double.parse((expRatio * 100).toStringAsFixed(1)),
-        'atsScore': double.parse((compositeScore * 0.9).toStringAsFixed(1)),
+        'atsScore':
+            double.parse((compositeScore * 0.9).toStringAsFixed(1)),
         'atsBreakdown': {
-          'skill_match_score': double.parse((ratio * 100).toStringAsFixed(1)),
-          'semantic_sim_score': double.parse((semanticSim * 100).toStringAsFixed(1)),
-          'experience_score': double.parse((expRatio * 100).toStringAsFixed(1)),
-          'education_score': 85.0,
-          'projects_score': 80.0,
+          'skill_match_score':
+              double.parse((ratio * 100).toStringAsFixed(1)),
+          'semantic_sim_score':
+              double.parse((semanticSim * 100).toStringAsFixed(1)),
+          'experience_score':
+              double.parse((expRatio * 100).toStringAsFixed(1)),
+          'education_score':
+              double.parse((eduScore * 100).toStringAsFixed(1)),
+          'projects_score':
+              double.parse((projScore * 100).toStringAsFixed(1)),
         },
-        'recommendations': [
-          if (missing.isNotEmpty)
-            'Focus on acquiring missing skills: ${missing.take(3).join(', ')}.',
-          'Highlight matched technical skills prominently in your summary.',
-          'Add quantitative project metrics to improve your ATS score.',
-        ],
-        'confidenceScore': 90.0,
-      }
+        'recommendations': recommendations,
+        'confidenceScore': 88.0,
+      },
     };
   }
 

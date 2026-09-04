@@ -27,6 +27,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final linkedinController = TextEditingController();
 
   String _selectedRole = "Student";
+  String _rawRole = "student"; // Preserve original role from DB
   bool _isRoleLocked = false; 
   File? _imageFile;
   String? _existingPhotoUrl;
@@ -58,11 +59,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       linkedinController.text = d['linkedin'] ?? "";
       _existingPhotoUrl = d['photoURL'];
       _isAvailableForMentoring = d['isMentor'] ?? false;
-      _selectedRole = d['role'] ?? "Student";
-
-      // ✅ Lock the role dropdown if the current role is Staff
-      if (_selectedRole == 'Staff') {
+      _rawRole = d['role'] ?? "student";
+      
+      final roleLower = _rawRole.toString().toLowerCase();
+      if (roleLower == 'staff') {
+        _selectedRole = 'Staff';
         _isRoleLocked = true;
+      } else if (roleLower == 'alumni' || roleLower == 'pending_alumni_verification') {
+        _selectedRole = 'Alumni';
+      } else {
+        _selectedRole = 'Student';
       }
     } catch (e) {
       debugPrint("Error loading user: $e");
@@ -93,10 +99,17 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         photoUrl = await UploadService.uploadImage(_imageFile!);
       }
 
+      String roleToSave = _selectedRole.toLowerCase();
+      
+      // Prevent bypassing alumni verification
+      if (_rawRole == 'pending_alumni_verification' && _selectedRole == 'Alumni') {
+        roleToSave = 'pending_alumni_verification';
+      }
+
       final Map<String, dynamic> updateData = {
         'name': nameController.text.trim(),
         'department': departmentController.text.trim(),
-        'role': _selectedRole,
+        'role': roleToSave,
         'bio': bioController.text.trim(),
         'photoURL': photoUrl,
       };

@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../services/ai_service.dart';
@@ -15,11 +17,18 @@ class AIProvider extends ChangeNotifier {
   Map<String, dynamic>? _cachedProfile;
   String? _error;
 
+  // ── Cold-start UX: phased loading messages ───────────────────────────────
+  String _loadingMessage = 'Starting AI engine…';
+  int _elapsedSeconds = 0;
+  Timer? _loadingTimer;
+
   bool get isLoading => _isLoading;
   bool get isInitialized => _isInitialized;
   Map<String, dynamic>? get result => _result;
   Map<String, dynamic>? get cachedProfile => _cachedProfile;
   String? get error => _error;
+  String get loadingMessage => _loadingMessage;
+  int get elapsedSeconds => _elapsedSeconds;
 
   AIProvider() {
     initialize();
@@ -30,7 +39,6 @@ class AIProvider extends ChangeNotifier {
       _isLoading = true;
       _error = null;
       notifyListeners();
-
       await _aiService.initializeModel();
       _isInitialized = _aiService.isInitialized;
     } catch (e) {
@@ -41,9 +49,46 @@ class AIProvider extends ChangeNotifier {
     }
   }
 
+  // ── Phased loading message ticker ─────────────────────────────────────────
+  void _startLoadingTimer() {
+    _elapsedSeconds = 0;
+    _loadingMessage = 'Waking up AI engine… this may take up to 60 s on first launch';
+    _loadingTimer?.cancel();
+    _loadingTimer = Timer.periodic(const Duration(seconds: 1), (t) {
+      _elapsedSeconds++;
+      if (_elapsedSeconds < 8) {
+        _loadingMessage = 'Uploading resume to AI engine…';
+      } else if (_elapsedSeconds < 20) {
+        _loadingMessage = 'Parsing resume — extracting skills & experience…';
+      } else if (_elapsedSeconds < 40) {
+        _loadingMessage =
+            'Still warming up (Render free tier cold start)… hang tight!';
+      } else if (_elapsedSeconds < 60) {
+        _loadingMessage =
+            'Almost there — computing career match score…';
+      } else {
+        _loadingMessage =
+            'Taking longer than usual. Falling back to offline engine if needed…';
+      }
+      notifyListeners();
+    });
+  }
+
+  void _stopLoadingTimer() {
+    _loadingTimer?.cancel();
+    _loadingTimer = null;
+    _elapsedSeconds = 0;
+  }
+
+  @override
+  void dispose() {
+    _loadingTimer?.cancel();
+    super.dispose();
+  }
+
   /// Upload PDF bytes and analyze against a job description.
   /// Uses Python backend: /resume/upload → /career-twin/analyze.
-  /// Never uses hardcoded sample profiles.
+  /// Falls back to native Dart engine if Render is slow/offline.
   Future<void> analyzeFromPdf({
     required Uint8List pdfBytes,
     required String filename,
@@ -64,25 +109,42 @@ class AIProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       _error = null;
+      _startLoadingTimer();
       notifyListeners();
 
-      // Step 1: Upload PDF → get CandidateProfile from Python
-      final uploadResult = await _aiService.uploadResumeBytes(pdfBytes, filename);
+      dev.log('[AIProvider] Step 1: Uploading PDF to AI engine…');
+
+      // Step 1: Upload PDF → get CandidateProfile from Python (or local fallback)
+      final uploadResult =
+          await _aiService.uploadResumeBytes(pdfBytes, filename);
       final profile = uploadResult['profile'] as Map<String, dynamic>?;
 
       if (profile == null || profile.isEmpty) {
         _error = 'Resume parsing failed. Ensure the PDF has selectable text.';
         return;
       }
+
+      // ── BUG 3 FIX: Normalize allSkills to lowercase before caching ──────
+      // This ensures the downstream _getSkillOverlap set intersection works
+      // correctly regardless of whether the Python server returns "Power BI"
+      // or "power bi" — both map to the same canonical lowercase key.
+      final rawSkills = profile['allSkills'] as List? ?? [];
+      profile['allSkills'] = rawSkills
+          .map((s) => s.toString().toLowerCase().trim())
+          .toList();
+
+      dev.log('[AIProvider] Skills after normalisation: ${profile['allSkills']}');
+
       _cachedProfile = profile;
 
-      // Cache profile for other AI screens (Career GPS, Alumni Skill Matcher)
+      // Cache profile for other AI screens
       _sessionCache.storeProfile(
         profile: profile,
         uploadedFilename: filename,
         bytes: pdfBytes,
       );
 
+      dev.log('[AIProvider] Step 2: Running Career Twin analysis…');
 
       // Step 2: Career Twin analysis using the parsed profile
       final analysisResult = await _aiService.analyzeCareerTwin(
@@ -92,9 +154,21 @@ class AIProvider extends ChangeNotifier {
       );
 
       _result = analysisResult;
-    } catch (e) {
+      
+      // Save atsScore to shared session cache for Alumni Skill screen
+      final atsScore = (analysisResult['career_score']?['ats_score'] as num?)?.toDouble();
+      final tier = analysisResult['career_score']?['tier']?.toString();
+      if (atsScore != null) {
+        _sessionCache.atsScore = atsScore;
+        _sessionCache.atsReadinessLevel = tier;
+      }
+
+      dev.log('[AIProvider] Analysis complete in ${_elapsedSeconds}s');
+    } catch (e, st) {
+      dev.log('[AIProvider] analyzeFromPdf error: $e', stackTrace: st);
       _error = e.toString();
     } finally {
+      _stopLoadingTimer();
       _isLoading = false;
       notifyListeners();
     }
@@ -115,18 +189,36 @@ class AIProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       _error = null;
+      _startLoadingTimer();
       notifyListeners();
 
+      // Normalize cached profile skills too
+      final rawSkills = profile['allSkills'] as List? ?? [];
+      profile['allSkills'] = rawSkills
+          .map((s) => s.toString().toLowerCase().trim())
+          .toList();
+
       _cachedProfile = profile;
+
       final analysisResult = await _aiService.analyzeCareerTwin(
         profile: profile,
         jdText: jdText,
         requiredExpYears: requiredExpYears,
       );
+      
       _result = analysisResult;
+
+      // Save atsScore to shared session cache
+      final atsScore = (analysisResult['career_score']?['ats_score'] as num?)?.toDouble();
+      final tier = analysisResult['career_score']?['tier']?.toString();
+      if (atsScore != null) {
+        _sessionCache.atsScore = atsScore;
+        _sessionCache.atsReadinessLevel = tier;
+      }
     } catch (e) {
       _error = e.toString();
     } finally {
+      _stopLoadingTimer();
       _isLoading = false;
       notifyListeners();
     }
@@ -147,6 +239,7 @@ class AIProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       _error = null;
+      _startLoadingTimer();
       notifyListeners();
 
       final res = await _aiService.analyzeInput(
@@ -158,6 +251,7 @@ class AIProvider extends ChangeNotifier {
     } catch (e) {
       _error = 'Analysis failed: ${e.toString()}';
     } finally {
+      _stopLoadingTimer();
       _isLoading = false;
       notifyListeners();
     }
@@ -168,6 +262,8 @@ class AIProvider extends ChangeNotifier {
     _cachedProfile = null;
     _error = null;
     _isLoading = false;
+    _loadingMessage = 'Starting AI engine…';
+    _stopLoadingTimer();
     notifyListeners();
   }
 }

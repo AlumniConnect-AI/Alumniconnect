@@ -6,6 +6,8 @@ import 'package:file_picker/file_picker.dart';
 import '../../config/theme.dart';
 import '../../providers/ai_provider.dart';
 import '../../providers/ai_session_cache.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/ai_processing_loader.dart';
 import '../../widgets/theme/glass_card.dart';
 import '../../widgets/theme/neon_button.dart';
 import '../../widgets/theme/gradient_icon.dart';
@@ -284,41 +286,13 @@ class _CareerTwinScreenState extends State<CareerTwinScreen>
               // ── LOADING ─────────────────────────────────────────────────────
               if (provider.isLoading) ...[
                 const SizedBox(height: 40),
-                Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: CircularProgressIndicator(
-                          color: AppColors.primaryNeon,
-                          strokeWidth: 3,
-                          backgroundColor: AppColors.primaryNeon.withValues(alpha: 0.15),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Analyzing Career Match…',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: AppColors.primaryNeon,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Parsing resume → extracting skills → computing match score',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: theme.textTheme.bodyMedium?.color,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
+                AIProcessingLoader(
+                  elapsedSeconds: provider.elapsedSeconds,
+                  loadingMessage: provider.loadingMessage,
                 ),
                 const SizedBox(height: 40),
               ]
+
 
               // ── RESULTS ─────────────────────────────────────────────────────
               else if (provider.result != null) ...[
@@ -781,6 +755,50 @@ class _CareerTwinScreenState extends State<CareerTwinScreen>
           const SizedBox(height: 20),
         ],
 
+        // ── 📅 LEARNING ROADMAP ──────────────────────────────────────────────
+        if (missingSkills.isNotEmpty) ...[
+          const AISectionHeader(title: '📅 3-Month Learning Roadmap'),
+          const SizedBox(height: 10),
+          ..._generateLearningRoadmap(missingSkills).entries.map((entry) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.cardDark,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.primaryNeon.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      entry.key,
+                      style: const TextStyle(
+                        color: AppColors.primaryNeon,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      entry.value,
+                      style: TextStyle(
+                        color: theme.textTheme.bodyMedium?.color,
+                        fontSize: 13,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+          const SizedBox(height: 20),
+        ],
+
         // ── CTA: NAVIGATE TO MENTOR MATCH ────────────────────────────────────
         Container(
           width: double.infinity,
@@ -890,6 +908,32 @@ class _CareerTwinScreenState extends State<CareerTwinScreen>
         ],
       ),
     );
+  }
+
+  Map<String, String> _generateLearningRoadmap(List<String> missingSkills) {
+    if (missingSkills.isEmpty) return {};
+    
+    final half = (missingSkills.length / 2).ceil();
+    final month1Skills = missingSkills.take(half).toList();
+    final month2Skills = missingSkills.skip(half).toList();
+    
+    final roadmap = <String, String>{};
+    
+    roadmap['Month 1: Fundamentals'] = 
+        'Focus on mastering the basics of: ${month1Skills.join(', ')}. '
+        'Start with introductory courses and basic exercises.';
+        
+    if (month2Skills.isNotEmpty) {
+      roadmap['Month 2: Advanced Concepts'] = 
+          'Deepen your knowledge by learning: ${month2Skills.join(', ')}. '
+          'Work on intermediate tutorials and pair them with Month 1 skills.';
+    }
+    
+    roadmap['Month 3: Projects & Portfolio'] = 
+        'Build end-to-end projects incorporating all the skills learned over the past two months. '
+        'Publish these projects to GitHub or your portfolio and add them to your resume.';
+        
+    return roadmap;
   }
 }
 

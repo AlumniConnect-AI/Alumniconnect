@@ -1,14 +1,19 @@
 import 'dart:math' as math;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../config/theme.dart';
 import '../../providers/alumni_skill_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/ai_processing_loader.dart';
+import '../../services/meeting_service.dart';
 import '../../widgets/theme/glass_card.dart';
 import '../../widgets/theme/neon_button.dart';
 import '../../widgets/theme/gradient_icon.dart';
 import '../../widgets/theme/ai_section_header.dart';
 import '../alumni/alumni_profile_screen.dart';
+import '../chat/chat_screen.dart';
 
 class AlumniSkillScreen extends StatefulWidget {
   const AlumniSkillScreen({super.key});
@@ -22,6 +27,11 @@ class _AlumniSkillScreenState extends State<AlumniSkillScreen>
   String? _uploadedFilename;
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+
+  // Tracks which mentor UIDs have already received a connection request
+  // so the button can be disabled/updated after first tap.
+  final Set<String> _sentConnections = {};
+  bool _connectingUid = false;
 
   // Category display names and colors
   static const Map<String, Map<String, dynamic>> _skillCategoryMeta = {
@@ -305,38 +315,10 @@ class _AlumniSkillScreenState extends State<AlumniSkillScreen>
               // ── LOADING ──────────────────────────────────────────────────
               if (provider.isLoading) ...[
                 const SizedBox(height: 40),
-                Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 72,
-                        height: 72,
-                        child: CircularProgressIndicator(
-                          color: AppColors.accentEmerald,
-                          strokeWidth: 3,
-                          backgroundColor: AppColors.accentEmerald.withValues(alpha: 0.1),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        'AI Engine parsing uploaded PDF…',
-                        style: TextStyle(
-                          color: AppColors.accentEmerald,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Fetching Firestore alumni → running SBERT mentor match…',
-                        style: TextStyle(
-                          color: theme.textTheme.bodyMedium?.color,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
+                AIProcessingLoader(
+                  elapsedSeconds: provider.elapsedSeconds,
+                  loadingMessage: provider.loadingMessage,
+                  primaryColor: AppColors.accentEmerald,
                 ),
                 const SizedBox(height: 40),
               ],
@@ -390,13 +372,68 @@ class _AlumniSkillScreenState extends State<AlumniSkillScreen>
               ),
               if (provider.resumeScore > 0) ...[
                 const Divider(height: 16),
-                _buildSummaryRowHighlighted(
-                  context,
-                  '📊 Resume Score',
-                  '${provider.resumeScore.toStringAsFixed(0)}% — ${provider.readinessLevel}',
-                  provider.resumeScore >= 70
-                      ? AppColors.accentEmerald
-                      : (provider.resumeScore >= 50 ? Colors.orange : Colors.redAccent),
+                // ── RESUME READINESS SCORE (P2 fix: distinct label from Career Twin JD score) ──
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Text(
+                                  '📊 Resume Readiness Score',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Tooltip(
+                                  message:
+                                      'Domain benchmark score — measures how ready your\n'
+                                      'resume is for industry roles in your field.\n'
+                                      'This is NOT the same as the JD Match Score\n'
+                                      'shown in Career Twin Engine (which requires a JD).',
+                                  child: Icon(
+                                    Icons.info_outline,
+                                    size: 13,
+                                    color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.5),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'Domain benchmark vs. industry standards (no JD required)',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          '${provider.resumeScore.toStringAsFixed(0)}% — ${provider.readinessLevel}',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: provider.resumeScore >= 70
+                                ? AppColors.accentEmerald
+                                : (provider.resumeScore >= 50 ? Colors.orange : Colors.redAccent),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ],
@@ -967,25 +1004,110 @@ class _AlumniSkillScreenState extends State<AlumniSkillScreen>
                   ),
                 ],
                 const SizedBox(height: 12),
+                // ── CONNECT + MESSAGE BUTTONS ──────────────────────────────
                 Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.connect_without_contact, size: 16),
-                        label: const Text('Connect'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.accentEmerald,
-                          side: BorderSide(
-                              color: AppColors.accentEmerald.withValues(alpha: 0.5)),
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                        ),
+                      child: StatefulBuilder(
+                        builder: (ctx, setBtn) {
+                          final mentorUid = m['uid']?.toString() ?? '';
+                          final alreadySent = _sentConnections.contains(mentorUid);
+                          return OutlinedButton.icon(
+                            onPressed: alreadySent || mentorUid.isEmpty
+                                ? null
+                                : () async {
+                                    try {
+                                      final sent = await MeetingService
+                                          .sendConnectionRequest(
+                                        mentorUid: mentorUid,
+                                        mentorName: name,
+                                      );
+                                      setState(() {
+                                        _sentConnections.add(mentorUid);
+                                      });
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(sent
+                                              ? '✅ Connection request sent to $name'
+                                              : 'ℹ️ Request already sent to $name'),
+                                          backgroundColor: sent
+                                              ? AppColors.accentEmerald
+                                              : Colors.orange,
+                                          behavior: SnackBarBehavior.floating,
+                                        ));
+                                      }
+                                    } catch (e) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text('Failed to connect: $e'),
+                                          backgroundColor: AppColors.error,
+                                        ));
+                                      }
+                                    }
+                                  },
+                            icon: Icon(
+                              alreadySent
+                                  ? Icons.check_circle_outline
+                                  : Icons.connect_without_contact,
+                              size: 16,
+                            ),
+                            label: Text(alreadySent ? 'Request Sent' : 'Connect'),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: alreadySent
+                                  ? Colors.grey
+                                  : AppColors.accentEmerald,
+                              side: BorderSide(
+                                  color: alreadySent
+                                      ? Colors.grey.withValues(alpha: 0.4)
+                                      : AppColors.accentEmerald
+                                          .withValues(alpha: 0.5)),
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final mentorUid = m['uid']?.toString() ?? '';
+                          if (mentorUid.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Cannot open chat — mentor ID missing'),
+                                backgroundColor: Colors.orange,
+                              ),
+                            );
+                            return;
+                          }
+                          try {
+                            final chatId =
+                                await MeetingService.getOrCreateChat(mentorUid);
+                            if (context.mounted) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ChatScreen(
+                                    chatId: chatId,
+                                    peerId: mentorUid,
+                                  ),
+                                ),
+                              );
+                            }
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Failed to open chat: $e'),
+                                  backgroundColor: AppColors.error,
+                                ),
+                              );
+                            }
+                          }
+                        },
                         icon: const Icon(Icons.message_outlined, size: 16),
                         label: const Text('Message'),
                         style: OutlinedButton.styleFrom(

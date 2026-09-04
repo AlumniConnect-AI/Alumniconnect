@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   final String uid;
   final String name;
@@ -11,6 +13,13 @@ class UserModel {
   final String? photoUrl;
   final String? linkedin;
 
+  // EduBridge add-on fields
+  final int? graduationYear;
+  final bool consentGiven;
+  final Timestamp? consentTimestamp;
+  final String verificationStatus; // "verified" | "pending" | ""
+  final Map<String, dynamic> engagementStats;
+
   UserModel({
     required this.uid,
     required this.name,
@@ -23,6 +32,11 @@ class UserModel {
     required this.profileCompleted,
     this.photoUrl,
     this.linkedin,
+    this.graduationYear,
+    this.consentGiven = false,
+    this.consentTimestamp,
+    this.verificationStatus = '',
+    this.engagementStats = const {},
   });
 
   // 🔁 Firestore → Model
@@ -31,7 +45,7 @@ class UserModel {
       uid: uid,
       name: map['name'] ?? '',
       email: map['email'] ?? '',
-      role: map['role'] ?? 'alumni',
+      role: map['role'] ?? 'student',
       batch: map['batch'] ?? '',
       department: map['department'] ?? '',
       company: map['company'] ?? '',
@@ -39,6 +53,12 @@ class UserModel {
       profileCompleted: map['profileCompleted'] ?? false,
       photoUrl: map['photoURL'],
       linkedin: map['linkedin'],
+      graduationYear: map['graduationYear'] as int?,
+      consentGiven: map['consentGiven'] ?? false,
+      consentTimestamp: map['consentTimestamp'] as Timestamp?,
+      verificationStatus: map['verificationStatus'] ?? '',
+      engagementStats:
+          (map['engagementStats'] as Map<String, dynamic>?) ?? {},
     );
   }
 
@@ -55,6 +75,11 @@ class UserModel {
       'profileCompleted': profileCompleted,
       'photoURL': photoUrl,
       'linkedin': linkedin,
+      'graduationYear': graduationYear,
+      'consentGiven': consentGiven,
+      'consentTimestamp': consentTimestamp,
+      'verificationStatus': verificationStatus,
+      'engagementStats': engagementStats,
     };
   }
 }

@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../services/chat_service.dart';
+import '../../services/meeting_service.dart';
 import '../../services/upload_service.dart';
 import '../../config/theme.dart';
 import '../alumni/alumni_profile_screen.dart';
@@ -149,12 +150,224 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  // ── SCHEDULE MEETING DIALOG ────────────────────────────────────────────────
+  Future<void> _showScheduleMeetingDialog() async {
+    DateTime selectedDate = DateTime.now().add(const Duration(days: 1));
+    TimeOfDay selectedTime = const TimeOfDay(hour: 10, minute: 0);
+    final titleCtrl = TextEditingController();
+    final agendaCtrl = TextEditingController();
+    bool scheduling = false;
+
+    await showDialog(
+      context: context,
+      builder: (_) => StatefulBuilder(
+        builder: (ctx, setDlg) => AlertDialog(
+          backgroundColor: Theme.of(context).cardColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Row(
+            children: [
+              Icon(Icons.calendar_today, color: AppColors.primaryNeon, size: 20),
+              SizedBox(width: 8),
+              Text('Schedule Meeting',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                TextField(
+                  controller: titleCtrl,
+                  decoration: InputDecoration(
+                    labelText: 'Meeting Title',
+                    hintText: 'e.g. Career Guidance Session',
+                    filled: true,
+                    fillColor: Theme.of(context).scaffoldBackgroundColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                // Date picker
+                InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: ctx,
+                      initialDate: selectedDate,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 180)),
+                    );
+                    if (picked != null) setDlg(() => selectedDate = picked);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: AppColors.primaryNeon.withValues(alpha: 0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.calendar_month,
+                            color: AppColors.primaryNeon, size: 18),
+                        const SizedBox(width: 10),
+                        Text(
+                          '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Time picker
+                InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () async {
+                    final picked = await showTimePicker(
+                      context: ctx,
+                      initialTime: selectedTime,
+                    );
+                    if (picked != null) setDlg(() => selectedTime = picked);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: AppColors.accentEmerald.withValues(alpha: 0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.access_time,
+                            color: AppColors.accentEmerald, size: 18),
+                        const SizedBox(width: 10),
+                        Text(
+                          selectedTime.format(ctx),
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                // Agenda
+                TextField(
+                  controller: agendaCtrl,
+                  maxLines: 2,
+                  decoration: InputDecoration(
+                    labelText: 'Agenda (optional)',
+                    hintText: 'Topics to discuss...',
+                    filled: true,
+                    fillColor: Theme.of(context).scaffoldBackgroundColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryNeon,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              onPressed: scheduling
+                  ? null
+                  : () async {
+                      // ── P3 crash fix: always guard setDlg with ctx.mounted ──
+                      if (!ctx.mounted) return;
+                      setDlg(() => scheduling = true);
+                      try {
+                        final dt = DateTime(
+                          selectedDate.year,
+                          selectedDate.month,
+                          selectedDate.day,
+                          selectedTime.hour,
+                          selectedTime.minute,
+                        );
+                        await MeetingService.scheduleMeeting(
+                          peerId: widget.peerId,
+                          chatId: widget.chatId,
+                          scheduledDateTime: dt,
+                          title: titleCtrl.text,
+                          agenda: agendaCtrl.text,
+                        );
+                        if (ctx.mounted) Navigator.pop(ctx);
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('📅 Meeting scheduled!'),
+                              backgroundColor: AppColors.accentEmerald,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        // Guard: dialog may have been dismissed during the await
+                        if (ctx.mounted) {
+                          setDlg(() => scheduling = false);
+                          final errMsg = e.toString().contains('permission-denied')
+                              ? '🔒 Permission denied — Firestore rules not yet deployed.\nRun: firebase deploy --only firestore:rules'
+                              : 'Failed to schedule: $e';
+                          ScaffoldMessenger.of(ctx).showSnackBar(
+                            SnackBar(
+                              content: Text(errMsg),
+                              backgroundColor: Colors.red,
+                              duration: const Duration(seconds: 6),
+                            ),
+                          );
+                        }
+                      }
+                    },
+              icon: scheduling
+                  ? const SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2, color: Colors.black))
+                  : const Icon(Icons.check, size: 16),
+              label: Text(scheduling ? 'Scheduling...' : 'Confirm'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    titleCtrl.dispose();
+    agendaCtrl.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: _chatHeader(),
+        actions: [
+          // Schedule Meeting button in chat app bar
+          IconButton(
+            icon: const Icon(Icons.calendar_today_outlined),
+            tooltip: 'Schedule Meeting',
+            onPressed: _showScheduleMeetingDialog,
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -188,6 +401,41 @@ class _ChatScreenState extends State<ChatScreen> {
                       final m = messages[i].data() as Map<String, dynamic>;
                       final isMe = m['senderId'] == uid;
                       final messageId = messages[i].id;
+
+                      // ── System messages (meeting confirmations) ──────────
+                      if (m['type'] == 'system') {
+                        return Center(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: AppColors.accentEmerald.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: AppColors.accentEmerald.withValues(alpha: 0.4)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.calendar_today,
+                                    color: AppColors.accentEmerald, size: 14),
+                                const SizedBox(width: 6),
+                                Flexible(
+                                  child: Text(
+                                    m['text']?.toString() ?? '',
+                                    style: const TextStyle(
+                                      color: AppColors.accentEmerald,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
 
                       return GestureDetector(
                         onLongPress: isMe ? () => _confirmDelete(messageId) : null,

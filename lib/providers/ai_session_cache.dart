@@ -23,6 +23,10 @@ class AISessionCache {
   /// Whether a valid parsed profile is cached
   bool get hasProfile => parsedProfile != null && parsedAt != null;
 
+  /// The ATS Score (computed against a JD in Career Twin, or a generic JD in Alumni Matcher)
+  double? atsScore;
+  String? atsReadinessLevel;
+
   /// Whether the cached profile came from the offline local fallback
   bool get isOfflineFallback => parsedProfile?['isOfflineFallback'] == true;
 
@@ -43,6 +47,8 @@ class AISessionCache {
     filename = uploadedFilename;
     pdfBytes = bytes;
     parsedAt = DateTime.now();
+    atsScore = null;
+    atsReadinessLevel = null;
   }
 
   /// Clear all cached data (e.g., when user resets or logs out)
@@ -51,6 +57,8 @@ class AISessionCache {
     pdfBytes = null;
     filename = null;
     parsedAt = null;
+    atsScore = null;
+    atsReadinessLevel = null;
   }
 
   // ── Convenience getters pulled from the cached profile ──────────────────────

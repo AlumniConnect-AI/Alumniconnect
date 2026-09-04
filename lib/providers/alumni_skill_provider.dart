@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../services/ai_service.dart';
@@ -14,6 +15,11 @@ class AlumniSkillProvider extends ChangeNotifier {
   String? _error;
   String? _uploadedPdfName;
 
+  // ── Cold-start UX: phased loading messages ───────────────────────────────
+  String _loadingMessage = 'Starting AI engine…';
+  int _elapsedSeconds = 0;
+  Timer? _loadingTimer;
+
   /// The full CandidateProfile JSON from /resume/upload
   Map<String, dynamic>? _parsedProfile;
 
@@ -26,6 +32,8 @@ class AlumniSkillProvider extends ChangeNotifier {
   String? get uploadedPdfName => _uploadedPdfName;
   Map<String, dynamic>? get parsedProfile => _parsedProfile;
   Map<String, dynamic>? get result => _result;
+  String get loadingMessage => _loadingMessage;
+  int get elapsedSeconds => _elapsedSeconds;
 
   // ── Candidate Profile Getters ─────────────────────────────────────────────
 
@@ -102,11 +110,17 @@ class AlumniSkillProvider extends ChangeNotifier {
   }
 
   double get resumeScore {
+    if (_cache.atsScore != null) {
+      return _cache.atsScore!;
+    }
     final sgr = _result?['skillGapResult'] as Map<String, dynamic>?;
     return (sgr?['placement_readiness_score'] as num?)?.toDouble() ?? 0.0;
   }
 
   String get readinessLevel {
+    if (_cache.atsReadinessLevel != null) {
+      return _cache.atsReadinessLevel!;
+    }
     final sgr = _result?['skillGapResult'] as Map<String, dynamic>?;
     return sgr?['readiness_level']?.toString() ?? '';
   }
@@ -146,6 +160,28 @@ class AlumniSkillProvider extends ChangeNotifier {
 
   AlumniSkillProvider() {
     initialize();
+  }
+
+  void _startLoadingTimer() {
+    _elapsedSeconds = 0;
+    _loadingMessage = 'Starting AI engine…';
+    _loadingTimer?.cancel();
+    _loadingTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _elapsedSeconds++;
+      if (_elapsedSeconds == 2) {
+        _loadingMessage = 'Parsing PDF resume...';
+      } else if (_elapsedSeconds == 6) {
+        _loadingMessage = 'Fetching alumni network...';
+      } else if (_elapsedSeconds == 10) {
+        _loadingMessage = 'Running SBERT mentor match...';
+      }
+      notifyListeners();
+    });
+  }
+
+  void _stopLoadingTimer() {
+    _loadingTimer?.cancel();
+    _loadingTimer = null;
   }
 
   Future<void> initialize() async {
@@ -188,6 +224,7 @@ class AlumniSkillProvider extends ChangeNotifier {
       _parsedProfile = null;
       _result = null;
       _uploadedPdfName = filename;
+      _startLoadingTimer();
       notifyListeners();
 
       // ── Step 1: Get parsed profile (from cache or fresh upload) ──────────
@@ -245,6 +282,7 @@ class AlumniSkillProvider extends ChangeNotifier {
     } catch (e) {
       _error = e.toString();
     } finally {
+      _stopLoadingTimer();
       _isLoading = false;
       notifyListeners();
     }
@@ -256,6 +294,8 @@ class AlumniSkillProvider extends ChangeNotifier {
     _uploadedPdfName = null;
     _error = null;
     _isLoading = false;
+    _loadingMessage = 'Starting AI engine…';
+    _stopLoadingTimer();
     notifyListeners();
   }
 }

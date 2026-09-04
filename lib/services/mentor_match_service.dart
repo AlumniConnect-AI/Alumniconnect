@@ -153,13 +153,51 @@ class MentorMatchService {
           final department = data['department']?.toString() ?? '';
           final company = data['company']?.toString() ?? '';
           final inferText = '$designation $department $company'.toLowerCase();
+
+          // 1. Extended keyword list for implicit skill injection
           const knownSkills = [
+            // ── Languages & Core ─────────────────────────────────
             'flutter', 'dart', 'python', 'java', 'sql', 'react', 'aws', 'docker',
             'machine learning', 'power bi', 'data analytics', 'tableau', 'azure',
             'nodejs', 'mongodb', 'postgresql', 'tensorflow', 'pytorch', 'devops', 'gcp',
+            // ── BI & Analytics role titles ────────────────────────
+            'data analyst', 'data analysis', 'business analyst', 'bi developer',
+            'bi analyst', 'power bi developer', 'tableau developer', 'analytics',
+            'data visualization', 'reporting', 'dashboard', 'etl', 'data warehouse',
+            'data engineering', 'data science', 'data scientist',
+            // ── Specific tools ────────────────────────────────────
+            'excel', 'advanced excel', 'dax', 'power query', 'qlik', 'looker',
+            'microsoft fabric', 'azure data factory', 'snowflake', 'spark', 'hadoop',
+            // ── Dev roles ────────────────────────────────────────
+            'backend', 'frontend', 'fullstack', 'mobile developer', 'android',
+            'ios', 'kotlin', 'swift', 'cloud engineer', 'devops engineer',
+            // ── AI/ML ─────────────────────────────────────────────
+            'nlp', 'deep learning', 'computer vision', 'mlops', 'scikit-learn',
           ];
           for (final s in knownSkills) {
             if (inferText.contains(s)) skills.add(s);
+          }
+          // 2. Always add department as a skill signal if present
+          if (department.isNotEmpty && !skills.contains(department.toLowerCase())) {
+            skills.add(department.toLowerCase());
+          }
+          
+          // 3. Aggressive domain matching against candidate's profile
+          final candidateDomain = candidateProfile['domain']?.toString().toLowerCase() ?? '';
+          final candidateRole = candidateProfile['target_role']?.toString().toLowerCase() ?? '';
+          
+          final domainKeywords = candidateDomain.replaceAll(RegExp(r'[^a-z0-9\s]'), ' ')
+              .split(' ').where((w) => w.length >= 3 && !['and', 'the', 'for'].contains(w)).toList();
+          final roleKeywords = candidateRole.replaceAll(RegExp(r'[^a-z0-9\s]'), ' ')
+              .split(' ').where((w) => w.length >= 3 && !['and', 'the', 'for'].contains(w)).toList();
+          
+          final allKeywords = {...domainKeywords, ...roleKeywords};
+          
+          for (final kw in allKeywords) {
+             if (inferText.contains(kw) && candidateDomain.isNotEmpty && !skills.contains(candidateDomain)) {
+                skills.add(candidateDomain);
+                break;
+             }
           }
         }
 

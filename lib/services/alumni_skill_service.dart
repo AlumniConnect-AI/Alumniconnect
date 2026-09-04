@@ -121,7 +121,7 @@ class AlumniSkillService {
     // ── Step 2: SBERT Mentor Match (via MentorMatchService) ──────────────────
     final mentorMatchResult = await _mentorMatchService.findMentors(
       candidateProfile: candidateProfile,
-      topK: 5,
+      topK: 8, // Fetch 8 so top-3 mentorship picks have wider pool to choose from
     );
 
     final mentorMatches =

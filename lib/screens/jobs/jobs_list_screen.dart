@@ -194,16 +194,28 @@ class _JobsListScreenState extends State<JobsListScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Jobs"), centerTitle: true),
 
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: AppColors.primary,
-        icon: const Icon(Icons.add, color: Colors.black),
-        label: const Text(
-          "Post Job",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w600),
-        ),
-        onPressed: _openPostJobDialog,
+      // ── Role-aware FAB: only alumni/staff may post jobs ─────────────────
+      floatingActionButton: StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser?.uid)
+            .snapshots(),
+        builder: (_, snap) {
+          if (!snap.hasData) return const SizedBox.shrink();
+          final data = snap.data?.data() as Map<String, dynamic>?;
+          final role = (data?['role'] ?? 'student').toString().toLowerCase();
+          final canPost = role == 'alumni' || role == 'staff';
+          if (!canPost) return const SizedBox.shrink();
+          return FloatingActionButton.extended(
+            backgroundColor: AppColors.primary,
+            icon: const Icon(Icons.add, color: Colors.black),
+            label: const Text(
+              'Post Job',
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            ),
+            onPressed: _openPostJobDialog,
+          );
+        },
       ),
 
       body: Column(
@@ -257,78 +269,107 @@ class _JobsListScreenState extends State<JobsListScreen> {
 
           const SizedBox(height: 10),
 
-          // 📋 JOB LIST
+          // 📋 JOB + REFERRAL LIST (merged)
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('jobs')
-                  .orderBy('createdAt',
-                  descending: true)
+                  .orderBy('createdAt', descending: true)
                   .snapshots(),
-              builder: (_, snap) {
-                if (!snap.hasData) {
-                  return const Center(
-                    child:
-                    CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  );
-                }
+              builder: (_, jobSnap) {
+                return StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('referrals')
+                      .orderBy('postedAt', descending: true)
+                      .snapshots(),
+                  builder: (_, referralSnap) {
+                    if (!jobSnap.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.primary),
+                      );
+                    }
 
-                final jobs = snap.data!.docs.where((d) {
-                  final m =
-                  d.data() as Map<String, dynamic>;
-
-                  final matchesSearch =
-                      search.isEmpty ||
-                          (m['designation'] ?? "")
+                    // Filter jobs
+                    final jobs = jobSnap.data!.docs.where((d) {
+                      final m = d.data() as Map<String, dynamic>;
+                      final matchesSearch = search.isEmpty ||
+                          (m['designation'] ?? '')
                               .toString()
                               .toLowerCase()
                               .contains(search) ||
-                          (m['company'] ?? "")
+                          (m['company'] ?? '')
                               .toString()
                               .toLowerCase()
                               .contains(search);
+                      final matchesExp = experienceFilter == 'All' ||
+                          (m['experience'] ?? '') == experienceFilter;
+                      return matchesSearch && matchesExp;
+                    }).toList();
 
-                  final matchesExp =
-                      experienceFilter == "All" ||
-                          (m['experience'] ?? "") ==
-                              experienceFilter;
+                    // Referrals (not filtered by experience)
+                    final referrals = referralSnap.hasData
+                        ? referralSnap.data!.docs.where((d) {
+                            final m = d.data() as Map<String, dynamic>;
+                            return search.isEmpty ||
+                                (m['title'] ?? '')
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(search) ||
+                                (m['companyName'] ?? '')
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(search);
+                          }).toList()
+                        : <QueryDocumentSnapshot>[];
 
-                  return matchesSearch && matchesExp;
-                }).toList();
+                    // Unified list: jobs first, then referrals
+                    final totalCount = jobs.length + referrals.length;
 
-                if (jobs.isEmpty) {
-                  return const _EmptyState();
-                }
+                    if (totalCount == 0) return const _EmptyState();
 
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16),
-                  itemCount: jobs.length,
-                  itemBuilder: (_, i) {
-                    final d =
-                    jobs[i].data()
-                    as Map<String, dynamic>;
-
-                    return TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0, end: 1),
-                      duration: Duration(
-                          milliseconds:
-                          300 + i * 50),
-                      builder: (_, value, child) =>
-                          Opacity(
-                            opacity: value,
-                            child: Transform.translate(
-                              offset: Offset(
-                                  0, (1 - value) * 20),
-                              child: child,
+                    return ListView.builder(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: totalCount,
+                      itemBuilder: (_, i) {
+                        if (i < jobs.length) {
+                          final d = jobs[i].data()
+                              as Map<String, dynamic>;
+                          return TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0, end: 1),
+                            duration:
+                                Duration(milliseconds: 300 + i * 50),
+                            builder: (_, value, child) => Opacity(
+                              opacity: value,
+                              child: Transform.translate(
+                                offset: Offset(0, (1 - value) * 20),
+                                child: child,
+                              ),
                             ),
-                          ),
-                      child: _JobCard(
-                        data: d,
-                        jobId: jobs[i].id,
-                      ),
+                            child: _JobCard(
+                                data: d, jobId: jobs[i].id),
+                          );
+                        } else {
+                          final ri = i - jobs.length;
+                          final d = referrals[ri].data()
+                              as Map<String, dynamic>;
+                          return TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0, end: 1),
+                            duration:
+                                Duration(milliseconds: 300 + i * 50),
+                            builder: (_, value, child) => Opacity(
+                              opacity: value,
+                              child: Transform.translate(
+                                offset: Offset(0, (1 - value) * 20),
+                                child: child,
+                              ),
+                            ),
+                            child: _ReferralCard(
+                                data: d, referralId: referrals[ri].id),
+                          );
+                        }
+                      },
                     );
                   },
                 );
@@ -425,6 +466,116 @@ class _EmptyState extends StatelessWidget {
         "No jobs found",
         style: TextStyle(
             color: Theme.of(context).textTheme.bodyMedium?.color),
+      ),
+    );
+  }
+}
+
+/// 🎁 REFERRAL CARD — alumni-posted opportunities
+class _ReferralCard extends StatelessWidget {
+  final Map<String, dynamic> data;
+  final String referralId;
+
+  const _ReferralCard({required this.data, required this.referralId});
+
+  Color get _typeColor {
+    switch (data['type']) {
+      case 'job':
+        return AppColors.accentBlue;
+      case 'internship':
+        return AppColors.accentEmerald;
+      default:
+        return AppColors.accentPurple;
+    }
+  }
+
+  String get _typeLabel {
+    switch (data['type']) {
+      case 'job':
+        return 'JOB';
+      case 'internship':
+        return 'INTERNSHIP';
+      default:
+        return 'REFERRAL';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.cardColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: _typeColor.withOpacity(0.3)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    data['title'] ?? '',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: _typeColor.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: _typeColor.withOpacity(0.5)),
+                  ),
+                  child: Text(
+                    _typeLabel,
+                    style: TextStyle(
+                        color: _typeColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              data['companyName'] ?? '',
+              style: TextStyle(
+                  color: theme.textTheme.bodyMedium?.color, fontSize: 13),
+            ),
+            if ((data['description'] ?? '').toString().isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Text(
+                data['description'],
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: theme.textTheme.bodyMedium?.color, fontSize: 12),
+              ),
+            ],
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.workspace_premium,
+                    size: 13, color: _typeColor),
+                const SizedBox(width: 4),
+                Text(
+                  "Posted by an alumnus",
+                  style: TextStyle(
+                      color: _typeColor,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

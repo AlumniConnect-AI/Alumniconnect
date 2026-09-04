@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../config/theme.dart';
 import '../../widgets/theme/glass_card.dart';
 import '../../widgets/theme/neon_button.dart';
+import '../../widgets/retention_timeline_widget.dart';
+import '../../services/role_flip_service.dart';
 import '../alumni/alumni_profile_screen.dart';
 import '../profile/profile_screen.dart';
 import '../search/global_search_screen.dart';
@@ -13,6 +15,10 @@ import '../events/event_detail_screen.dart';
 import '../ai/ai_hub_screen.dart';
 import '../ai/career_twin_screen.dart';
 import '../ai/career_gps_screen.dart';
+import '../alumni/post_referral_screen.dart';
+import '../alumni/employment_verification_screen.dart';
+import '../alumni/alumni_mentees_screen.dart';
+import 'placement_report_screen.dart';
 import 'home_skeleton.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final String uid = FirebaseAuth.instance.currentUser!.uid;
+  String? _nudgeBanner;
 
   final List<String> _quotes = [
     "Your network is your net worth.",
@@ -39,12 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
     "Don't wait for opportunity. Create it."
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _checkNudge();
+  }
+
+  Future<void> _checkNudge() async {
+    final msg = await RoleFlipService.getNudgeBanner(uid);
+    if (mounted) setState(() => _nudgeBanner = msg);
+  }
+
   String _getQuoteOfTheDay() {
     final dayIndex = DateTime.now().day % _quotes.length;
     return _quotes[dayIndex];
   }
 
-  // 🎭 Dynamic Greeting with Role
   String _greeting(String name, String role) {
     final hour = DateTime.now().hour;
     String timePrefix;
@@ -65,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // 🕒 Time ago helper
   String _timeAgo(Timestamp? ts) {
     if (ts == null) return "Recently";
     final diff = DateTime.now().difference(ts.toDate());
@@ -74,19 +90,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return "Just now";
   }
 
-  // ================= RANDOM RECOMMENDED ALUMNI FUNCTION =================
   Future<List<QueryDocumentSnapshot>> _getRecommendedAlumni() async {
     final query = await FirebaseFirestore.instance
         .collection('users')
         .where('profileCompleted', isEqualTo: true)
         .get();
 
-    // Filter out current user
     final docs = query.docs.where((doc) => doc.id != uid).toList();
-    
-    // Shuffle the list to get random profiles
     docs.shuffle();
-    
     return docs.take(5).toList();
   }
 
@@ -98,7 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
-            setState(() {}); 
+            setState(() {});
+            await _checkNudge();
           },
           color: AppColors.primary,
           child: StreamBuilder<DocumentSnapshot>(
@@ -117,9 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
               final user = snapshot.data!.data() as Map<String, dynamic>;
               final name = user['name'] ?? "User";
-              final role = user['role'] ?? "Student";
+              final role = (user['role'] ?? "student").toString().toLowerCase();
               final photoUrl = user['photoURL'] as String?;
               final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : "U";
+              final verificationStatus = user['verificationStatus'] ?? '';
 
               return SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(
@@ -128,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ================= HEADER =================
+                    // ── Header ──────────────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       child: Row(
@@ -136,24 +149,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           GestureDetector(
                             onTap: () => Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const ProfileScreen()),
                             ),
                             child: CircleAvatar(
                               radius: 26,
-                              backgroundColor: AppColors.primary.withOpacity(0.1),
-                              backgroundImage: photoUrl != null && photoUrl.isNotEmpty 
-                                  ? NetworkImage(photoUrl) 
+                              backgroundColor:
+                                  AppColors.primary.withOpacity(0.1),
+                              backgroundImage: photoUrl != null &&
+                                      photoUrl.isNotEmpty
+                                  ? NetworkImage(photoUrl)
                                   : null,
                               child: (photoUrl == null || photoUrl.isEmpty)
-                                ? Text(
-                                    firstLetter,
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                : null,
+                                  ? Text(
+                                      firstLetter,
+                                      style: const TextStyle(
+                                        color: AppColors.primary,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : null,
                             ),
                           ),
                           const SizedBox(width: 14),
@@ -185,9 +201,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
+                    // ── Pending Verification Banner (Alumni) ─────────────
+                    if (role == 'alumni' && verificationStatus == 'pending')
+                      _verificationBanner(context),
+
+                    // ── Graduation Nudge Banner (Student) ────────────────
+                    if (_nudgeBanner != null) _nudgeBannerWidget(context),
+
+                    // ── Pending Alumni Verification prompt ───────────────
+                    if (role == 'pending_alumni_verification')
+                      _pendingAlumniPrompt(context),
+
                     const SizedBox(height: 24),
 
-                    // ================= QUOTE OF THE DAY =================
+                    // ── Quote of the Day ─────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
@@ -195,7 +222,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+                            colors: [
+                              AppColors.primary,
+                              AppColors.primary.withOpacity(0.8)
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -213,11 +243,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             const Row(
                               children: [
-                                Icon(Icons.format_quote_rounded, color: Colors.white, size: 24),
+                                Icon(Icons.format_quote_rounded,
+                                    color: Colors.white, size: 24),
                                 SizedBox(width: 8),
                                 Text(
                                   "Quote of the Day",
-                                  style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -239,13 +273,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     const SizedBox(height: 24),
 
-                    // ================= AI HUB FEATURE CARD =================
+                    // ── AI Hub Card ──────────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: GlassCard(
                         padding: const EdgeInsets.all(20),
-                        borderColor: AppColors.primaryNeon.withValues(alpha: 0.5),
-                        backgroundColor: AppColors.cardDark.withValues(alpha: 0.8),
+                        borderColor:
+                            AppColors.primaryNeon.withValues(alpha: 0.5),
+                        backgroundColor:
+                            AppColors.cardDark.withValues(alpha: 0.8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -258,34 +294,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(14),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: AppColors.primaryNeon.withValues(alpha: 0.4),
+                                        color: AppColors.primaryNeon
+                                            .withValues(alpha: 0.4),
                                         blurRadius: 10,
                                       ),
                                     ],
                                   ),
-                                  child: const Icon(Icons.psychology, color: Colors.white, size: 24),
+                                  child: const Icon(Icons.psychology,
+                                      color: Colors.white, size: 24),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
                                           Text(
                                             "AI Hub",
                                             style: TextStyle(
-                                              color: theme.textTheme.bodyLarge?.color,
+                                              color: theme
+                                                  .textTheme.bodyLarge?.color,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                             ),
                                           ),
                                           const SizedBox(width: 8),
                                           Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                            padding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 6,
+                                                    vertical: 2),
                                             decoration: BoxDecoration(
-                                              gradient: AppGradients.purplePink,
-                                              borderRadius: BorderRadius.circular(8),
+                                              gradient:
+                                                  AppGradients.purplePink,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                             ),
                                             child: const Text(
                                               "DUAL ENGINE",
@@ -302,7 +347,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Text(
                                         "Career Intelligence Powered by AI",
                                         style: TextStyle(
-                                          color: theme.textTheme.bodyMedium?.color,
+                                          color: theme
+                                              .textTheme.bodyMedium?.color,
                                           fontSize: 12,
                                         ),
                                       ),
@@ -310,18 +356,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.arrow_forward, color: AppColors.primaryNeon),
+                                  icon: const Icon(Icons.arrow_forward,
+                                      color: AppColors.primaryNeon),
                                   onPressed: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (_) => const AiHubScreen()),
+                                    MaterialPageRoute(
+                                        builder: (_) => const AiHubScreen()),
                                   ),
                                 ),
                               ],
                             ),
-
                             const SizedBox(height: 16),
-
-                            // ── TWO GLOWING BUTTONS ──────────────────────────────────
                             Row(
                               children: [
                                 Expanded(
@@ -332,7 +377,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     gradient: AppGradients.neonCyanPurple,
                                     onPressed: () => Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (_) => const CareerTwinScreen()),
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              const CareerTwinScreen()),
                                     ),
                                   ),
                                 ),
@@ -345,7 +392,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     gradient: AppGradients.purplePink,
                                     onPressed: () => Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (_) => const CareerGpsScreen()),
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              const CareerGpsScreen()),
                                     ),
                                   ),
                                 ),
@@ -358,36 +407,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     const SizedBox(height: 24),
 
-                    // ================= QUICK ACTIONS =================
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: GridView.count(
-                        crossAxisCount: 3, 
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: 0.9,
-                        children: [
-                          _quickCardWidget(context, "AI Hub", Icons.psychology,
-                              () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AiHubScreen()))),
-                          _quickCardWidget(context, "Community", Icons.school,
-                              () => widget.onTabChange(1)),
-                          _quickCardWidget(context, "Staff", Icons.badge, 
-                              () => widget.onTabChange(2)),
-                          _quickCardWidget(context, "Jobs", Icons.work, 
-                              () => widget.onTabChange(3)),
-                          _quickCardWidget(context, "Events", Icons.event, 
-                              () => widget.onTabChange(4)),
-                          _quickCardWidget(context, "Search", Icons.search, 
-                              () => Navigator.push(context, MaterialPageRoute(builder: (_) => const GlobalSearchScreen()))),
-                        ],
-                      ),
-                    ),
+                    // ── ROLE-BASED CONTENT FORK ──────────────────────────
+                    if (role == 'alumni')
+                      _alumniContent(context, user)
+                    else
+                      _studentContent(context, user),
 
                     const SizedBox(height: 30),
 
-                    // ================= LATEST UPDATES =================
+                    // ── Latest Updates ────────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: _sectionHeader(context, "Latest Updates"),
@@ -400,14 +428,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     const SizedBox(height: 30),
 
-                    // ================= RECOMMENDATIONS =================
+                    // ── Recommendations ────────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: _sectionHeader(context, "People You May Know"),
                     ),
                     const SizedBox(height: 12),
                     _recommendationList(context),
-                    
+
                     const SizedBox(height: 30),
                   ],
                 ),
@@ -419,7 +447,573 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ================= REUSABLE COMPONENTS =================
+  // ══════════════════════════════════════════════════════════════════════════
+  // STUDENT-SPECIFIC HOME CONTENT
+  // ══════════════════════════════════════════════════════════════════════════
+
+  Widget _studentContent(BuildContext context, Map<String, dynamic> user) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Career Journey (Retention Timeline)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: RetentionTimelineWidget(uid: uid),
+        ),
+
+        const SizedBox(height: 16),
+
+        // Placement status CTA
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _placementCtaCard(context),
+        ),
+
+        const SizedBox(height: 24),
+
+        // Quick actions grid — Student tabs
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _sectionHeader(context, "Quick Actions"),
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.9,
+            children: [
+              _quickCardWidget(context, "AI Hub", Icons.psychology,
+                  () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const AiHubScreen()))),
+              _quickCardWidget(context, "Community", Icons.school,
+                  () => widget.onTabChange(1)),
+              _quickCardWidget(context, "Staff", Icons.badge,
+                  () => widget.onTabChange(2)),
+              _quickCardWidget(context, "Jobs", Icons.work,
+                  () => widget.onTabChange(3)),
+              _quickCardWidget(context, "Events", Icons.event,
+                  () => widget.onTabChange(4)),
+              _quickCardWidget(
+                  context,
+                  "Search",
+                  Icons.search,
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const GlobalSearchScreen()))),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _placementCtaCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => PlacementReportScreen(uid: uid)),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: AppGradients.emeraldCyan,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.accentEmerald.withOpacity(0.25),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.edit_note, color: Colors.white, size: 28),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Update Your Placement Status",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Help us track your career journey",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // ALUMNI-SPECIFIC HOME CONTENT
+  // ══════════════════════════════════════════════════════════════════════════
+
+  Widget _alumniContent(BuildContext context, Map<String, dynamic> user) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Mentorship Requests Card
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _mentorshipRequestsCard(context),
+        ),
+
+        const SizedBox(height: 14),
+
+        // My Mentees Card
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _myMenteesCard(context),
+        ),
+
+        const SizedBox(height: 14),
+
+        // Retention Timeline
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: RetentionTimelineWidget(uid: uid),
+        ),
+
+        const SizedBox(height: 14),
+
+        // Post Referral CTA
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _postReferralCtaCard(context),
+        ),
+
+        const SizedBox(height: 14),
+
+        // Employment Verification CTA
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _employmentVerificationCtaCard(context),
+        ),
+
+        const SizedBox(height: 24),
+
+        // Alumni Quick Actions grid
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: _sectionHeader(context, "Quick Actions"),
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.9,
+            children: [
+              _quickCardWidget(
+                  context,
+                  "My Profile",
+                  Icons.person,
+                  () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const ProfileScreen()))),
+              _quickCardWidget(
+                  context,
+                  "Referrals",
+                  Icons.card_giftcard,
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const PostReferralScreen()))),
+              _quickCardWidget(
+                  context,
+                  "Mentees",
+                  Icons.people,
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const AlumniMenteesScreen()))),
+              _quickCardWidget(
+                  context,
+                  "Jobs Posted",
+                  Icons.work,
+                  () => widget.onTabChange(2)),
+              _quickCardWidget(
+                  context,
+                  "Verify",
+                  Icons.verified_user,
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) =>
+                              const EmploymentVerificationScreen()))),
+              _quickCardWidget(
+                  context,
+                  "Search",
+                  Icons.search,
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const GlobalSearchScreen()))),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _mentorshipRequestsCard(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const AlumniMenteesScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.cardColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.accentPurple.withOpacity(0.3)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: AppGradients.purplePink,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(Icons.handshake, color: Colors.white, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Mentorship Requests",
+                    style: TextStyle(
+                      color: theme.textTheme.bodyLarge?.color,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('mentorship')
+                        .where('mentorUid', isEqualTo: uid)
+                        .where('requestStatus', isEqualTo: 'pending')
+                        .snapshots(),
+                    builder: (_, snap) {
+                      final count = snap.data?.docs.length ?? 0;
+                      return Text(
+                        count == 0
+                            ? "No pending requests"
+                            : "$count pending request${count > 1 ? 's' : ''}",
+                        style: TextStyle(
+                          color: count > 0
+                              ? AppColors.accentPurple
+                              : theme.textTheme.bodyMedium?.color,
+                          fontSize: 12,
+                          fontWeight: count > 0 ? FontWeight.w600 : FontWeight.normal,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios,
+                color: AppColors.accentPurple, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _myMenteesCard(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const AlumniMenteesScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.cardColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.primaryNeon.withOpacity(0.2)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: AppGradients.neonCyanPurple,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(Icons.people, color: Colors.white, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "My Mentees",
+                    style: TextStyle(
+                      color: theme.textTheme.bodyLarge?.color,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('mentorship')
+                        .where('mentorUid', isEqualTo: uid)
+                        .where('requestStatus', isEqualTo: 'accepted')
+                        .snapshots(),
+                    builder: (_, snap) {
+                      final count = snap.data?.docs.length ?? 0;
+                      return Text(
+                        count == 0 ? "No active mentees" : "$count active mentee${count > 1 ? 's' : ''}",
+                        style: TextStyle(
+                            color: theme.textTheme.bodyMedium?.color,
+                            fontSize: 12),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios,
+                color: AppColors.primaryNeon, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _postReferralCtaCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const PostReferralScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: AppGradients.blueViolet,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.accentBlue.withOpacity(0.25),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.card_giftcard, color: Colors.white, size: 28),
+            const SizedBox(width: 14),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Post a Referral / Internship",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Help students with opportunities at your company",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _employmentVerificationCtaCard(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const EmploymentVerificationScreen()),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.cardColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.accentEmerald.withOpacity(0.3)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: AppGradients.emeraldCyan,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(Icons.verified_user, color: Colors.white, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Employment Verification",
+                    style: TextStyle(
+                      color: theme.textTheme.bodyLarge?.color,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    "Review & verify student employment claims",
+                    style: TextStyle(
+                        color: theme.textTheme.bodyMedium?.color, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios,
+                color: AppColors.accentEmerald, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // BANNERS
+  // ══════════════════════════════════════════════════════════════════════════
+
+  Widget _verificationBanner(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.warning.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.warning.withOpacity(0.5)),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.info_outline, color: AppColors.warning, size: 18),
+          SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              "Verification pending — your college hasn't confirmed this record yet.",
+              style: TextStyle(color: AppColors.warning, fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _nudgeBannerWidget(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.accentBlue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.accentBlue.withOpacity(0.4)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.notifications_active, color: AppColors.accentBlue, size: 18),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              _nudgeBanner!,
+              style: const TextStyle(color: AppColors.accentBlue, fontSize: 12),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => setState(() => _nudgeBanner = null),
+            child: const Icon(Icons.close, color: AppColors.accentBlue, size: 16),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _pendingAlumniPrompt(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        gradient: AppGradients.purplePink,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+              color: AppColors.accentPurple.withOpacity(0.3),
+              blurRadius: 10)
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.workspace_premium, color: Colors.white, size: 24),
+          const SizedBox(width: 12),
+          const Expanded(
+            child: Text(
+              "Complete alumni verification to unlock your Alumni home.",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            ),
+            child: const Text("Verify",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // SHARED COMPONENTS (unchanged from original)
+  // ══════════════════════════════════════════════════════════════════════════
 
   Widget _chatBadge(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -432,8 +1026,9 @@ class _HomeScreenState extends State<HomeScreen> {
         if (snap.hasData) {
           for (var doc in snap.data!.docs) {
             final data = doc.data() as Map<String, dynamic>;
-            final unread = (data['unreadCount'] != null && data['unreadCount'][uid] != null) 
-                ? data['unreadCount'][uid] as int 
+            final unread = (data['unreadCount'] != null &&
+                    data['unreadCount'][uid] != null)
+                ? data['unreadCount'][uid] as int
                 : 0;
             totalUnread += unread;
           }
@@ -442,8 +1037,9 @@ class _HomeScreenState extends State<HomeScreen> {
         return Stack(
           children: [
             IconButton(
-              icon: const Icon(Icons.chat_bubble_outline, color: AppColors.primary, size: 28),
-              onPressed: () => widget.onTabChange(5), 
+              icon: const Icon(Icons.chat_bubble_outline,
+                  color: AppColors.primary, size: 28),
+              onPressed: () => widget.onTabChange(5),
             ),
             if (totalUnread > 0)
               Positioned(
@@ -455,10 +1051,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                  constraints:
+                      const BoxConstraints(minWidth: 16, minHeight: 16),
                   child: Text(
                     totalUnread > 9 ? '9+' : '$totalUnread',
-                    style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -480,7 +1080,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _quickCardWidget(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+  Widget _quickCardWidget(
+      BuildContext context, String title, IconData icon, VoidCallback onTap) {
     final theme = Theme.of(context);
     return Material(
       color: Colors.transparent,
@@ -492,7 +1093,8 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
             color: theme.cardColor,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+            border:
+                Border.all(color: theme.dividerColor.withOpacity(0.5)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -503,7 +1105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: theme.textTheme.bodyLarge?.color, 
+                  color: theme.textTheme.bodyLarge?.color,
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
                 ),
@@ -518,21 +1120,33 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _latestCombinedUpdates(BuildContext context) {
     final theme = Theme.of(context);
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('jobs').orderBy('createdAt', descending: true).limit(5).snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('jobs')
+          .orderBy('createdAt', descending: true)
+          .limit(5)
+          .snapshots(),
       builder: (_, jobSnap) {
         return StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('events').orderBy('createdAt', descending: true).limit(5).snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('events')
+              .orderBy('createdAt', descending: true)
+              .limit(5)
+              .snapshots(),
           builder: (_, eventSnap) {
             if (!jobSnap.hasData || !eventSnap.hasData) return const SizedBox();
 
             final items = [
-              ...jobSnap.data!.docs.map((d) => {'type': 'job', 'id': d.id, 'data': d.data()}),
-              ...eventSnap.data!.docs.map((d) => {'type': 'event', 'id': d.id, 'data': d.data()}),
+              ...jobSnap.data!.docs.map(
+                  (d) => {'type': 'job', 'id': d.id, 'data': d.data()}),
+              ...eventSnap.data!.docs.map(
+                  (d) => {'type': 'event', 'id': d.id, 'data': d.data()}),
             ];
 
             items.sort((a, b) {
-              final aTime = (a['data'] as Map)['createdAt'] as Timestamp?;
-              final bTime = (b['data'] as Map)['createdAt'] as Timestamp?;
+              final aTime =
+                  (a['data'] as Map)['createdAt'] as Timestamp?;
+              final bTime =
+                  (b['data'] as Map)['createdAt'] as Timestamp?;
               if (aTime == null) return 1;
               if (bTime == null) return -1;
               return bTime.compareTo(aTime);
@@ -547,9 +1161,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => isJob 
-                        ? JobDetailScreen(jobId: item['id'] as String) 
-                        : EventDetailScreen(eventId: item['id'] as String),
+                      builder: (_) => isJob
+                          ? JobDetailScreen(jobId: item['id'] as String)
+                          : EventDetailScreen(
+                              eventId: item['id'] as String),
                     ),
                   ),
                   child: Container(
@@ -558,20 +1173,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       color: theme.cardColor,
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+                      border: Border.all(
+                          color: theme.dividerColor.withOpacity(0.5)),
                     ),
                     child: Row(
                       children: [
-                        Icon(isJob ? Icons.work_outline : Icons.event_outlined, color: AppColors.primary),
+                        Icon(
+                          isJob
+                              ? Icons.work_outline
+                              : Icons.event_outlined,
+                          color: AppColors.primary,
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(isJob ? (d['designation'] ?? "Job") : (d['title'] ?? "Event"), 
-                                  style: const TextStyle(fontWeight: FontWeight.w600)),
-                              Text(_timeAgo(d['createdAt'] as Timestamp?), 
-                                  style: TextStyle(color: theme.textTheme.bodyMedium?.color, fontSize: 12)),
+                              Text(
+                                isJob
+                                    ? (d['designation'] ?? "Job")
+                                    : (d['title'] ?? "Event"),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                _timeAgo(d['createdAt'] as Timestamp?),
+                                style: TextStyle(
+                                    color: theme.textTheme.bodyMedium?.color,
+                                    fontSize: 12),
+                              ),
                             ],
                           ),
                         ),
@@ -594,7 +1224,10 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const SizedBox();
         final users = snapshot.data!;
-        if (users.isEmpty) return Text("No recommendations yet.", style: TextStyle(color: theme.textTheme.bodyMedium?.color));
+        if (users.isEmpty) {
+          return Text("No recommendations yet.",
+              style: TextStyle(color: theme.textTheme.bodyMedium?.color));
+        }
 
         return SizedBox(
           height: 160,
@@ -611,7 +1244,11 @@ class _HomeScreenState extends State<HomeScreen> {
               final isMentor = d['isMentor'] == true;
 
               return GestureDetector(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AlumniProfileScreen(userId: doc.id))),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            AlumniProfileScreen(userId: doc.id))),
                 child: Container(
                   width: 150,
                   margin: const EdgeInsets.only(right: 14),
@@ -619,17 +1256,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: theme.cardColor,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+                    border: Border.all(
+                        color: theme.dividerColor.withOpacity(0.5)),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        backgroundColor: AppColors.primarySoft, 
-                        backgroundImage: rPhoto != null && rPhoto.isNotEmpty ? NetworkImage(rPhoto) : null,
+                        backgroundColor: AppColors.primarySoft,
+                        backgroundImage: rPhoto != null && rPhoto.isNotEmpty
+                            ? NetworkImage(rPhoto)
+                            : null,
                         child: (rPhoto == null || rPhoto.isEmpty)
-                          ? Text(rName.isNotEmpty ? rName[0].toUpperCase() : "?", style: const TextStyle(color: AppColors.primary))
-                          : null,
+                            ? Text(
+                                rName.isNotEmpty ? rName[0].toUpperCase() : "?",
+                                style:
+                                    const TextStyle(color: AppColors.primary))
+                            : null,
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -637,25 +1280,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Flexible(
                             child: Text(
-                              rName, 
-                              style: const TextStyle(fontWeight: FontWeight.bold), 
+                              rName,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          // ✅ ONLY SHOW VERIFICATION FOR STAFF
-                          if (isMentor && role.toLowerCase() == 'staff') ...[
+                          if (isMentor &&
+                              role.toLowerCase() == 'staff') ...[
                             const SizedBox(width: 4),
-                            const Icon(Icons.verified, color: AppColors.primary, size: 14),
+                            const Icon(Icons.verified,
+                                color: AppColors.primary, size: 14),
                           ],
                         ],
                       ),
                       Text(
-                        role == "Alumni" 
-                          ? "${d['designation'] ?? "Alumni"}" 
-                          : role == "Staff"
-                            ? "${d['designation'] ?? "Staff"}"
-                            : "Student", 
-                        style: TextStyle(fontSize: 11, color: theme.textTheme.bodyMedium?.color), 
+                        role == "Alumni"
+                            ? "${d['designation'] ?? "Alumni"}"
+                            : role == "Staff"
+                                ? "${d['designation'] ?? "Staff"}"
+                                : "Student",
+                        style: TextStyle(
+                            fontSize: 11,
+                            color: theme.textTheme.bodyMedium?.color),
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
