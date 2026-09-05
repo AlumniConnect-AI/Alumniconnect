@@ -44,108 +44,125 @@ class BottomNavBar extends StatelessWidget {
     ];
 
     final items = isAlumni ? alumniItems : studentItems;
-    // Messages badge is at index 5 for student, no badge for alumni
     final messagesIndex = isAlumni ? -1 : 5;
 
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isDark
-                ? AppColors.cardDark.withValues(alpha: 0.75)
-                : theme.cardColor.withValues(alpha: 0.9),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primaryNeon.withValues(alpha: 0.08),
-                blurRadius: 20,
-                offset: const Offset(0, -4),
-              ),
-            ],
-            border: Border(
-              top: BorderSide(
-                color: isDark
-                    ? AppColors.primaryNeon.withValues(alpha: 0.2)
-                    : theme.dividerColor.withValues(alpha: 0.5),
-                width: 1.2,
-              ),
+    return SafeArea(
+      top: false,
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        height: 68,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryNeon.withOpacity(0.18),
+              blurRadius: 24,
+              spreadRadius: 2,
+              offset: const Offset(0, 8),
             ),
-          ),
-          child: SafeArea(
-            child: SizedBox(
-              height: 65,
+            BoxShadow(
+              color: Colors.black.withOpacity(isDark ? 0.4 : 0.08),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+              decoration: BoxDecoration(
+                color: isDark
+                    ? AppColors.cardDark.withOpacity(0.70)
+                    : theme.cardColor.withOpacity(0.85),
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: isDark
+                      ? AppColors.primaryNeon.withOpacity(0.3)
+                      : theme.dividerColor.withOpacity(0.6),
+                  width: 1.2,
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(items.length, (index) {
                   final selected = index == currentIndex;
 
                   return Expanded(
-                    child: InkWell(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () {
                         HapticFeedback.lightImpact();
                         onTap(index);
                       },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            clipBehavior: Clip.none,
-                            children: [
-                              // ── Glow pill background ─────────────────
-                              AnimatedScale(
-                                duration: const Duration(milliseconds: 300),
-                                scale: selected ? 1.0 : 0.0,
-                                curve: Curves.easeOutBack,
-                                child: Container(
-                                  height: 36,
-                                  width: 36,
+                          AnimatedScale(
+                            duration: const Duration(milliseconds: 250),
+                            scale: selected ? 1.12 : 1.0,
+                            curve: Curves.easeOutCubic,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              clipBehavior: Clip.none,
+                              children: [
+                                // ── Liquid Glass Hover Pill ─────────────────
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 280),
+                                  curve: Curves.easeOutBack,
+                                  height: selected ? 38 : 0,
+                                  width: selected ? 38 : 0,
                                   decoration: BoxDecoration(
-                                    gradient: AppGradients.neonCyanPurple,
+                                    gradient: selected
+                                        ? AppGradients.neonCyanPurple
+                                        : null,
                                     shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.primaryNeon
-                                            .withValues(alpha: 0.4),
-                                        blurRadius: 10,
-                                      ),
-                                    ],
+                                    boxShadow: selected
+                                        ? [
+                                            BoxShadow(
+                                              color: AppColors.primaryNeon
+                                                  .withOpacity(0.45),
+                                              blurRadius: 12,
+                                              spreadRadius: 1,
+                                            ),
+                                          ]
+                                        : [],
                                   ),
                                 ),
-                              ),
-                              Icon(
-                                selected
-                                    ? items[index].activeIcon
-                                    : items[index].inactiveIcon,
-                                size: 20,
-                                color: selected
-                                    ? Colors.white
-                                    : (isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondary),
-                              ),
-                              // ── Unread badge (student Messages) ──────
-                              if (index == messagesIndex && uid != null)
-                                Positioned(
-                                  top: -4,
-                                  right: -4,
-                                  child: _UnreadBadge(uid: uid),
+                                Icon(
+                                  selected
+                                      ? items[index].activeIcon
+                                      : items[index].inactiveIcon,
+                                  size: 20,
+                                  color: selected
+                                      ? Colors.white
+                                      : (isDark
+                                          ? AppColors.textSecondaryDark
+                                          : AppColors.textSecondary),
                                 ),
-                              // ── Pending mentorship badge (alumni) ────
-                              if (isAlumni && index == 1 && uid != null)
-                                Positioned(
-                                  top: -4,
-                                  right: -4,
-                                  child: _MentorshipBadge(uid: uid),
-                                ),
-                            ],
+                                // ── Unread badge (student Messages) ──────
+                                if (index == messagesIndex && uid != null)
+                                  Positioned(
+                                    top: -4,
+                                    right: -4,
+                                    child: _UnreadBadge(uid: uid),
+                                  ),
+                                // ── Pending mentorship badge (alumni) ────
+                                if (isAlumni && index == 1 && uid != null)
+                                  Positioned(
+                                    top: -4,
+                                    right: -4,
+                                    child: _MentorshipBadge(uid: uid),
+                                  ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            items[index].label,
+                          const SizedBox(height: 3),
+                          AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 200),
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: selected
@@ -159,6 +176,11 @@ class BottomNavBar extends StatelessWidget {
                                       ? AppColors.textSecondaryDark
                                       : AppColors.textSecondary),
                               letterSpacing: 0.1,
+                            ),
+                            child: Text(
+                              items[index].label,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
@@ -237,7 +259,7 @@ Widget _badge(String label, Color color) {
       color: color,
       shape: BoxShape.circle,
       boxShadow: [
-        BoxShadow(color: color.withValues(alpha: 0.5), blurRadius: 6),
+        BoxShadow(color: color.withOpacity(0.5), blurRadius: 6),
       ],
     ),
     constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
