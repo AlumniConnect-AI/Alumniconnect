@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../config/theme.dart';
 import '../../services/upload_service.dart';
 import 'job_detail_screen.dart';
+import 'job_referral_application_screen.dart';
 
 class JobsListScreen extends StatefulWidget {
   const JobsListScreen({super.key});
@@ -382,60 +383,84 @@ class _JobsListScreenState extends State<JobsListScreen> {
   }
 }
 
-/// 🧩 JOB CARD
+/// 🧩 JOB CARD — All jobs featured with Referral Request capability
 class _JobCard extends StatelessWidget {
   final Map<String, dynamic> data;
   final String jobId;
 
-  const _JobCard(
-      {required this.data, required this.jobId});
+  const _JobCard({required this.data, required this.jobId});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final ownerName = data['ownerName']?.toString() ?? 'an alumnus';
+
     return Padding(
-      padding:
-      const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 12),
       child: InkWell(
-        borderRadius:
-        BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16),
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) =>
-                  JobDetailScreen(jobId: jobId),
+              builder: (_) => JobDetailScreen(jobId: jobId),
             ),
           );
         },
         child: Container(
-          padding:
-          const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: theme.cardColor,
-            borderRadius:
-            BorderRadius.circular(16),
-            border:
-            Border.all(color: theme.dividerColor),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: AppColors.accentEmerald.withOpacity(0.35)),
           ),
           child: Column(
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                data['designation'] ?? "",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight:
-                  FontWeight.w600,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      data['designation'] ?? "",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: AppColors.accentEmerald.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                          color: AppColors.accentEmerald.withOpacity(0.5)),
+                    ),
+                    child: Text(
+                      (data['experience'] == 'Fresher' ||
+                              (data['designation'] ?? '')
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains('intern'))
+                          ? 'INTERNSHIP'
+                          : 'JOB',
+                      style: const TextStyle(
+                        color: AppColors.accentEmerald,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 4),
               Text(
-                "${data['company'] ?? ""} • ${data['location'] ?? ""}",
+                "${data['company'] ?? ""}${data['location'] != null && data['location'].toString().isNotEmpty ? ' • ${data['location']}' : ''}",
                 style: TextStyle(
-                  color:
-                  theme.textTheme.bodyMedium?.color,
+                  color: theme.textTheme.bodyMedium?.color,
                   fontSize: 13,
                 ),
               ),
@@ -443,10 +468,28 @@ class _JobCard extends StatelessWidget {
               Text(
                 "Experience: ${data['experience'] ?? "Any"}",
                 style: TextStyle(
-                  color:
-                  theme.textTheme.bodyMedium?.color,
+                  color: theme.textTheme.bodyMedium?.color,
                   fontSize: 12,
                 ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(Icons.workspace_premium,
+                      size: 13, color: AppColors.accentEmerald),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      "Posted by $ownerName • Tap to view & request",
+                      style: const TextStyle(
+                        color: AppColors.accentEmerald,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -503,78 +546,109 @@ class _ReferralCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final linkedJobId = data['jobId']?.toString() ?? '';
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: theme.cardColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _typeColor.withOpacity(0.3)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    data['title'] ?? '',
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () {
+          if (linkedJobId.isNotEmpty) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => JobDetailScreen(jobId: linkedJobId),
+              ),
+            );
+          } else {
+            // Legacy referrals fallback
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => JobReferralApplicationScreen(
+                  jobId: referralId,
+                  jobData: {
+                    'designation': data['title'] ?? 'Role',
+                    'company': data['companyName'] ?? 'Company',
+                    'description': data['description'] ?? '',
+                    'ownerId': data['postedByUid'] ?? '',
+                  },
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: _typeColor.withOpacity(0.12),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: _typeColor.withOpacity(0.5)),
+              ),
+            );
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: theme.cardColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: _typeColor.withOpacity(0.35)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      data['title'] ?? '',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
                   ),
-                  child: Text(
-                    _typeLabel,
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: _typeColor.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: _typeColor.withOpacity(0.5)),
+                    ),
+                    child: Text(
+                      _typeLabel,
+                      style: TextStyle(
+                          color: _typeColor,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                data['companyName'] ?? '',
+                style: TextStyle(
+                    color: theme.textTheme.bodyMedium?.color, fontSize: 13),
+              ),
+              if ((data['description'] ?? '').toString().isNotEmpty) ...[
+                const SizedBox(height: 6),
+                Text(
+                  data['description'],
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: theme.textTheme.bodyMedium?.color, fontSize: 12),
+                ),
+              ],
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(Icons.workspace_premium,
+                      size: 13, color: _typeColor),
+                  const SizedBox(width: 4),
+                  Text(
+                    "Posted by an alumnus • Tap to view & request",
                     style: TextStyle(
                         color: _typeColor,
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              data['companyName'] ?? '',
-              style: TextStyle(
-                  color: theme.textTheme.bodyMedium?.color, fontSize: 13),
-            ),
-            if ((data['description'] ?? '').toString().isNotEmpty) ...[
-              const SizedBox(height: 6),
-              Text(
-                data['description'],
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: theme.textTheme.bodyMedium?.color, fontSize: 12),
+                ],
               ),
             ],
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Icon(Icons.workspace_premium,
-                    size: 13, color: _typeColor),
-                const SizedBox(width: 4),
-                Text(
-                  "Posted by an alumnus",
-                  style: TextStyle(
-                      color: _typeColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

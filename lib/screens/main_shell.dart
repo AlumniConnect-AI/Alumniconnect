@@ -6,7 +6,7 @@ import '../widgets/bottom_nav_bar.dart';
 import 'home/home_screen.dart';
 import 'alumni/alumni_list_screen.dart';
 import 'alumni/alumni_mentees_screen.dart';
-import 'alumni/post_referral_screen.dart';
+import 'jobs/referral_requests_screen.dart';
 import 'alumni/employment_verification_screen.dart';
 import 'staff/staff_list_screen.dart';
 import 'jobs/jobs_list_screen.dart';
@@ -58,7 +58,7 @@ class _MainShellState extends State<MainShell> {
         final alumniPages = [
           HomeScreen(onTabChange: _onTabChange),
           const AlumniMenteesScreen(),
-          const PostReferralScreen(),
+          const ReferralRequestsScreen(),
           const EmploymentVerificationScreen(),
           const ProfileScreen(),
         ];

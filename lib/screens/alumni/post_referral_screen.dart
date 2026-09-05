@@ -47,13 +47,33 @@ class _PostReferralScreenState extends State<PostReferralScreen> {
     try {
       final uid = FirebaseAuth.instance.currentUser!.uid;
 
-      // Write to referrals collection
+      // Fetch owner name
+      String ownerName = 'Alumnus';
+      try {
+        final uDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        if (uDoc.exists) ownerName = uDoc.data()?['name']?.toString() ?? 'Alumnus';
+      } catch (_) {}
+
+      // Write to 'jobs' collection so students can view job details & request referral
+      final jobRef = await FirebaseFirestore.instance.collection('jobs').add({
+        'ownerId': uid,
+        'ownerName': ownerName,
+        'designation': _titleCtrl.text.trim(),
+        'company': _companyCtrl.text.trim(),
+        'location': 'Remote / On-site',
+        'experience': 'Fresher',
+        'description': _descriptionCtrl.text.trim(),
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      // Write to referrals collection linked to jobRef.id
       await FirebaseFirestore.instance.collection('referrals').add({
         'postedByUid': uid,
         'title': _titleCtrl.text.trim(),
         'companyName': _companyCtrl.text.trim(),
         'type': _selectedType,
         'description': _descriptionCtrl.text.trim(),
+        'jobId': jobRef.id,
         'postedAt': FieldValue.serverTimestamp(),
       });
 
