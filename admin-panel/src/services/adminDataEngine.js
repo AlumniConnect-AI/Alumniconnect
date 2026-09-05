@@ -2,7 +2,10 @@
 // Serves as the single source of truth supporting full CRUD, live updates, 
 // dynamic KPI recalculation, filtering, and real-time subscription listeners.
 
-import { fetchUsers, fetchJobs, fetchReports as fetchFirestoreReports } from "../../../src/services/firestoreService";
+// Standby Firestore Service Handlers for dataEngine
+const fetchUsers = async () => [];
+const fetchJobs = async () => [];
+const fetchFirestoreReports = async () => [];
 
 const STORAGE_KEYS = {
   UNIVERSITIES: "admin_data_universities_v3",
