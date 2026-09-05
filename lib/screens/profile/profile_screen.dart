@@ -32,11 +32,11 @@ class ProfileScreen extends StatelessWidget {
 
   // 👥 FOLLOW COUNT
   Widget _followCount(
-      BuildContext context, {
-        required String title,
-        required String uid,
-        required String collection,
-      }) {
+    BuildContext context, {
+    required String title,
+    required String uid,
+    required String collection,
+  }) {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
@@ -59,24 +59,34 @@ class ProfileScreen extends StatelessWidget {
             .snapshots(),
         builder: (_, snap) {
           final count = snap.data?.docs.length ?? 0;
-          return Column(
-            children: [
-              Text(
-                count.toString(),
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            decoration: BoxDecoration(
+              color: theme.cardColor,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  count.toString(),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryNeon,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: TextStyle(
-                  color: theme.textTheme.bodyMedium?.color,
-                  fontSize: 13,
+                const SizedBox(height: 2),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: theme.textTheme.bodyMedium?.color,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
@@ -89,9 +99,10 @@ class ProfileScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
         ),
         automaticallyImplyLeading: false,
@@ -100,12 +111,13 @@ class ProfileScreen extends StatelessWidget {
           "My Profile",
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontSize: 18,
           ),
         ),
         actions: [
           IconButton(
             tooltip: "Edit profile",
-            icon: const Icon(Icons.edit, color: AppColors.primary),
+            icon: const Icon(Icons.edit_outlined, color: AppColors.primaryNeon),
             onPressed: () {
               Navigator.push(
                 context,
@@ -117,7 +129,8 @@ class ProfileScreen extends StatelessWidget {
           ),
           IconButton(
             tooltip: "Settings",
-            icon: Icon(Icons.settings, color: theme.textTheme.bodyMedium?.color),
+            icon: Icon(Icons.settings_outlined,
+                color: theme.textTheme.bodyMedium?.color),
             onPressed: () {
               Navigator.pushNamed(context, '/settings');
             },
@@ -132,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, snap) {
           if (!snap.hasData) {
             return const Center(
-              child: CircularProgressIndicator(color: AppColors.primary),
+              child: CircularProgressIndicator(color: AppColors.primaryNeon),
             );
           }
 
@@ -146,12 +159,13 @@ class ProfileScreen extends StatelessWidget {
           final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : "?";
           final rawRole = (userData['role'] ?? "Student").toString();
           final isMentor = userData['isMentor'] == true;
-          
+
           final isAlumni = rawRole.toLowerCase() == 'alumni';
           final isStaff = rawRole.toLowerCase() == 'staff';
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -159,24 +173,43 @@ class ProfileScreen extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 46,
-                        backgroundColor: AppColors.primary.withOpacity(0.1),
-                        backgroundImage: photoUrl != null && photoUrl.isNotEmpty ? NetworkImage(photoUrl) : null,
-                        child: (photoUrl == null || photoUrl.isEmpty)
-                          ? Text(
-                              firstLetter,
-                              style: const TextStyle(
-                                fontSize: 34,
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          : null,
+                      Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: AppColors.primaryNeon, width: 2.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primaryNeon.withOpacity(0.25),
+                              blurRadius: 16,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 44,
+                          backgroundColor:
+                              AppColors.primaryNeon.withOpacity(0.15),
+                          backgroundImage:
+                              photoUrl != null && photoUrl.isNotEmpty
+                                  ? NetworkImage(photoUrl)
+                                  : null,
+                          child: (photoUrl == null || photoUrl.isEmpty)
+                              ? Text(
+                                  firstLetter,
+                                  style: const TextStyle(
+                                    fontSize: 34,
+                                    color: AppColors.primaryNeon,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : null,
+                        ),
                       ),
                       const SizedBox(height: 14),
-                      
-                      // ✅ NAME WITH VERIFICATION MARK (Only for Alumni/Staff Mentors)
+
+                      // NAME WITH VERIFICATION MARK
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -185,59 +218,66 @@ class ProfileScreen extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
+                              letterSpacing: -0.5,
                             ),
                           ),
                           if (isMentor && (isAlumni || isStaff)) ...[
-                            const SizedBox(width: 8),
-                            const Icon(Icons.verified, color: AppColors.primary, size: 22),
+                            const SizedBox(width: 6),
+                            const Icon(Icons.verified,
+                                color: AppColors.primaryNeon, size: 22),
                           ],
                         ],
                       ),
-                      
+
                       const SizedBox(height: 4),
-                      
-                      // ✅ CONDITIONAL ROLE/DESIGNATION DISPLAY
+
+                      // CONDITIONAL ROLE/DESIGNATION DISPLAY
                       Text(
-                        isAlumni 
-                          ? "${userData['designation'] ?? ""} @ ${userData['company'] ?? ""}"
-                          : isStaff
-                            ? "${userData['designation'] ?? ""} • ${userData['company'] ?? ""}"
-                            : "Student",
+                        isAlumni
+                            ? "${userData['designation'] ?? ""} @ ${userData['company'] ?? ""}"
+                            : isStaff
+                                ? "${userData['designation'] ?? ""} • ${userData['company'] ?? ""}"
+                                : "Student",
                         style: TextStyle(
                           color: theme.textTheme.bodyMedium?.color,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 4),
-                      Text(
-                        isStaff 
-                          ? (userData['department'] ?? "")
-                          : "${userData['batch'] ?? ""} • ${userData['department'] ?? ""}",
-                        style: TextStyle(
-                          color: theme.textTheme.bodyMedium?.color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
                         ),
                       ),
 
-                      // ✅ MENTOR BADGE (Only for Alumni/Staff Mentors)
+                      const SizedBox(height: 3),
+                      Text(
+                        isStaff
+                            ? (userData['department'] ?? "")
+                            : "${userData['batch'] ?? ""} • ${userData['department'] ?? ""}",
+                        style: TextStyle(
+                          color: theme.textTheme.bodyMedium?.color,
+                          fontSize: 12,
+                        ),
+                      ),
+
+                      // MENTOR BADGE
                       if (isMentor && (isAlumni || isStaff)) ...[
                         const SizedBox(height: 12),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 6),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
+                            color: AppColors.primaryNeon.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: AppColors.primary.withOpacity(0.5)),
+                            border: Border.all(
+                                color: AppColors.primaryNeon.withOpacity(0.5)),
                           ),
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.verified_user, size: 16, color: AppColors.primary),
+                              Icon(Icons.verified_user,
+                                  size: 16, color: AppColors.primaryNeon),
                               SizedBox(width: 6),
                               Text(
                                 "Mentor",
                                 style: TextStyle(
-                                  color: AppColors.primary,
+                                  color: AppColors.primaryNeon,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
                                 ),
@@ -247,11 +287,11 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ],
 
-                      const SizedBox(height: 22),
+                      const SizedBox(height: 20),
 
                       // ================= FOLLOW STATS =================
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _followCount(
                             context,
@@ -259,6 +299,7 @@ class ProfileScreen extends StatelessWidget {
                             uid: uid,
                             collection: "followers",
                           ),
+                          const SizedBox(width: 16),
                           _followCount(
                             context,
                             title: "Following",
@@ -271,52 +312,50 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 28),
 
                 // ================= ABOUT =================
                 _sectionTitle("About"),
                 _card(
                   context,
-                  child: Text(
-                    userData['bio'] ?? "No bio added",
-                    style: TextStyle(
-                      color: theme.textTheme.bodyMedium?.color,
-                      height: 1.4,
-                    ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.format_quote,
+                          color: AppColors.primaryNeon, size: 20),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          userData['bio'] ?? "No bio added",
+                          style: TextStyle(
+                            color: theme.textTheme.bodyMedium?.color,
+                            height: 1.4,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
                 // ================= CONTACT =================
-                _infoRow(context, "Email", userData['email']),
-                
-                // Show Location & LinkedIn only if NOT Staff
-                if (!isStaff) ...[
-                  const SizedBox(height: 10),
-                  _infoRow(context, "Location", userData['location']),
-                  const SizedBox(height: 10),
-                  OutlinedButton.icon(
-                    icon: const Icon(Icons.open_in_new),
-                    label: const Text("View LinkedIn"),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primary,
-                      side: const BorderSide(color: AppColors.primary),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    onPressed: () => _openLink(context, userData['linkedin']),
-                  ),
-                ],
+                _infoCard(
+                  context,
+                  email: userData['email'],
+                  location: !isStaff ? userData['location'] : null,
+                  linkedin: !isStaff ? userData['linkedin'] : null,
+                ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 28),
 
                 // ================= MY ACTIVITY =================
                 _sectionTitle("My Activity"),
                 _activityTile(
                   context,
                   title: "My Jobs",
+                  icon: Icons.work_outline,
                   query: FirebaseFirestore.instance
                       .collection('jobs')
                       .where('ownerId', isEqualTo: uid),
@@ -328,6 +367,7 @@ class ProfileScreen extends StatelessWidget {
                 _activityTile(
                   context,
                   title: "My Events",
+                  icon: Icons.event_outlined,
                   query: FirebaseFirestore.instance
                       .collection('events')
                       .where('ownerId', isEqualTo: uid),
@@ -344,6 +384,7 @@ class ProfileScreen extends StatelessWidget {
                 _activityTile(
                   context,
                   title: "Saved Jobs",
+                  icon: Icons.bookmark_outline,
                   query: FirebaseFirestore.instance
                       .collection('saved_jobs')
                       .where('userId', isEqualTo: uid),
@@ -355,14 +396,18 @@ class ProfileScreen extends StatelessWidget {
                 _activityTile(
                   context,
                   title: "Saved Events",
+                  icon: Icons.star_outline,
                   query: FirebaseFirestore.instance
                       .collection('saved_events')
                       .where('userId', isEqualTo: uid),
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const SavedEventsScreen()),
+                    MaterialPageRoute(
+                        builder: (_) => const SavedEventsScreen()),
                   ),
                 ),
+
+                const SizedBox(height: 16),
               ],
             ),
           );
@@ -393,66 +438,162 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: theme.cardColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: theme.dividerColor),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: child,
     );
   }
 
-  Widget _infoRow(BuildContext context, String label, String? value) {
+  Widget _infoCard(
+    BuildContext context, {
+    String? email,
+    String? location,
+    String? linkedin,
+  }) {
     final theme = Theme.of(context);
-    return Text(
-      "$label: ${value ?? "-"}",
-      style: TextStyle(color: theme.textTheme.bodyMedium?.color),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.email_outlined,
+                  size: 18, color: AppColors.primaryNeon),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  email ?? "-",
+                  style: TextStyle(
+                      color: theme.textTheme.bodyLarge?.color, fontSize: 13),
+                ),
+              ),
+            ],
+          ),
+          if (location != null && location.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                const Icon(Icons.location_on_outlined,
+                    size: 18, color: AppColors.primaryNeon),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    location,
+                    style: TextStyle(
+                        color: theme.textTheme.bodyLarge?.color,
+                        fontSize: 13),
+                  ),
+                ),
+              ],
+            ),
+          ],
+          if (linkedin != null && linkedin.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.open_in_new, size: 16),
+                label: const Text("View LinkedIn",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.primaryNeon,
+                  side: const BorderSide(color: AppColors.primaryNeon),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onPressed: () => _openLink(context, linkedin),
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 
   Widget _activityTile(
-      BuildContext context, {
-        required String title,
-        required Query query,
-        VoidCallback? onTap,
-      }) {
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Query query,
+    VoidCallback? onTap,
+  }) {
     final theme = Theme.of(context);
     return StreamBuilder<QuerySnapshot>(
       stream: query.snapshots(),
       builder: (_, snap) {
         final count = snap.hasData ? snap.data!.docs.length : 0;
 
-        return InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: theme.cardColor,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: theme.cardColor,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryNeon.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(icon, color: AppColors.primaryNeon, size: 20),
                   ),
-                ),
-                CircleAvatar(
-                  radius: 14,
-                  backgroundColor: AppColors.primary,
-                  child: Text(
-                    count.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryNeon,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      count.toString(),
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.arrow_forward_ios,
+                      size: 14, color: Colors.grey),
+                ],
+              ),
             ),
           ),
         );
