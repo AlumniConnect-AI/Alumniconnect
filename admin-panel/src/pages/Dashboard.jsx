@@ -9,13 +9,10 @@ import { dataEngine } from "../services/adminDataEngine";
 import { useAdminAuth } from "../context/AdminAuthContext";
 import { useNavigate } from "react-router-dom";
 
-import firestoreUserService from "../services/firestoreUserService";
-
 export default function Dashboard() {
   const [kpis, setKpis] = useState(null);
   const [stateOverview, setStateOverview] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [fsStats, setFsStats] = useState(firestoreUserService.getUserStatistics());
   const { globalFilters } = useAdminAuth();
   const navigate = useNavigate();
 
@@ -37,18 +34,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     loadDashboardData();
-    const unsubscribeDataEngine = dataEngine.subscribe(() => {
+    const unsubscribe = dataEngine.subscribe(() => {
       loadDashboardData();
     });
-    const unsubscribeFsUser = firestoreUserService.subscribe((fsState) => {
-      setFsStats(fsState.stats);
-    });
-    return () => {
-      unsubscribeDataEngine();
-      unsubscribeFsUser();
-    };
+    return () => unsubscribe();
   }, [globalFilters]);
-
 
   // Chart dataset derived dynamically from current stateOverview
   const chartBarData = stateOverview.slice(0, 7).map((s) => ({
@@ -124,69 +114,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Live Firestore User Administration KPI Cards */}
-      <div className="glass-card" style={{ background: "rgba(15, 23, 42, 0.6)", padding: "18px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-          <div>
-            <h3 style={{ fontSize: "1.05rem", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ color: "var(--accent-cyan)" }}>🔥</span> Real-Time Firestore User Accounts (Live Single Source of Truth)
-            </h3>
-            <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "2px" }}>
-              Dynamically fetched via Firestore <code style={{ color: "var(--accent-cyan)" }}>onSnapshot</code> real-time listeners from main AlumniConnect project
-            </p>
-          </div>
-          <button className="btn btn-outline btn-sm" onClick={() => navigate("/users-data")}>
-            Manage All Users →
-          </button>
-        </div>
-
-        <div className="grid-4">
-          <div onClick={() => navigate("/users-data")} style={{ cursor: "pointer" }}>
-            <KpiCard
-              title="Firestore Total Users"
-              value={fsStats.totalUsers.toLocaleString()}
-              subtext={`${fsStats.onlineUsers} Online now`}
-              growth={+4.8}
-              icon={Users}
-              color="cyan"
-            />
-          </div>
-          <div onClick={() => navigate("/users-data/students")} style={{ cursor: "pointer" }}>
-            <KpiCard
-              title="Firestore Students"
-              value={fsStats.totalStudents.toLocaleString()}
-              subtext={`${fsStats.studentOnline} Online`}
-              growth={+5.2}
-              icon={GraduationCap}
-              color="emerald"
-            />
-          </div>
-          <div onClick={() => navigate("/users-data/alumni")} style={{ cursor: "pointer" }}>
-            <KpiCard
-              title="Firestore Alumni"
-              value={fsStats.totalAlumni.toLocaleString()}
-              subtext={`${fsStats.alumniOnline} Online`}
-              growth={+3.6}
-              icon={Briefcase}
-              color="indigo"
-            />
-          </div>
-          <div onClick={() => navigate("/users-data/staff")} style={{ cursor: "pointer" }}>
-            <KpiCard
-              title="Firestore Staff"
-              value={fsStats.totalStaff.toLocaleString()}
-              subtext={`${fsStats.staffOnline} Online`}
-              growth={+1.5}
-              icon={UserCheck}
-              color="amber"
-            />
-          </div>
-        </div>
-      </div>
-
       {/* Row 1: Primary KPI Cards (5 Grid) */}
       <div className="grid-5">
-
         <div onClick={() => navigate("/universities")} style={{ cursor: "pointer" }}>
           <KpiCard
             title="Total Universities"

@@ -4,31 +4,22 @@ import {
   Building2,
   School,
   Users,
-  GraduationCap,
-  Briefcase,
-  UserCheck,
   BookOpen,
+  Briefcase,
   TrendingUp,
   MapPin,
   FileSpreadsheet,
   Database,
   ShieldCheck,
   Settings,
-  Shield,
-  UserCog
+  Shield
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { path: "/dashboard", label: "Dashboard Overview", icon: LayoutDashboard },
-  { header: "ADMINISTRATION → USER DATA" },
-  { path: "/users-data", label: "All Users", icon: UserCog },
-  { path: "/users-data/students", label: "Students", icon: GraduationCap },
-  { path: "/users-data/alumni", label: "Alumni", icon: Briefcase },
-  { path: "/users-data/staff", label: "Staff", icon: UserCheck },
-  { header: "INSTITUTIONS & ANALYTICS" },
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/universities", label: "Universities", icon: Building2 },
   { path: "/institutions", label: "Institutions", icon: School },
-  { path: "/students", label: "Local Student System", icon: Users },
+  { path: "/students", label: "Students", icon: Users },
   { path: "/courses", label: "Courses", icon: BookOpen },
   { path: "/placements", label: "Placements", icon: Briefcase },
   { path: "/career-outcomes", label: "Career Outcomes", icon: TrendingUp },
@@ -38,7 +29,6 @@ const NAV_ITEMS = [
   { path: "/admin-management", label: "Admin Management", icon: ShieldCheck },
   { path: "/settings", label: "Settings", icon: Settings }
 ];
-
 
 export default function AdminSidebar() {
   return (
@@ -96,24 +86,7 @@ export default function AdminSidebar() {
         <div style={{ fontSize: "0.7rem", fontWeight: "700", color: "var(--text-dim)", padding: "4px 12px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
           Administration Navigation
         </div>
-        {NAV_ITEMS.map((item, idx) => {
-          if (item.header) {
-            return (
-              <div
-                key={`header-${idx}`}
-                style={{
-                  fontSize: "0.68rem",
-                  fontWeight: "700",
-                  color: "var(--accent-cyan)",
-                  padding: "12px 12px 4px 12px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em"
-                }}
-              >
-                {item.header}
-              </div>
-            );
-          }
+        {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
