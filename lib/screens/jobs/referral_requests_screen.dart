@@ -518,24 +518,35 @@ class _ReferralRequestsScreenState extends State<ReferralRequestsScreen>
                             style: const TextStyle(fontSize: 11, color: Colors.grey)),
                       ],
                     ),
-                    if (alumniUid.isNotEmpty && status == 'accepted') ...[
+                    if (status == 'accepted') ...[
                       const SizedBox(height: 12),
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           onPressed: () async {
-                            final chatId = await MeetingService.getOrCreateChat(alumniUid);
+                            final targetPeer = (_userRole == 'alumni' || _userRole == 'staff')
+                                ? (data['studentUid']?.toString().isNotEmpty == true
+                                    ? data['studentUid']!.toString()
+                                    : alumniUid)
+                                : alumniUid;
+                            if (targetPeer.isEmpty) return;
+                            final chatId = await MeetingService.getOrCreateChat(targetPeer);
                             if (context.mounted) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => ChatScreen(chatId: chatId, peerId: alumniUid),
+                                  builder: (_) => ChatScreen(chatId: chatId, peerId: targetPeer),
                                 ),
                               );
                             }
                           },
                           icon: const Icon(Icons.message, size: 14),
-                          label: const Text('Chat with Alumnus', style: TextStyle(fontSize: 12)),
+                          label: Text(
+                            (_userRole == 'alumni' || _userRole == 'staff')
+                                ? 'Chat with Student'
+                                : 'Chat with Alumnus',
+                            style: const TextStyle(fontSize: 12),
+                          ),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: AppColors.primaryNeon,
                             side: const BorderSide(color: AppColors.primaryNeon),
