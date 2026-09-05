@@ -106,13 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
             setState(() {});
             await _checkNudge();
           },
-          color: AppColors.primary,
+          color: AppColors.primaryNeon,
           child: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('users')
@@ -141,78 +142,101 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ── Header ──────────────────────────────────────────
+                    // ── Header Card ───────────────────────────────────────
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const ProfileScreen()),
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: theme.cardColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                              color: theme.dividerColor.withOpacity(0.5)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
                             ),
-                            child: CircleAvatar(
-                              radius: 26,
-                              backgroundColor:
-                                  AppColors.primary.withOpacity(0.1),
-                              backgroundImage: photoUrl != null &&
-                                      photoUrl.isNotEmpty
-                                  ? NetworkImage(photoUrl)
-                                  : null,
-                              child: (photoUrl == null || photoUrl.isEmpty)
-                                  ? Text(
-                                      firstLetter,
-                                      style: const TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _greeting(name, role),
-                                  style: TextStyle(
-                                    color: theme.textTheme.bodyLarge?.color,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const ProfileScreen()),
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppColors.primaryNeon, width: 2),
                                 ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  "Stay Connected. Stay Engaged.",
-                                  style: TextStyle(
-                                    color: theme.textTheme.bodyMedium?.color,
-                                    fontSize: 13,
-                                  ),
+                                child: CircleAvatar(
+                                  radius: 24,
+                                  backgroundColor:
+                                      AppColors.primaryNeon.withOpacity(0.15),
+                                  backgroundImage: photoUrl != null &&
+                                          photoUrl.isNotEmpty
+                                      ? NetworkImage(photoUrl)
+                                      : null,
+                                  child: (photoUrl == null || photoUrl.isEmpty)
+                                      ? Text(
+                                          firstLetter,
+                                          style: const TextStyle(
+                                            color: AppColors.primaryNeon,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      : null,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                          _chatBadge(context),
-                        ],
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _greeting(name, role),
+                                    style: TextStyle(
+                                      color: theme.textTheme.bodyLarge?.color,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Text(
+                                    "Stay Connected. Stay Engaged.",
+                                    style: TextStyle(
+                                      color: theme.textTheme.bodyMedium?.color,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (role != 'alumni') _chatBadge(context),
+                          ],
+                        ),
                       ),
                     ),
 
-                    // ── Pending Verification Banner (Alumni) ─────────────
+                    // ── Banners ──────────────────────────────────────────
                     if (role == 'alumni' && verificationStatus == 'pending')
                       _verificationBanner(context),
 
-                    // ── Graduation Nudge Banner (Student) ────────────────
                     if (_nudgeBanner != null) _nudgeBannerWidget(context),
 
-                    // ── Pending Alumni Verification prompt ───────────────
                     if (role == 'pending_alumni_verification')
                       _pendingAlumniPrompt(context),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // ── Quote of the Day ─────────────────────────────────
                     Padding(
@@ -221,20 +245,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              AppColors.primary,
-                              AppColors.primary.withOpacity(0.8)
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
+                          gradient: AppGradients.blueViolet,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.3),
+                              color: AppColors.accentBlue.withOpacity(0.25),
                               blurRadius: 12,
-                              offset: const Offset(0, 6),
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
@@ -244,13 +261,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             const Row(
                               children: [
                                 Icon(Icons.format_quote_rounded,
-                                    color: Colors.white, size: 24),
+                                    color: Colors.white, size: 22),
                                 SizedBox(width: 8),
                                 Text(
                                   "Quote of the Day",
                                   style: TextStyle(
                                       color: Colors.white70,
-                                      fontSize: 13,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -260,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               _getQuoteOfTheDay(),
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4,
@@ -271,17 +288,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // ── AI Hub Card ──────────────────────────────────────
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: GlassCard(
                         padding: const EdgeInsets.all(20),
-                        borderColor:
-                            AppColors.primaryNeon.withValues(alpha: 0.5),
-                        backgroundColor:
-                            AppColors.cardDark.withValues(alpha: 0.8),
+                        borderColor: theme.dividerColor,
+                        backgroundColor: theme.cardColor,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -295,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     boxShadow: [
                                       BoxShadow(
                                         color: AppColors.primaryNeon
-                                            .withValues(alpha: 0.4),
+                                            .withOpacity(0.3),
                                         blurRadius: 10,
                                       ),
                                     ],
@@ -317,18 +332,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: theme
                                                   .textTheme.bodyLarge?.color,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: 17,
                                             ),
                                           ),
                                           const SizedBox(width: 8),
                                           Container(
-                                            padding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 6,
-                                                    vertical: 2),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6, vertical: 2),
                                             decoration: BoxDecoration(
-                                              gradient:
-                                                  AppGradients.purplePink,
+                                              gradient: AppGradients.purplePink,
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                             ),
@@ -356,8 +368,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.arrow_forward,
-                                      color: AppColors.primaryNeon),
+                                  icon: const Icon(Icons.arrow_forward_ios,
+                                      size: 16, color: AppColors.primaryNeon),
                                   onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -413,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     else
                       _studentContent(context, user),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 28),
 
                     // ── Latest Updates ────────────────────────────────────
                     Padding(
@@ -426,17 +438,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: _latestCombinedUpdates(context),
                     ),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 28),
 
-                    // ── Recommendations ────────────────────────────────────
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: _sectionHeader(context, "People You May Know"),
-                    ),
-                    const SizedBox(height: 12),
-                    _recommendationList(context),
-
-                    const SizedBox(height: 30),
+                    // ── Recommendations (Students/Staff only) ───────────────
+                    if (role != 'alumni') ...[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: _sectionHeader(context, "People You May Know"),
+                      ),
+                      const SizedBox(height: 12),
+                      _recommendationList(context),
+                      const SizedBox(height: 28),
+                    ],
                   ],
                 ),
               );
@@ -485,7 +498,7 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            childAspectRatio: 0.9,
+            childAspectRatio: 0.95,
             children: [
               _quickCardWidget(context, "AI Hub", Icons.psychology,
                   () => Navigator.push(context,
@@ -523,7 +536,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: AppGradients.emeraldCyan,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
               color: AppColors.accentEmerald.withOpacity(0.25),
@@ -536,10 +549,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Icon(Icons.edit_note, color: Colors.white, size: 28),
             const SizedBox(width: 14),
-            Expanded(
+            const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "Update Your Placement Status",
                     style: TextStyle(
@@ -595,7 +608,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         const SizedBox(height: 14),
 
-        // Post Referral CTA
+        // Post Job CTA
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: _postReferralCtaCard(context),
@@ -625,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            childAspectRatio: 0.9,
+            childAspectRatio: 0.95,
             children: [
               _quickCardWidget(
                   context,
@@ -635,8 +648,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(builder: (_) => const ProfileScreen()))),
               _quickCardWidget(
                   context,
-                  "Referrals",
-                  Icons.card_giftcard,
+                  "Post Job",
+                  Icons.work_outline,
                   () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -689,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: theme.cardColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(color: AppColors.accentPurple.withOpacity(0.3)),
         ),
         child: Row(
@@ -760,8 +773,8 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: theme.cardColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.primaryNeon.withOpacity(0.2)),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: AppColors.primaryNeon.withOpacity(0.25)),
         ),
         child: Row(
           children: [
@@ -824,7 +837,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: AppGradients.blueViolet,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
               color: AppColors.accentBlue.withOpacity(0.25),
@@ -835,14 +848,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Row(
           children: [
-            const Icon(Icons.card_giftcard, color: Colors.white, size: 28),
+            const Icon(Icons.work_outline, color: Colors.white, size: 28),
             const SizedBox(width: 14),
             const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Post a Referral / Internship",
+                    "Post a Job",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -850,7 +863,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 2),
                   Text(
-                    "Help students with opportunities at your company",
+                    "Share job opportunities with students at your alma mater",
                     style: TextStyle(color: Colors.white70, fontSize: 12),
                   ),
                 ],
@@ -874,7 +887,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: theme.cardColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(color: AppColors.accentEmerald.withOpacity(0.3)),
         ),
         child: Row(
@@ -1012,7 +1025,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // ══════════════════════════════════════════════════════════════════════════
-  // SHARED COMPONENTS (unchanged from original)
+  // SHARED COMPONENTS
   // ══════════════════════════════════════════════════════════════════════════
 
   Widget _chatBadge(BuildContext context) {
@@ -1038,17 +1051,17 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             IconButton(
               icon: const Icon(Icons.chat_bubble_outline,
-                  color: AppColors.primary, size: 28),
+                  color: AppColors.primaryNeon, size: 26),
               onPressed: () => widget.onTabChange(5),
             ),
             if (totalUnread > 0)
               Positioned(
-                right: 8,
-                top: 8,
+                right: 6,
+                top: 6,
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: const BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.redAccent,
                     shape: BoxShape.circle,
                   ),
                   constraints:
@@ -1057,7 +1070,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     totalUnread > 9 ? '9+' : '$totalUnread',
                     style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 10,
+                        fontSize: 9,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
@@ -1095,11 +1108,25 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(18),
             border:
                 Border.all(color: theme.dividerColor.withOpacity(0.5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: AppColors.primary, size: 26),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryNeon.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: AppColors.primaryNeon, size: 22),
+              ),
               const SizedBox(height: 8),
               Text(
                 title,
@@ -1107,7 +1134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   color: theme.textTheme.bodyLarge?.color,
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  fontSize: 11,
                 ),
               ),
             ],
@@ -1172,19 +1199,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: theme.cardColor,
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                           color: theme.dividerColor.withOpacity(0.5)),
                     ),
                     child: Row(
                       children: [
-                        Icon(
-                          isJob
-                              ? Icons.work_outline
-                              : Icons.event_outlined,
-                          color: AppColors.primary,
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: (isJob ? AppColors.accentEmerald : AppColors.accentBlue)
+                                .withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            isJob ? Icons.work_outline : Icons.event_outlined,
+                            color: isJob ? AppColors.accentEmerald : AppColors.accentBlue,
+                            size: 20,
+                          ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 14),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1194,17 +1228,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? (d['designation'] ?? "Job")
                                     : (d['title'] ?? "Event"),
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.bold, fontSize: 14),
                               ),
+                              const SizedBox(height: 2),
                               Text(
                                 _timeAgo(d['createdAt'] as Timestamp?),
                                 style: TextStyle(
                                     color: theme.textTheme.bodyMedium?.color,
-                                    fontSize: 12),
+                                    fontSize: 11),
                               ),
                             ],
                           ),
                         ),
+                        const Icon(Icons.arrow_forward_ios,
+                            size: 14, color: Colors.grey),
                       ],
                     ),
                   ),
@@ -1230,7 +1267,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         return SizedBox(
-          height: 160,
+          height: 165,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1250,29 +1287,40 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (_) =>
                             AlumniProfileScreen(userId: doc.id))),
                 child: Container(
-                  width: 150,
+                  width: 145,
                   margin: const EdgeInsets.only(right: 14),
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: theme.cardColor,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(18),
                     border: Border.all(
                         color: theme.dividerColor.withOpacity(0.5)),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        backgroundColor: AppColors.primarySoft,
-                        backgroundImage: rPhoto != null && rPhoto.isNotEmpty
-                            ? NetworkImage(rPhoto)
-                            : null,
-                        child: (rPhoto == null || rPhoto.isEmpty)
-                            ? Text(
-                                rName.isNotEmpty ? rName[0].toUpperCase() : "?",
-                                style:
-                                    const TextStyle(color: AppColors.primary))
-                            : null,
+                      Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: AppColors.primaryNeon.withOpacity(0.5),
+                              width: 1.5),
+                        ),
+                        child: CircleAvatar(
+                          radius: 22,
+                          backgroundColor: AppColors.primaryNeon.withOpacity(0.12),
+                          backgroundImage: rPhoto != null && rPhoto.isNotEmpty
+                              ? NetworkImage(rPhoto)
+                              : null,
+                          child: (rPhoto == null || rPhoto.isEmpty)
+                              ? Text(
+                                  rName.isNotEmpty ? rName[0].toUpperCase() : "?",
+                                  style: const TextStyle(
+                                      color: AppColors.primaryNeon,
+                                      fontWeight: FontWeight.bold))
+                              : null,
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -1282,18 +1330,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               rName,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold, fontSize: 13),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          if (isMentor &&
-                              role.toLowerCase() == 'staff') ...[
+                          if (isMentor && role.toLowerCase() == 'staff') ...[
                             const SizedBox(width: 4),
                             const Icon(Icons.verified,
-                                color: AppColors.primary, size: 14),
+                                color: AppColors.primaryNeon, size: 14),
                           ],
                         ],
                       ),
+                      const SizedBox(height: 2),
                       Text(
                         role == "Alumni"
                             ? "${d['designation'] ?? "Alumni"}"

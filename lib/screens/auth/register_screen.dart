@@ -38,23 +38,29 @@ class _RegisterScreenState extends State<RegisterScreen>
   // ── Country code (default India) ─────────────────────────────────────────
   static const String _countryCode = '+91';
 
-  // ── Animation ────────────────────────────────────────────────────────────
-  late final AnimationController _fadeCtrl;
-  late final Animation<double>   _fadeAnim;
+  // ── Animation (Hot-reload safe) ──────────────────────────────────────────
+  AnimationController? _fadeCtrl;
+  Animation<double>?   _fadeAnim;
+
+  void _initAnimation() {
+    if (_fadeCtrl == null) {
+      _fadeCtrl = AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 500));
+      _fadeAnim = CurvedAnimation(parent: _fadeCtrl!, curve: Curves.easeOut);
+      _fadeCtrl!.forward();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _fadeCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
-    _fadeAnim = CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut);
-    _fadeCtrl.forward();
+    _initAnimation();
     AlumniVerificationService.seedDemoData();
   }
 
   @override
   void dispose() {
-    _fadeCtrl.dispose();
+    _fadeCtrl?.dispose();
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -238,6 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   // ── BUILD ────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
+    _initAnimation();
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -245,7 +252,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: FadeTransition(
-          opacity: _fadeAnim,
+          opacity: _fadeAnim ?? const AlwaysStoppedAnimation(1.0),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(

@@ -22,22 +22,28 @@ class _LoginScreenState extends State<LoginScreen>
   bool _loading = false;
   bool _obscurePassword = true;
 
-  // ── Animation ────────────────────────────────────────────────────────────
-  late final AnimationController _fadeCtrl;
-  late final Animation<double> _fadeAnim;
+  // ── Animation (Hot-reload safe) ──────────────────────────────────────────
+  AnimationController? _fadeCtrl;
+  Animation<double>? _fadeAnim;
+
+  void _initAnimation() {
+    if (_fadeCtrl == null) {
+      _fadeCtrl = AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 500));
+      _fadeAnim = CurvedAnimation(parent: _fadeCtrl!, curve: Curves.easeOut);
+      _fadeCtrl!.forward();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _fadeCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
-    _fadeAnim = CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut);
-    _fadeCtrl.forward();
+    _initAnimation();
   }
 
   @override
   void dispose() {
-    _fadeCtrl.dispose();
+    _fadeCtrl?.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -107,13 +113,14 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    _initAnimation();
     final theme = Theme.of(context);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: FadeTransition(
-          opacity: _fadeAnim,
+          opacity: _fadeAnim ?? const AlwaysStoppedAnimation(1.0),
           child: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
