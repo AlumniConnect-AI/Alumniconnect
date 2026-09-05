@@ -13,7 +13,8 @@ import {
   fbGetReports, fbAddReport,
   fbGetSyncLogs, fbAddSyncLog,
   fbGetAdminUsers, fbAddAdminUser, fbUpdateAdminUser, fbDeleteAdminUser,
-  fbSubscribeToCollection
+  fbSubscribeToCollection,
+  fbGetUsers, fbSubscribeToUsers
 } from "./firebaseService";
 
 const STORAGE_KEYS = {
@@ -193,6 +194,8 @@ class AdminDataEngine {
     this.listeners = new Set();
     this.fbConnected = false;
     this._fbUnsubscribers = [];
+    this.firebaseUsers = []; // Holds real users fetched from Firebase RTDB
+    this.firebaseUsersPath = null;
     // Bootstrap Firebase connection asynchronously
     this._initFirebase();
   }
@@ -237,9 +240,10 @@ class AdminDataEngine {
   }
 
   async _loadFromFirebase() {
-    const [univs, insts, studs, crss, reps, logs, admins] = await Promise.all([
+    const [univs, insts, studs, crss, reps, logs, admins, fbUsersResult] = await Promise.all([
       fbGetUniversities(), fbGetInstitutions(), fbGetStudents(),
-      fbGetCourses(), fbGetReports(), fbGetSyncLogs(), fbGetAdminUsers()
+      fbGetCourses(), fbGetReports(), fbGetSyncLogs(), fbGetAdminUsers(),
+      fbGetUsers()
     ]);
     if (univs.length)  { this.universities = univs;  saveStorage(STORAGE_KEYS.UNIVERSITIES, univs); }
     if (insts.length)  { this.institutions = insts;  saveStorage(STORAGE_KEYS.INSTITUTIONS, insts); }
@@ -248,6 +252,11 @@ class AdminDataEngine {
     if (reps.length)   { this.reports = reps;          saveStorage(STORAGE_KEYS.REPORTS, reps); }
     if (logs.length)   { this.syncLogs = logs;         saveStorage(STORAGE_KEYS.SYNC_LOGS, logs); }
     if (admins.length) { this.adminUsers = admins;     saveStorage(STORAGE_KEYS.ADMIN_USERS, admins); }
+    if (fbUsersResult.users.length) {
+      this.firebaseUsers = fbUsersResult.users;
+      this.firebaseUsersPath = fbUsersResult.path;
+      console.log(`[DataEngine] Firebase users loaded: ${fbUsersResult.users.length} records from /${fbUsersResult.path}`);
+    }
     console.log(`[DataEngine] Loaded from Firebase: ${studs.length} students, ${univs.length} universities, ${insts.length} institutions`);
   }
 
@@ -267,6 +276,15 @@ class AdminDataEngine {
       });
       this._fbUnsubscribers.push(unsub);
     });
+
+    // Also subscribe to real app users path
+    const usersUnsub = fbSubscribeToUsers((users, path) => {
+      this.firebaseUsers = users;
+      this.firebaseUsersPath = path;
+      this.notify();
+    });
+    this._fbUnsubscribers.push(usersUnsub);
+
     console.log("[DataEngine] Real-time Firebase listeners attached for all collections ✓");
   }
 
@@ -856,7 +874,32 @@ class AdminDataEngine {
     this.notify();
   }
 
-  // --- DYNAMIC DRAINED KPI CALCULATIONS BASED ON SINGLE SOURCE OF TRUTH ---
+  // --- FIREBASE APP USERS (read-only) ---
+  getFirebaseUsers(filters = {}) {
+    let list = [...this.firebaseUsers];
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      list = list.filter(u =>
+        (u.name && u.name.toLowerCase().includes(q)) ||
+        (u.email && u.email.toLowerCase().includes(q)) ||
+        (u.role && u.role.toLowerCase().includes(q)) ||
+        (u.college && u.college.toLowerCase().includes(q))
+      );
+    }
+    if (filters.role && filters.role !== "All Roles") {
+      list = list.filter(u => u.role === filters.role);
+    }
+    if (filters.state && filters.state !== "All India") {
+      list = list.filter(u => u.state === filters.state);
+    }
+    return {
+      users: list,
+      total: list.length,
+      path: this.firebaseUsersPath
+    };
+  }
+
+
   calculateKpis(filters = {}) {
     const univs = this.getUniversities(filters);
     const insts = this.getInstitutions(filters);

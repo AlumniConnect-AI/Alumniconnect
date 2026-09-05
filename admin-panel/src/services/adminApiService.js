@@ -143,6 +143,11 @@ export async function deleteAdminUser(id) {
   return dataEngine.deleteAdminUser(id);
 }
 
+// --- FIREBASE APP USERS (fetched from main project's RTDB) ---
+export async function fetchFirebaseUsers(filters = {}) {
+  return dataEngine.getFirebaseUsers(filters);
+}
+
 export async function loginAdmin(email, password) {
   if (email && password) {
     return { success: true, user: { ...INITIAL_ADMIN_PROFILE, email } };

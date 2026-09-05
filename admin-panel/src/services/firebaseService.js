@@ -216,7 +216,102 @@ export async function fbDeleteAdminUser(id) {
   } catch (err) { console.warn("[Firebase] fbDeleteAdminUser:", err.message); }
 }
 
-// --- REAL-TIME LISTENERS ---
+// --- APP USERS (from main AlumniConnect Firebase RTDB) ---
+// Tries multiple paths in priority order — reads wherever the main app writes users
+export async function fbGetUsers() {
+  const CANDIDATE_PATHS = [
+    "users",
+    "Users",
+    "alumni",
+    "Alumni",
+    "members",
+    "accounts"
+  ];
+
+  for (const path of CANDIDATE_PATHS) {
+    try {
+      const snap = await get(ref(database, path));
+      if (snap.exists()) {
+        const val = snap.val();
+        const users = Object.entries(val).map(([key, value]) => ({
+          _fbKey: key,
+          id: key,
+          // normalise common field names from any schema
+          uid:          value.uid          || value.id    || key,
+          name:         value.name         || value.displayName || value.fullName || value.username || "—",
+          email:        value.email        || value.emailAddress || "—",
+          phone:        value.phone        || value.phoneNumber  || value.mobile  || "—",
+          role:         value.role         || value.userType     || value.type    || "User",
+          status:       value.status       || (value.isActive ? "Active" : "Active"),
+          state:        value.state        || value.location     || value.city    || "—",
+          college:      value.college      || value.institution  || value.organization || "—",
+          course:       value.course       || value.department   || value.stream  || "—",
+          graduationYear: value.graduationYear || value.passoutYear || value.batch || "—",
+          createdAt:    value.createdAt    || value.joinedAt      || value.registeredAt || "—",
+          lastLogin:    value.lastLogin    || value.lastSeen      || "—",
+          photoURL:     value.photoURL     || value.avatar        || value.profilePic || null,
+          // preserve all raw fields
+          ...value
+        }));
+        console.log(`[Firebase] fbGetUsers: found ${users.length} users at path /${path}`);
+        return { users, path };
+      }
+    } catch (err) {
+      console.warn(`[Firebase] fbGetUsers: error reading /${path}:`, err.message);
+    }
+  }
+  console.log("[Firebase] fbGetUsers: no user data found in any known RTDB path");
+  return { users: [], path: null };
+}
+
+// Real-time listener for users collection
+export function fbSubscribeToUsers(callback) {
+  let unsubscribers = [];
+  const CANDIDATE_PATHS = ["users", "Users", "alumni", "Alumni", "members", "accounts"];
+
+  // Try each path sequentially and attach listener to first non-empty one found
+  (async () => {
+    for (const path of CANDIDATE_PATHS) {
+      try {
+        const snap = await get(ref(database, path));
+        if (snap.exists()) {
+          const dbRef = ref(database, path);
+          onValue(dbRef, (snapshot) => {
+            if (snapshot.exists()) {
+              const val = snapshot.val();
+              const users = Object.entries(val).map(([key, value]) => ({
+                _fbKey: key,
+                id: key,
+                uid:           value.uid          || key,
+                name:          value.name         || value.displayName || value.fullName || value.username || "—",
+                email:         value.email        || value.emailAddress || "—",
+                phone:         value.phone        || value.phoneNumber  || value.mobile  || "—",
+                role:          value.role         || value.userType     || value.type    || "User",
+                status:        value.status       || "Active",
+                state:         value.state        || value.location     || "—",
+                college:       value.college      || value.institution  || value.organization || "—",
+                course:        value.course       || value.department   || "—",
+                graduationYear: value.graduationYear || value.passoutYear || "—",
+                createdAt:     value.createdAt    || value.joinedAt || "—",
+                lastLogin:     value.lastLogin    || value.lastSeen || "—",
+                ...value
+              }));
+              callback(users, path);
+            }
+          }, (err) => console.warn(`[Firebase] Users listener error on /${path}:`, err.message));
+          unsubscribers.push(() => off(ref(database, path)));
+          break; // stop after first path with data
+        }
+      } catch (err) {
+        console.warn(`[Firebase] fbSubscribeToUsers scan error on /${path}:`, err.message);
+      }
+    }
+  })();
+
+  return () => unsubscribers.forEach(fn => fn());
+}
+
+
 // Subscribe to live Firebase updates for a given collection path
 export function fbSubscribeToCollection(path, callback) {
   const dbRef = ref(database, DB_PATHS[path] || path);
