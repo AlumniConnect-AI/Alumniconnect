@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shimmer/shimmer.dart';
@@ -12,27 +14,50 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with TickerProviderStateMixin {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  bool loading = false;
+  bool _loading = false;
+  bool _obscurePassword = true;
+
+  // ── Animation ────────────────────────────────────────────────────────────
+  late final AnimationController _fadeCtrl;
+  late final Animation<double> _fadeAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeCtrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    _fadeAnim = CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut);
+    _fadeCtrl.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeCtrl.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   Future<void> _login() async {
-    if (_emailController.text.isEmpty ||
-        _passwordController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Email & password required")),
-      );
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      _showError("Email and password are required");
       return;
     }
 
     try {
-      setState(() => loading = true);
+      setState(() => _loading = true);
 
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
 
       if (!mounted) return;
@@ -41,12 +66,43 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (_) => const MainShell()),
       );
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message ?? "Login failed")),
-      );
+      dev.log('[Login] FirebaseAuthException: ${e.code} — ${e.message}');
+      _showError(_friendlyAuthError(e));
+    } catch (e) {
+      dev.log('[Login] Unexpected error: $e');
+      _showError("Login failed. Please try again.");
     } finally {
-      if (mounted) setState(() => loading = false);
+      if (mounted) setState(() => _loading = false);
     }
+  }
+
+  String _friendlyAuthError(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'user-not-found':
+      case 'wrong-password':
+      case 'invalid-credential':
+        return 'Invalid email or password. Please check your credentials.';
+      case 'invalid-email':
+        return 'Please enter a valid email address.';
+      case 'network-request-failed':
+        return 'No internet connection. Please check your network.';
+      case 'user-disabled':
+        return 'This account has been disabled. Please contact support.';
+      default:
+        return e.message ?? 'Login failed. Please try again.';
+    }
+  }
+
+  void _showError(String msg) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: AppColors.error,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 4),
+      ),
+    );
   }
 
   @override
@@ -56,122 +112,149 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // ICON
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: theme.cardColor,
-                    ),
-                    child: const Icon(
-                      Icons.school,
-                      size: 40,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
+        child: FadeTransition(
+          opacity: _fadeAnim,
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
 
-                const SizedBox(height: 32),
-
-                // TITLE
-                Text(
-                  "Welcome Back",
-                  style: TextStyle(
-                    color: theme.textTheme.bodyLarge?.color,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 6),
-
-                Text(
-                  "Login to AlumniConnect",
-                  style: TextStyle(
-                    color: theme.textTheme.bodyMedium?.color,
-                    fontSize: 14,
-                  ),
-                ),
-
-                const SizedBox(height: 32),
-
-                // EMAIL
-                _inputField(
-                  context,
-                  controller: _emailController,
-                  hint: "Email",
-                  icon: Icons.email,
-                ),
-
-                const SizedBox(height: 16),
-
-                // PASSWORD
-                _inputField(
-                  context,
-                  controller: _passwordController,
-                  hint: "Password",
-                  icon: Icons.lock,
-                  obscure: true,
-                ),
-
-                const SizedBox(height: 30),
-
-                // LOGIN BUTTON
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: loading
-                      ? Shimmer.fromColors(
-                    baseColor: theme.dividerColor,
-                    highlightColor: theme.cardColor,
+                  // ── Logo ─────────────────────────────────────────────────
+                  Center(
                     child: Container(
+                      width: 72,
+                      height: 72,
                       decoration: BoxDecoration(
-                        color: theme.cardColor,
-                        borderRadius: BorderRadius.circular(30),
+                        gradient: AppGradients.neonCyanPurple,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primaryNeon.withOpacity(0.3),
+                            blurRadius: 20,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
                       ),
+                      child: const Icon(Icons.school,
+                          size: 38, color: Colors.white),
                     ),
-                  )
-                      : ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ── Heading ───────────────────────────────────────────────
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Welcome Back',
+                          style: TextStyle(
+                            color: theme.textTheme.bodyLarge?.color,
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: -0.5,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'Login to EduBridge alumni network',
+                          style: TextStyle(
+                            color: theme.textTheme.bodyMedium?.color,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.black, // Dark text on primary teal
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // ── Email Field ───────────────────────────────────────────
+                  _input(
+                    context,
+                    'Email',
+                    _emailController,
+                    Icons.email,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ── Password Field ────────────────────────────────────────
+                  _passwordInput(context),
+
+                  const SizedBox(height: 28),
+
+                  // ── Submit Button ─────────────────────────────────────────
+                  SizedBox(
+                    width: double.infinity,
+                    height: 54,
+                    child: _loading
+                        ? Shimmer.fromColors(
+                            baseColor: theme.dividerColor,
+                            highlightColor: theme.cardColor,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: theme.cardColor,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                          )
+                        : DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: AppGradients.neonCyanPurple,
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.primaryNeon.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: ElevatedButton(
+                              onPressed: _login,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ── Navigation Link ───────────────────────────────────────
+                  Center(
+                    child: TextButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, "/register"),
+                      child: Text(
+                        "Don't have an account? Create one",
+                        style: TextStyle(
+                            color: theme.textTheme.bodyMedium?.color),
                       ),
                     ),
                   ),
-                ),
 
-                const SizedBox(height: 24),
-
-                // NAVIGATION
-                Center(
-                  child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, "/register"),
-                    child: Text(
-                      "Create an account",
-                      style: TextStyle(color: theme.textTheme.bodyMedium?.color),
-                    ),
-                  ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
           ),
         ),
@@ -179,23 +262,27 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // THEME-AWARE INPUT FIELD (matches Register/Profile)
-  Widget _inputField(
-    BuildContext context, {
-    required TextEditingController controller,
-    required String hint,
-    required IconData icon,
-    bool obscure = false,
-  }) {
+  // ── Password input with visibility toggle ─────────────────────────────────
+  Widget _passwordInput(BuildContext context) {
     final theme = Theme.of(context);
     return TextField(
-      controller: controller,
-      obscureText: obscure,
+      controller: _passwordController,
+      obscureText: _obscurePassword,
       style: TextStyle(color: theme.textTheme.bodyLarge?.color),
       decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
-        prefixIcon: Icon(icon, color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+        hintText: 'Password',
+        hintStyle: TextStyle(
+            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+        prefixIcon: Icon(Icons.lock,
+            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscurePassword ? Icons.visibility_off : Icons.visibility,
+            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.5),
+          ),
+          onPressed: () =>
+              setState(() => _obscurePassword = !_obscurePassword),
+        ),
         filled: true,
         fillColor: theme.cardColor,
         border: OutlineInputBorder(
@@ -208,7 +295,46 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide:
+              const BorderSide(color: AppColors.primary, width: 1.5),
+        ),
+      ),
+    );
+  }
+
+  // ── Generic text input ────────────────────────────────────────────────────
+  Widget _input(
+    BuildContext context,
+    String hint,
+    TextEditingController controller,
+    IconData icon, {
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    final theme = Theme.of(context);
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      style: TextStyle(color: theme.textTheme.bodyLarge?.color),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(
+            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+        prefixIcon: Icon(icon,
+            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+        filled: true,
+        fillColor: theme.cardColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide:
+              const BorderSide(color: AppColors.primary, width: 1.5),
         ),
       ),
     );
