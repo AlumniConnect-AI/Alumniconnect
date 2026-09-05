@@ -8,7 +8,7 @@ import '../auth/login_screen.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  // 🔴 LOGOUT CONFIRMATION
+  // LOGOUT CONFIRMATION
   Future<void> _confirmLogout(BuildContext context) async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -63,7 +63,7 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // 🌙 DARK MODE SWITCH
+          // DARK MODE SWITCH
           ListTile(
             leading: Icon(
               themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
@@ -80,7 +80,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(),
 
-          // 🔴 LOGOUT BUTTON
+          // LOGOUT BUTTON
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.red),
             title: const Text(

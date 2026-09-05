@@ -74,7 +74,7 @@ class _AIInputWidgetState extends State<AIInputWidget> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("✅ Successfully extracted text from: ${file.name}"),
+              content: Text("Successfully extracted text from: ${file.name}"),
               backgroundColor: AppColors.success,
             ),
           );
@@ -107,7 +107,7 @@ class _AIInputWidgetState extends State<AIInputWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 📄 UPLOAD PDF RESUME BANNER
+        // UPLOAD PDF RESUME BANNER
         GlassCard(
           padding: const EdgeInsets.all(16),
           borderColor: AppColors.primaryNeon.withValues(alpha: 0.4),

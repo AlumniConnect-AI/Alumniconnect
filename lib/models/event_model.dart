@@ -19,7 +19,7 @@ class EventModel {
     required this.createdAt,
   });
 
-  // 🔁 Firestore → Model
+  // Firestore → Model
   factory EventModel.fromMap(Map<String, dynamic> map, String id) {
     return EventModel(
       id: id,
@@ -33,7 +33,7 @@ class EventModel {
     );
   }
 
-  // 🔁 Model → Firestore
+  // Model → Firestore
   Map<String, dynamic> toMap() {
     return {
       'title': title,

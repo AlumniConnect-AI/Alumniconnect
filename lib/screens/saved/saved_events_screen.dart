@@ -120,7 +120,7 @@ class SavedEventsScreen extends StatelessWidget {
   );
 }
 
-/// 🧩 EVENT CARD
+/// EVENT CARD
 class _SavedEventCard extends StatelessWidget {
   final String title;
   final String subtitle;

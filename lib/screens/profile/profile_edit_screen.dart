@@ -114,7 +114,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         'photoURL': photoUrl,
       };
 
-      // ✅ Conditional Data Sync
+      // Conditional Data Sync
       if (_selectedRole == 'Staff') {
         updateData['batch'] = "";
         updateData['location'] = "";
@@ -226,14 +226,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 initialValue: _selectedRole,
                 decoration: _inputDecoration(context, "I am a..."),
                 dropdownColor: theme.cardColor,
-                // ✅ Disable dropdown if role is Staff (Locked)
+                // Disable dropdown if role is Staff (Locked)
                 onChanged: _isRoleLocked ? null : (value) {
                   setState(() {
                     _selectedRole = value!;
                     if (_selectedRole != 'Staff') _isAvailableForMentoring = false;
                   });
                 },
-                // ✅ HIDE STAFF OPTION FOR STUDENTS/ALUMNI
+                // HIDE STAFF OPTION FOR STUDENTS/ALUMNI
                 items: ["Student", "Alumni", "Staff"]
                     .where((role) => _isRoleLocked ? role == 'Staff' : role != 'Staff')
                     .map((label) => DropdownMenuItem(
@@ -244,7 +244,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               ),
             ),
             
-            // ✅ Info message for Staff
+            // Info message for Staff
             if (_isRoleLocked)
               Padding(
                 padding: const EdgeInsets.only(bottom: 14, top: 4),
@@ -275,7 +275,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
             const SizedBox(height: 10),
 
-            // ✅ MENTORSHIP TOGGLE (Only visible for Staff)
+            // MENTORSHIP TOGGLE (Only visible for Staff)
             if (_selectedRole == 'Staff')
               SwitchListTile(
                 title: const Text(

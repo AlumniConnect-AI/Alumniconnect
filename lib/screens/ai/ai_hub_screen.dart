@@ -35,11 +35,11 @@ class AiHubScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── 🔮 HERO WELCOME BANNER ─────────────────────────────────────
+              // ── HERO WELCOME BANNER ─────────────────────────────────────
               GlassCard(
                 padding: const EdgeInsets.all(22),
-                borderColor: AppColors.primaryNeon.withValues(alpha: 0.5),
-                backgroundColor: AppColors.cardDark.withValues(alpha: 0.8),
+                borderColor: theme.dividerColor,
+                backgroundColor: theme.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -67,7 +67,7 @@ class AiHubScreen extends StatelessWidget {
                               const Text(
                                 "AI CAREER HUB",
                                 style: TextStyle(
-                                  color: AppColors.primaryNeon,
+                                  color: AppColors.primary,
                                   fontSize: 11,
                                   fontWeight: FontWeight.w900,
                                   letterSpacing: 1.5,
@@ -113,14 +113,15 @@ class AiHubScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ── 🧬 CARD 1: CAREER TWIN AI ─────────────────────────────────
+              // ── CARD 1: CAREER TWIN AI ─────────────────────────────────
               GlassCard(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const CareerTwinScreen()),
                 ),
                 padding: const EdgeInsets.all(20),
-                borderColor: AppColors.primaryNeon.withValues(alpha: 0.4),
+                borderColor: theme.dividerColor,
+                backgroundColor: theme.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -133,19 +134,19 @@ class AiHubScreen extends StatelessWidget {
                             color: AppColors.primarySoft,
                             borderRadius: BorderRadius.circular(14),
                           ),
-                          child: const Icon(Icons.biotech, color: AppColors.primaryNeon, size: 26),
+                          child: const Icon(Icons.biotech, color: AppColors.primary, size: 26),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryNeon.withValues(alpha: 0.15),
+                            color: AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: AppColors.primaryNeon.withValues(alpha: 0.4)),
+                            border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
                           ),
                           child: const Text(
                             "MODEL 1 • ACTIVE",
                             style: TextStyle(
-                              color: AppColors.primaryNeon,
+                              color: AppColors.primary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -187,14 +188,15 @@ class AiHubScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── 🧭 CARD 2: CAREER GPS AI ──────────────────────────────────
+              // ── CARD 2: CAREER GPS AI ──────────────────────────────────
               GlassCard(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const CareerGpsScreen()),
                 ),
                 padding: const EdgeInsets.all(20),
-                borderColor: AppColors.accentPurple.withValues(alpha: 0.5),
+                borderColor: theme.dividerColor,
+                backgroundColor: theme.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -261,14 +263,15 @@ class AiHubScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── 📊 CARD 3: AI SKILL GAP ANALYZER ──────────────────────────
+              // ── CARD 3: AI SKILL GAP ANALYZER ──────────────────────────
               GlassCard(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const AlumniSkillScreen()),
                 ),
                 padding: const EdgeInsets.all(20),
-                borderColor: Colors.orange.withValues(alpha: 0.5),
+                borderColor: theme.dividerColor,
+                backgroundColor: theme.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -337,15 +340,15 @@ class AiHubScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── 🤝 CARD 4: AI MENTOR MATCH ────────────────────────────────
+              // ── CARD 4: AI MENTOR MATCH ────────────────────────────────
               GlassCard(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const AlumniSkillScreen()),
                 ),
                 padding: const EdgeInsets.all(20),
-                borderColor: AppColors.accentEmerald.withValues(alpha: 0.6),
-                backgroundColor: Color(0xFF071A14).withValues(alpha: 0.85),
+                borderColor: theme.dividerColor,
+                backgroundColor: theme.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -366,12 +369,6 @@ class AiHubScreen extends StatelessWidget {
                             color: AppColors.accentEmerald.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: AppColors.accentEmerald.withValues(alpha: 0.6)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.accentEmerald.withValues(alpha: 0.3),
-                                blurRadius: 8,
-                              ),
-                            ],
                           ),
                           child: const Text(
                             "MODEL 4 • SBERT ACTIVE",

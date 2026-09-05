@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
     );
 
-    // 🏎️ LOGO ANIMATIONS (0% - 60%)
+    // LOGO ANIMATIONS (0% - 60%)
     _logoFade = CurvedAnimation(
       parent: _mainController,
       curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // 🏎️ TEXT ANIMATIONS (40% - 80%)
+    // TEXT ANIMATIONS (40% - 80%)
     _textFade = CurvedAnimation(
       parent: _mainController,
       curve: const Interval(0.4, 0.8, curve: Curves.easeIn),
@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // 🏎️ TAGLINE ANIMATIONS (60% - 100%)
+    // TAGLINE ANIMATIONS (60% - 100%)
     _taglineFade = CurvedAnimation(
       parent: _mainController,
       curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
     } else {
       _mainController.forward();
 
-      // ⏳ Navigate after splash finishes
+      // Navigate after splash finishes
       _timer = Timer(const Duration(milliseconds: 2800), () {
         if (!mounted) return;
 
@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
-          // 🎇 SUBTLE BACKGROUND ACCENT
+          // SUBTLE BACKGROUND ACCENT
           Positioned(
             top: -100,
             right: -100,
@@ -132,7 +132,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // 🏫 PREMIUM LOGO WITH ROTATION & ELASTIC SCALE
+                // PREMIUM LOGO WITH ROTATION & ELASTIC SCALE
                 FadeTransition(
                   opacity: _logoFade,
                   child: ScaleTransition(
@@ -170,7 +170,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                 const SizedBox(height: 40),
 
-                // 📛 STAGGERED APP NAME
+                // STAGGERED APP NAME
                 FadeTransition(
                   opacity: _textFade,
                   child: SlideTransition(
@@ -188,7 +188,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         const SizedBox(height: 12),
                         
-                        // 🧭 DELAYED TAGLINE
+                        // DELAYED TAGLINE
                         FadeTransition(
                           opacity: _taglineFade,
                           child: Text(

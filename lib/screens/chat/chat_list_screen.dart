@@ -29,7 +29,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
     return "${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}";
   }
 
-  // 🔴 DELETE CHAT CONFIRMATION
+  // DELETE CHAT CONFIRMATION
   Future<void> _confirmDelete(String chatId) async {
     final theme = Theme.of(context);
     final confirm = await showDialog<bool>(

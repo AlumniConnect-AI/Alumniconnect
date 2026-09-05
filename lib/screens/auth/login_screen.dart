@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🎓 ICON
+                // ICON
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(18),
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 32),
 
-                // 📝 TITLE
+                // TITLE
                 Text(
                   "Welcome Back",
                   style: TextStyle(
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 32),
 
-                // 📧 EMAIL
+                // EMAIL
                 _inputField(
                   context,
                   controller: _emailController,
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 16),
 
-                // 🔒 PASSWORD
+                // PASSWORD
                 _inputField(
                   context,
                   controller: _passwordController,
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 30),
 
-                // 🔘 LOGIN BUTTON
+                // LOGIN BUTTON
                 SizedBox(
                   width: double.infinity,
                   height: 52,
@@ -160,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 24),
 
-                // 🔁 NAVIGATION
+                // NAVIGATION
                 Center(
                   child: TextButton(
                     onPressed: () =>
@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // 🔹 THEME-AWARE INPUT FIELD (matches Register/Profile)
+  // THEME-AWARE INPUT FIELD (matches Register/Profile)
   Widget _inputField(
     BuildContext context, {
     required TextEditingController controller,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Helpers {
-  // 🔔 Show Snackbar
+  // Show Snackbar
   static void showSnackBar(
       BuildContext context,
       String message, {
@@ -15,7 +15,7 @@ class Helpers {
     );
   }
 
-  // 🧾 Confirm dialog (logout, delete)
+  // Confirm dialog (logout, delete)
   static Future<bool> confirmAction(
       BuildContext context,
       String title,
@@ -41,7 +41,7 @@ class Helpers {
         false;
   }
 
-  // 📅 Date formatter (Firestore → UI)
+  // Date formatter (Firestore → UI)
   static String formatDate(DateTime date) {
     return "${date.day}/${date.month}/${date.year}";
   }

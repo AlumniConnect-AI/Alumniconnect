@@ -45,7 +45,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
     return "${ids[0]}_${ids[1]}";
   }
 
-  // 🔗 OPEN LINK
+  // OPEN LINK
   Future<void> _openLink(BuildContext context, String? url) async {
     final cleaned = url?.trim() ?? "";
     if (cleaned.isEmpty || !cleaned.startsWith("http")) {
@@ -66,7 +66,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
     }
   }
 
-  // 🖼️ FULL SCREEN IMAGE VIEWER
+  // FULL SCREEN IMAGE VIEWER
   void _openFullScreenImage(BuildContext context, String url) {
     Navigator.push(
       context,
@@ -98,7 +98,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
     );
   }
 
-  // 🚩 REPORT USER
+  // REPORT USER
   Future<void> _reportUser() async {
     final theme = Theme.of(context);
     final reasons = ["Spam", "Inappropriate Content", "Fake Profile", "Other"];
@@ -490,7 +490,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // ✅ VERIFICATION MARK (Only for Staff Mentors)
+                          // VERIFICATION MARK (Only for Staff Mentors)
                           if (isMentor && isStaff) ...[
                             const SizedBox(width: 8),
                             const Icon(Icons.verified, color: AppColors.primary, size: 22),
@@ -504,7 +504,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
                     Center(
                       child: Column(
                         children: [
-                          // ✅ CONDITIONAL ROLE/DESIGNATION DISPLAY
+                          // CONDITIONAL ROLE/DESIGNATION DISPLAY
                           Text(
                             isAlumni
                               ? "${d['designation'] ?? ""} @ ${d['company'] ?? ""}"
@@ -524,7 +524,7 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
                             style: TextStyle(color: theme.textTheme.bodyMedium?.color),
                           ),
 
-                          // ✅ MENTOR BADGE (Only for Staff Mentors)
+                          // MENTOR BADGE (Only for Staff Mentors)
                           if (isMentor && isStaff) ...[
                             const SizedBox(height: 12),
                             Container(
@@ -555,15 +555,16 @@ class _AlumniProfileScreenState extends State<AlumniProfileScreen>
                       ),
                     ),
 
-                    const SizedBox(height: 18),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _countTile("Followers", "followers"),
-                        _countTile("Following", "following"),
-                      ],
-                    ),
+                    if (!isAlumni) ...[
+                      const SizedBox(height: 18),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _countTile("Followers", "followers"),
+                          _countTile("Following", "following"),
+                        ],
+                      ),
+                    ],
 
                     const SizedBox(height: 22),
 

@@ -54,7 +54,7 @@ class ChatService {
   }) async {
     final chatRef = _db.collection('chats').doc(chatId);
 
-    final String displayMsg = type == 'image' ? '📷 Image' : '📄 Document';
+    final String displayMsg = type == 'image'? 'Image': 'Document';
 
     await chatRef.set({
       'participants': FieldValue.arrayUnion([_uid, receiverId]),
@@ -100,9 +100,9 @@ class ChatService {
       if (lastData['type'] == 'text') {
         lastMsg = lastData['text'] ?? "";
       } else if (lastData['type'] == 'image') {
-        lastMsg = "📷 Image";
+        lastMsg = "Image";
       } else {
-        lastMsg = "📄 Document";
+        lastMsg = "Document";
       }
 
       await chatRef.update({

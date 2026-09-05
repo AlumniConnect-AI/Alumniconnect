@@ -55,7 +55,7 @@ class EventDetailScreen extends StatelessWidget {
     );
   }
 
-  // 🖼️ FULL SCREEN IMAGE VIEWER
+  // FULL SCREEN IMAGE VIEWER
   void _openFullScreenImage(BuildContext context, String url) {
     Navigator.push(
       context,
@@ -117,7 +117,7 @@ class EventDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🖼️ EVENT IMAGE (Clickable for Full Screen)
+                // EVENT IMAGE (Clickable for Full Screen)
                 if (imageUrl != null && imageUrl.isNotEmpty)
                   GestureDetector(
                     onTap: () => _openFullScreenImage(context, imageUrl),

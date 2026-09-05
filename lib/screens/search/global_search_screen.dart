@@ -45,17 +45,17 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sectionTitle(context, "🎓 Alumni & Staff"),
+            _sectionTitle(context, "Alumni & Staff"),
             _userResults(),
 
             const SizedBox(height: 24),
 
-            _sectionTitle(context, "🧳 Jobs"),
+            _sectionTitle(context, "Jobs"),
             _jobResults(),
 
             const SizedBox(height: 24),
 
-            _sectionTitle(context, "📅 Events"),
+            _sectionTitle(context, "Events"),
             _eventResults(),
           ],
         ),

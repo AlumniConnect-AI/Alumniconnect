@@ -227,10 +227,10 @@ class CareerGPSService {
     final readinessScore = double.parse((rawScore * 100).toStringAsFixed(1));
 
     String tier;
-    if (readinessScore >= 80) tier = "Ready to Apply 🚀";
-    else if (readinessScore >= 65) tier = "Near Ready ⚡";
-    else if (readinessScore >= 45) tier = "Developing Skills 📈";
-    else tier = "Getting Started 🌱";
+    if (readinessScore >= 80) tier = "Ready to Apply ";
+    else if (readinessScore >= 65) tier = "Near Ready ";
+    else if (readinessScore >= 45) tier = "Developing Skills ";
+    else tier = "Getting Started ";
 
     final p1Skills = missing.take((missing.length / 2).ceil()).toList();
     final p2Skills = missing.skip(p1Skills.length).toList();
@@ -239,21 +239,21 @@ class CareerGPSService {
       {
         'phase': 'Phase 1: Foundations & Essential Skills',
         'duration': 'Weeks 1 – 4',
-        'status': p1Skills.isEmpty ? 'Completed ✅' : 'In Progress ⏳',
+        'status': p1Skills.isEmpty ? 'Completed ': 'In Progress ',
         'target_skills': p1Skills.isEmpty ? ['Core Fundamentals Review'] : p1Skills,
         'milestone': 'Master fundamental toolchains and core language concepts.',
       },
       {
         'phase': 'Phase 2: Core Engineering & Architecture',
         'duration': 'Weeks 5 – 8',
-        'status': 'Upcoming 🎯',
+        'status': 'Upcoming ',
         'target_skills': p2Skills.isEmpty ? ['Advanced Design Patterns'] : p2Skills,
         'milestone': 'Build complex module implementations & system designs.',
       },
       {
         'phase': 'Phase 3: Production Deployment & Portfolio',
         'duration': 'Weeks 9 – 12',
-        'status': 'Future 🌟',
+        'status': 'Future ',
         'target_skills': ['CI/CD', 'Production Monitoring', 'Portfolio Project'],
         'milestone': 'Deploy scalable project live and optimize for technical interviews.',
       },
@@ -275,8 +275,8 @@ class CareerGPSService {
     ];
 
     final nextBestAction = missing.isNotEmpty
-        ? "🎯 Priority Focus: Build hands-on mastery in ${missing.first} over the next 2 weeks."
-        : "🌟 You are fully aligned! Prepare your resume & target top company interviews.";
+        ? "Priority Focus: Build hands-on mastery in ${missing.first} over the next 2 weeks."
+        : "You are fully aligned! Prepare your resume & target top company interviews.";
 
     return {
       'target_role': targetRole,
@@ -324,7 +324,7 @@ class CareerGPSService {
           return {
             'phase': m['phase'] ?? m['timeframe'] ?? '',
             'duration': m['timeframe'] ?? '',
-            'status': 'In Progress ⏳',
+            'status': 'In Progress ',
             'target_skills': m['focus_skills'] ?? [],
             'milestone': m['milestone'] ?? '',
           };

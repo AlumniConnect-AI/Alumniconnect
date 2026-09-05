@@ -17,7 +17,7 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
 
   String search = "";
 
-  String roleFilter = "All"; // ✅ Added role filter
+  String roleFilter = "All"; // Added role filter
   String batchFilter = "All";
   String departmentFilter = "All";
   String companyFilter = "All";
@@ -53,7 +53,7 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
 
           final docs = snapshot.data!.docs;
 
-          // 🔹 Dynamic filter values (only for non-staff)
+          // Dynamic filter values (only for non-staff)
           final filteredDocsForFilters = docs.where((doc) {
              final d = doc.data() as Map<String, dynamic>;
              final role = (d['role'] ?? "Student").toString().toLowerCase();
@@ -65,13 +65,13 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
           final companies = _unique(filteredDocsForFilters, 'company');
           final locations = _unique(filteredDocsForFilters, 'location');
 
-          // 🔹 Apply filters + Hide self + Hide Staff
+          // Apply filters + Hide self + Hide Staff
           final alumni = docs.where((doc) {
             if (doc.id == currentUid) return false;
 
             final d = doc.data() as Map<String, dynamic>;
             
-            // ✅ EXCLUDE STAFF
+            // EXCLUDE STAFF
             final role = (d['role'] ?? "Student").toString();
             if (role.toLowerCase() == 'staff') return false;
 
@@ -89,7 +89,7 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
                         .toLowerCase()
                         .contains(q);
 
-            final matchesRole = roleFilter == "All" || role == roleFilter; // ✅ Role check
+            final matchesRole = roleFilter == "All"|| role == roleFilter; // Role check
             final matchesBatch =
                 batchFilter == "All" || d['batch'] == batchFilter;
             final matchesDept =
@@ -113,7 +113,7 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
 
           return Column(
             children: [
-              // 🔍 SEARCH
+              // SEARCH
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: TextField(
@@ -135,14 +135,14 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
                 ),
               ),
 
-              // 🎛 FILTERS
+              // FILTERS
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   children: [
                     _filter("Role", roleFilter, ["All", "Student", "Alumni"],
-                            (v) => setState(() => roleFilter = v)), // ✅ Role dropdown
+                            (v) => setState(() => roleFilter = v)), // Role dropdown
                     _filter("Batch", batchFilter, batches,
                             (v) => setState(() => batchFilter = v)),
                     _filter("Dept", departmentFilter, departments,
@@ -157,7 +157,7 @@ class _AlumniListScreenState extends State<AlumniListScreen> {
 
               const SizedBox(height: 10),
 
-              // 📋 LIST WITH ANIMATION
+              // LIST WITH ANIMATION
               Expanded(
                 child: alumni.isEmpty
                     ? const Center(

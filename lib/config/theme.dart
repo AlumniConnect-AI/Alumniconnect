@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Cyberpunk + AI + Glassmorphism + Material 3 Design System
 class AppColors {
-  // ── 🌌 CYBERPUNK BACKGROUNDS ──────────────────────────────────────────────
+  // ──  CYBERPUNK BACKGROUNDS ──────────────────────────────────────────────
   static const backgroundDark = Color(0xFF07070A); // Rich Black
   static const cardDark = Color(0xFF111118);       // Charcoal Deep
   static const surfaceDark = Color(0xFF181824);    // Glass Translucent Dark
@@ -12,7 +12,7 @@ class AppColors {
   static const border = Color(0xFFE2E8F0);
   static const borderDark = Color(0xFF262636);
 
-  // ── ⚡ NEON ACCENTS ───────────────────────────────────────────────────────
+  // ──  NEON ACCENTS ───────────────────────────────────────────────────────
   static const primary = Color(0xFF00F5FF);        // Neon Cyan
   static const primaryDark = Color(0xFF047857);    // Deep Emerald
   static const primaryNeon = Color(0xFF00F5FF);    // Neon Cyan
@@ -27,13 +27,13 @@ class AppColors {
   static const primarySoft = Color(0x1F00F5FF);
   static const purpleSoft = Color(0x1F8A2BE2);
 
-  // ── 📝 TEXT COLORS ────────────────────────────────────────────────────────
+  // ──  TEXT COLORS ────────────────────────────────────────────────────────
   static const textPrimaryDark = Color(0xFFF8FAFC);
   static const textSecondaryDark = Color(0xFF94A3B8);
   static const textPrimary = Color(0xFF0F172A);
   static const textSecondary = Color(0xFF64748B);
 
-  // ── 🎯 STATUS COLORS ──────────────────────────────────────────────────────
+  // ──  STATUS COLORS ──────────────────────────────────────────────────────
   static const success = Color(0xFF00E676);
   static const warning = Color(0xFFFFB300);
   static const error = Color(0xFFFF2A6D);

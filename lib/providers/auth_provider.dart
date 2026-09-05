@@ -14,7 +14,7 @@ class AuthProvider extends ChangeNotifier {
   void _init() {
     _auth.authStateChanges().listen((u) {
       user = u;
-      isLoading = false; // 🔴 IMPORTANT: stop loader here
+      isLoading = false; // IMPORTANT: stop loader here
       notifyListeners();
     });
   }

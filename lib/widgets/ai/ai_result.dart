@@ -43,7 +43,7 @@ class AIResultWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── 🏆 HERO SCORE CARD ─────────────────────────────────────────────
+        // ──  HERO SCORE CARD ─────────────────────────────────────────────
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(22),
@@ -122,7 +122,7 @@ class AIResultWidget extends StatelessWidget {
 
         const SizedBox(height: 24),
 
-        // ── 📊 COMPONENT BREAKDOWN METRICS ──────────────────────────────────
+        // ──  COMPONENT BREAKDOWN METRICS ──────────────────────────────────
         _sectionTitle(context, "Scoring Breakdown"),
         const SizedBox(height: 10),
         Row(
@@ -139,7 +139,7 @@ class AIResultWidget extends StatelessWidget {
 
         const SizedBox(height: 24),
 
-        // ── 🎯 SKILLS OVERLAP ANALYSIS ──────────────────────────────────────
+        // ──  SKILLS OVERLAP ANALYSIS ──────────────────────────────────────
         _sectionTitle(context, "Skill Analysis"),
         const SizedBox(height: 10),
 
@@ -184,7 +184,7 @@ class AIResultWidget extends StatelessWidget {
 
         const SizedBox(height: 16),
 
-        // ── 🚀 SUGGESTED ROLES ──────────────────────────────────────────────
+        // ──  SUGGESTED ROLES ──────────────────────────────────────────────
         if (suggestedRoles.isNotEmpty) ...[
           _sectionTitle(context, "Suggested Career Roles"),
           const SizedBox(height: 10),
@@ -231,7 +231,7 @@ class AIResultWidget extends StatelessWidget {
           const SizedBox(height: 16),
         ],
 
-        // ── 💡 ACTIONABLE RECOMMENDATIONS ──────────────────────────────────
+        // ──  ACTIONABLE RECOMMENDATIONS ──────────────────────────────────
         if (recommendations.isNotEmpty) ...[
           _sectionTitle(context, "AI Recommendations"),
           const SizedBox(height: 10),
@@ -257,7 +257,7 @@ class AIResultWidget extends StatelessWidget {
           const SizedBox(height: 16),
         ],
 
-        // ── 📚 LEARNING RESOURCES ──────────────────────────────────────────
+        // ──  LEARNING RESOURCES ──────────────────────────────────────────
         if (learningResources.isNotEmpty) ...[
           _sectionTitle(context, "Learning Resources for Gaps"),
           const SizedBox(height: 10),
@@ -278,7 +278,7 @@ class AIResultWidget extends StatelessWidget {
 
         const SizedBox(height: 24),
 
-        // ── 🔄 RETRY / NEW ANALYSIS BUTTON ─────────────────────────────────
+        // ──  RETRY / NEW ANALYSIS BUTTON ─────────────────────────────────
         SizedBox(
           width: double.infinity,
           height: 50,

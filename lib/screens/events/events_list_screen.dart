@@ -159,7 +159,7 @@ class _EventsListScreenState extends State<EventsListScreen> {
                   
                   const SizedBox(height: 12),
 
-                  // 🖼️ IMAGE SELECTOR
+                  // IMAGE SELECTOR
                   InkWell(
                     onTap: () async {
                       final picked = await ImagePicker().pickImage(source: ImageSource.gallery);

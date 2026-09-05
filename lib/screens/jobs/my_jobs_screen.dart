@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../config/theme.dart';
 import '../jobs/job_detail_screen.dart';
+import 'referral_requests_screen.dart';
 
 class MyJobsScreen extends StatelessWidget {
   const MyJobsScreen({super.key});
 
-  // 🔴 DELETE CONFIRM
+  // DELETE CONFIRM
   Future<bool> _confirmDelete(BuildContext context, String id) async {
     final theme = Theme.of(context);
     final res = await showDialog<bool>(
@@ -42,7 +43,7 @@ class MyJobsScreen extends StatelessWidget {
     return false;
   }
 
-  // ➕ ADD / ✏️ EDIT JOB
+  // ADD /  EDIT JOB
   void _openJobDialog(BuildContext context, {DocumentSnapshot? job}) async {
     final theme = Theme.of(context);
     final uid = FirebaseAuth.instance.currentUser!.uid;
@@ -146,7 +147,7 @@ class MyJobsScreen extends StatelessWidget {
     );
   }
 
-  // 🔹 STATUS LOGIC
+  // STATUS LOGIC
   bool _isClosed(Timestamp? createdAt) {
     if (createdAt == null) return false;
     final created = createdAt.toDate();
@@ -165,6 +166,20 @@ class MyJobsScreen extends StatelessWidget {
           "My Jobs",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.workspace_premium_outlined),
+            tooltip: 'Referral Requests',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const ReferralRequestsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

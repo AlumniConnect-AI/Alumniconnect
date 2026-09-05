@@ -75,7 +75,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── 🧭 HERO BANNER ─────────────────────────────────────────────
+              // ──  HERO BANNER ─────────────────────────────────────────────
               GlassCard(
                 padding: const EdgeInsets.all(20),
                 borderColor: AppColors.accentPurple.withValues(alpha: 0.5),
@@ -148,7 +148,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
                 const SizedBox(height: 16),
               ],
 
-              // ── 📊 RESULT DISPLAY OR INPUT FORM ─────────────────────────────
+              // ──  RESULT DISPLAY OR INPUT FORM ─────────────────────────────
               if (gpsProvider.isLoading)
                 _buildLoadingState(theme)
               else if (gpsProvider.roadmap != null)
@@ -321,7 +321,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── 🏆 READINESS SCORE GAUGE ───────────────────────────────────────
+        // ──  READINESS SCORE GAUGE ───────────────────────────────────────
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(22),
@@ -369,7 +369,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
           const SizedBox(height: 24),
         ],
 
-        // ── 🎯 SKILL GAP ANALYSIS ──────────────────────────────────────────
+        // ──  SKILL GAP ANALYSIS ──────────────────────────────────────────
         const AISectionHeader(title: "Skill Gap Analysis"),
         const SizedBox(height: 10),
         Row(
@@ -409,7 +409,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
 
         const SizedBox(height: 28),
 
-        // ── 🗓 3-PHASE TIMELINE ROADMAP ─────────────────────────────────────
+        // ──  3-PHASE TIMELINE ROADMAP ─────────────────────────────────────
         const AISectionHeader(title: "Sequenced Learning Roadmap"),
         const SizedBox(height: 12),
 
@@ -458,7 +458,7 @@ class _CareerGpsScreenState extends State<CareerGpsScreen> {
 
         const SizedBox(height: 24),
 
-        // ── 🛠 RECOMMENDED HANDS-ON PROJECTS ──────────────────────────────
+        // ──  RECOMMENDED HANDS-ON PROJECTS ──────────────────────────────
         if (projects.isNotEmpty) ...[
           const AISectionHeader(title: "Target Project Portfolio"),
           const SizedBox(height: 12),

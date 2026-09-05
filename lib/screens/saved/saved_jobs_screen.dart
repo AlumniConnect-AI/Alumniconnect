@@ -118,7 +118,7 @@ class SavedJobsScreen extends StatelessWidget {
   );
 }
 
-/// 🧩 JOB CARD
+/// JOB CARD
 class _SavedJobCard extends StatelessWidget {
   final String title;
   final String subtitle;

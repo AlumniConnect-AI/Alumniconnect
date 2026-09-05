@@ -16,7 +16,7 @@ class _StaffListScreenState extends State<StaffListScreen> {
   final String currentUid = FirebaseAuth.instance.currentUser!.uid;
   String search = "";
   
-  // 🔹 Filter states
+  // Filter states
   String departmentFilter = "All";
   String positionFilter = "All";
   String officeFilter = "All";
@@ -52,13 +52,13 @@ class _StaffListScreenState extends State<StaffListScreen> {
 
           final docs = snapshot.data!.docs;
 
-          // 🔹 Dynamic filter values
+          // Dynamic filter values
           final departments = _unique(docs, 'department');
           final positions = _unique(docs, 'designation');
           final offices = _unique(docs, 'company');
 
           final staff = docs.where((doc) {
-            // 🔥 HIDE OWN PROFILE
+            // HIDE OWN PROFILE
             if (doc.id == currentUid) return false;
 
             final d = doc.data() as Map<String, dynamic>;
@@ -80,7 +80,7 @@ class _StaffListScreenState extends State<StaffListScreen> {
 
           return Column(
             children: [
-              // 🔍 SEARCH
+              // SEARCH
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: TextField(
@@ -102,13 +102,13 @@ class _StaffListScreenState extends State<StaffListScreen> {
                 ),
               ),
 
-              // 🎛 FILTERS
+              // FILTERS
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    // ✅ Mentorship Filter Chip
+                    // Mentorship Filter Chip
                     Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: FilterChip(

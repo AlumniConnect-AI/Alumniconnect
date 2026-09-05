@@ -16,22 +16,22 @@ class AuthGate extends StatelessWidget {
     final auth = context.watch<AuthProvider>();
     final user = context.watch<UserProvider>();
 
-    // ⏳ GLOBAL LOADING (WAIT FOR BOTH PROVIDERS)
+    // GLOBAL LOADING (WAIT FOR BOTH PROVIDERS)
     if (auth.isLoading || user.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    // ❌ USER NOT LOGGED IN
+    // USER NOT LOGGED IN
     if (!auth.isLoggedIn) {
       return LoginScreen();
     }
 
-    // 🧾 LOGGED IN BUT PROFILE NOT COMPLETED
+    // LOGGED IN BUT PROFILE NOT COMPLETED
     if (!user.profileCompleted) {
       return const ProfileSetupScreen();
     }
 
-    // ✅ EVERYTHING OK → MAIN APP
+    // EVERYTHING OK → MAIN APP
     return const MainShell();
   }
 }

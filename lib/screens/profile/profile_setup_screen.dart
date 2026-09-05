@@ -26,13 +26,13 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
   final locationController = TextEditingController();
   final bioController = TextEditingController();
   final linkedinController = TextEditingController();
-  final verificationCodeController = TextEditingController(); // ✅ Staff verification code controller
+  final verificationCodeController = TextEditingController(); // Staff verification code controller
 
   String _selectedRole = "Student";
   File? _imageFile;
   bool loading = false;
 
-  // 🖼️ PICK & CROP IMAGE
+  // PICK & CROP IMAGE
   Future<void> _pickAndCropImage() async {
     final picked = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -78,7 +78,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
       return;
     }
 
-    // ✅ VERIFY STAFF CODE
+    // VERIFY STAFF CODE
     if (_selectedRole == 'Staff') {
       if (verificationCodeController.text.trim() != "EMPDGVC") {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -202,7 +202,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                 ),
               ),
 
-              // ✅ STAFF VERIFICATION CODE INPUT
+              // STAFF VERIFICATION CODE INPUT
               if (_selectedRole == 'Staff')
                 _input(context, "Staff Verification Code (Compulsory)", verificationCodeController),
               

@@ -42,7 +42,7 @@ class AiAssistantScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── 🔮 AI BANNER / HEADER ───────────────────────────────────────
+              // ──  AI BANNER / HEADER ───────────────────────────────────────
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
@@ -103,7 +103,7 @@ class AiAssistantScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // ── 🔴 ERROR STATE DISPLAY ─────────────────────────────────────
+              // ──  ERROR STATE DISPLAY ─────────────────────────────────────
               if (aiProvider.error != null) ...[
                 Container(
                   width: double.infinity,
@@ -133,18 +133,18 @@ class AiAssistantScreen extends StatelessWidget {
                 const SizedBox(height: 20),
               ],
 
-              // ── ⏳ LOADING STATE ───────────────────────────────────────────
+              // ──  LOADING STATE ───────────────────────────────────────────
               if (aiProvider.isLoading)
                 const AILoadingWidget()
 
-              // ── 🏆 RESULT STATE ────────────────────────────────────────────
+              // ──  RESULT STATE ────────────────────────────────────────────
               else if (aiProvider.result != null)
                 AIResultWidget(
                   result: aiProvider.result!,
                   onRetry: () => aiProvider.reset(),
                 )
 
-              // ── 📝 INPUT STATE ─────────────────────────────────────────────
+              // ──  INPUT STATE ─────────────────────────────────────────────
               else
                 AIInputWidget(
                   isLoading: aiProvider.isLoading,

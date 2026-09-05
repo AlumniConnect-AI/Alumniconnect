@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class UploadService {
   static final SupabaseClient _client = Supabase.instance.client;
 
-  // ⚠️ DOUBLE CHECK: This must match your Supabase Dashboard bucket name exactly
+  // DOUBLE CHECK: This must match your Supabase Dashboard bucket name exactly
   static const String bucketName = "alumni-files";
 
   /// Upload file to Supabase Storage

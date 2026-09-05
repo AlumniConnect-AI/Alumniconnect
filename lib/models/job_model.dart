@@ -21,7 +21,7 @@ class JobModel {
     required this.createdAt,
   });
 
-  // 🔁 Firestore → Model
+  // Firestore → Model
   factory JobModel.fromMap(Map<String, dynamic> map, String id) {
     return JobModel(
       id: id,
@@ -36,7 +36,7 @@ class JobModel {
     );
   }
 
-  // 🔁 Model → Firestore
+  // Model → Firestore
   Map<String, dynamic> toMap() {
     return {
       'designation': designation,

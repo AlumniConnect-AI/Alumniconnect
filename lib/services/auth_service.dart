@@ -5,7 +5,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // 🔐 Register
+  // Register
   Future<User?> register({
     required String name,
     required String email,
@@ -29,7 +29,7 @@ class AuthService {
     return cred.user;
   }
 
-  // 🔐 Login
+  // Login
   Future<User?> login(String email, String password) async {
     final cred = await _auth.signInWithEmailAndPassword(
       email: email,
@@ -38,11 +38,11 @@ class AuthService {
     return cred.user;
   }
 
-  // 🚪 Logout
+  // Logout
   Future<void> logout() async {
     await _auth.signOut();
   }
 
-  // 👤 Current user
+  // Current user
   User? get currentUser => _auth.currentUser;
 }

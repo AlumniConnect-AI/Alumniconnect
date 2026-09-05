@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// 🔹 Providers
+// Providers
 import 'providers/auth_provider.dart';
 import 'providers/user_provider.dart';
 import 'providers/theme_provider.dart';
@@ -9,7 +9,7 @@ import 'providers/ai_provider.dart';
 import 'providers/career_gps_provider.dart';
 import 'providers/alumni_skill_provider.dart';
 
-// 🔹 Screens
+// Screens
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/profile/profile_setup_screen.dart';
@@ -21,7 +21,7 @@ import 'screens/ai/ai_hub_screen.dart';
 import 'screens/ai/career_gps_screen.dart';
 import 'screens/ai/alumni_skill_screen.dart';
 
-// 🎨 Theme
+// Theme
 import 'config/theme.dart';
 
 class AlumniConnectApp extends StatelessWidget {
@@ -47,7 +47,7 @@ class AlumniConnectApp extends StatelessWidget {
             darkTheme: AppTheme.darkTheme,
             themeMode: themeProvider.themeMode,
             
-            // ✅ Directly show SplashScreen as the home
+            // Directly show SplashScreen as the home
             home: const SplashScreen(),
             
             routes: {

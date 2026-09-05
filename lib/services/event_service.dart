@@ -4,12 +4,12 @@ import '../models/event_model.dart';
 class EventService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // ➕ Add event
+  // Add event
   Future<void> addEvent(EventModel event) async {
     await _db.collection("events").add(event.toMap());
   }
 
-  // 📥 Get all events
+  // Get all events
   Future<List<EventModel>> getEvents() async {
     final snap = await _db
         .collection("events")
@@ -21,12 +21,12 @@ class EventService {
         .toList();
   }
 
-  // ✏️ Update event
+  // Update event
   Future<void> updateEvent(String id, Map<String, dynamic> data) async {
     await _db.collection("events").doc(id).update(data);
   }
 
-  // 🗑️ Delete event
+  // Delete event
   Future<void> deleteEvent(String id) async {
     await _db.collection("events").doc(id).delete();
   }

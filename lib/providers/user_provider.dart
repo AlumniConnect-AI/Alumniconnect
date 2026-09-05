@@ -12,7 +12,7 @@ class UserProvider extends ChangeNotifier {
 
   void _init() {
     FirebaseAuth.instance.authStateChanges().listen((user) async {
-      // 🔴 USER LOGGED OUT
+      // USER LOGGED OUT
       if (user == null) {
         profileCompleted = false;
         isLoading = false;

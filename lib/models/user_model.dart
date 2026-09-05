@@ -39,7 +39,7 @@ class UserModel {
     this.engagementStats = const {},
   });
 
-  // 🔁 Firestore → Model
+  // Firestore → Model
   factory UserModel.fromMap(Map<String, dynamic> map, String uid) {
     return UserModel(
       uid: uid,
@@ -62,7 +62,7 @@ class UserModel {
     );
   }
 
-  // 🔁 Model → Firestore
+  // Model → Firestore
   Map<String, dynamic> toMap() {
     return {
       'name': name,

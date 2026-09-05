@@ -61,7 +61,7 @@ class _UserListScreenState extends State<UserListScreen> {
       ),
       body: Column(
         children: [
-          // 🔍 SEARCH BAR
+          // SEARCH BAR
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
@@ -79,7 +79,7 @@ class _UserListScreenState extends State<UserListScreen> {
             ),
           ),
 
-          // 👥 USER LIST
+          // USER LIST
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
@@ -175,7 +175,7 @@ class _UserListScreenState extends State<UserListScreen> {
             ),
           ),
 
-          // 💬 MUTUAL FOLLOW CHAT
+          // MUTUAL FOLLOW CHAT
           StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('followers')

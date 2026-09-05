@@ -3,7 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// 🛑 TOP-LEVEL background handler (Must be outside any class)
+// TOP-LEVEL background handler (Must be outside any class)
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -89,6 +89,27 @@ class NotificationService {
           ),
         ),
       );
+    }
+  }
+
+  /// Sends an in-app notification document to Firestore
+  static Future<void> sendNotification({
+    required String toUserId,
+    required String title,
+    required String body,
+    Map<String, dynamic>? data,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection('notifications').add({
+        'toUserId': toUserId,
+        'title': title,
+        'body': body,
+        'data': data ?? {},
+        'isRead': false,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error sending notification: $e');
     }
   }
 }
