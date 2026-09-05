@@ -49,8 +49,8 @@ class BottomNavBar extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Container(
-        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-        height: 68,
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+        height: 72,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
@@ -101,86 +101,94 @@ class BottomNavBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          AnimatedScale(
-                            duration: const Duration(milliseconds: 250),
-                            scale: selected ? 1.12 : 1.0,
-                            curve: Curves.easeOutCubic,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              clipBehavior: Clip.none,
-                              children: [
-                                // ── Liquid Glass Hover Pill ─────────────────
-                                AnimatedContainer(
-                                  duration: const Duration(milliseconds: 280),
-                                  curve: Curves.easeOutBack,
-                                  height: selected ? 38 : 0,
-                                  width: selected ? 38 : 0,
-                                  decoration: BoxDecoration(
-                                    gradient: selected
-                                        ? AppGradients.neonCyanPurple
-                                        : null,
-                                    shape: BoxShape.circle,
-                                    boxShadow: selected
-                                        ? [
-                                            BoxShadow(
-                                              color: AppColors.primaryNeon
-                                                  .withOpacity(0.45),
-                                              blurRadius: 12,
-                                              spreadRadius: 1,
-                                            ),
-                                          ]
-                                        : [],
+                          SizedBox(
+                            height: 34,
+                            child: AnimatedScale(
+                              duration: const Duration(milliseconds: 220),
+                              scale: selected ? 1.06 : 1.0,
+                              curve: Curves.easeOutCubic,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                clipBehavior: Clip.none,
+                                children: [
+                                  // ── Liquid Glass Hover Pill ─────────────────
+                                  AnimatedContainer(
+                                    duration: const Duration(milliseconds: 220),
+                                    curve: Curves.easeInOutCubic,
+                                    height: selected ? 34 : 0,
+                                    width: selected ? 34 : 0,
+                                    decoration: BoxDecoration(
+                                      gradient: selected
+                                          ? AppGradients.neonCyanPurple
+                                          : null,
+                                      shape: BoxShape.circle,
+                                      boxShadow: selected
+                                          ? [
+                                              BoxShadow(
+                                                color: AppColors.primaryNeon
+                                                    .withOpacity(0.35),
+                                                blurRadius: 10,
+                                                spreadRadius: 0,
+                                              ),
+                                            ]
+                                          : [],
+                                    ),
                                   ),
-                                ),
-                                Icon(
-                                  selected
-                                      ? items[index].activeIcon
-                                      : items[index].inactiveIcon,
-                                  size: 20,
+                                  Icon(
+                                    selected
+                                        ? items[index].activeIcon
+                                        : items[index].inactiveIcon,
+                                    size: 19,
+                                    color: selected
+                                        ? Colors.white
+                                        : (isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondary),
+                                  ),
+                                  // ── Unread badge (student Messages) ──────
+                                  if (index == messagesIndex && uid != null)
+                                    Positioned(
+                                      top: -4,
+                                      right: -4,
+                                      child: _UnreadBadge(uid: uid),
+                                    ),
+                                  // ── Pending mentorship badge (alumni) ────
+                                  if (isAlumni && index == 1 && uid != null)
+                                    Positioned(
+                                      top: -4,
+                                      right: -4,
+                                      child: _MentorshipBadge(uid: uid),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: AnimatedDefaultTextStyle(
+                                duration: const Duration(milliseconds: 200),
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: selected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
                                   color: selected
-                                      ? Colors.white
+                                      ? (isDark
+                                          ? AppColors.primaryNeon
+                                          : AppColors.accentPurple)
                                       : (isDark
                                           ? AppColors.textSecondaryDark
                                           : AppColors.textSecondary),
+                                  letterSpacing: 0.1,
                                 ),
-                                // ── Unread badge (student Messages) ──────
-                                if (index == messagesIndex && uid != null)
-                                  Positioned(
-                                    top: -4,
-                                    right: -4,
-                                    child: _UnreadBadge(uid: uid),
-                                  ),
-                                // ── Pending mentorship badge (alumni) ────
-                                if (isAlumni && index == 1 && uid != null)
-                                  Positioned(
-                                    top: -4,
-                                    right: -4,
-                                    child: _MentorshipBadge(uid: uid),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 3),
-                          AnimatedDefaultTextStyle(
-                            duration: const Duration(milliseconds: 200),
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: selected
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              color: selected
-                                  ? (isDark
-                                      ? AppColors.primaryNeon
-                                      : AppColors.accentPurple)
-                                  : (isDark
-                                      ? AppColors.textSecondaryDark
-                                      : AppColors.textSecondary),
-                              letterSpacing: 0.1,
-                            ),
-                            child: Text(
-                              items[index].label,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                                child: Text(
+                                  items[index].label,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
                             ),
                           ),
                         ],
