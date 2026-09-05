@@ -7,7 +7,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/theme.dart';
 import '../../services/meeting_service.dart';
+import '../../services/upload_service.dart';
+import '../../services/referral_service.dart';
 import '../chat/chat_screen.dart';
+import '../alumni/alumni_profile_screen.dart';
+import 'job_referral_application_screen.dart';
 
 class JobDetailScreen extends StatefulWidget {
   final String jobId;
@@ -358,55 +362,54 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       const SizedBox(height: 40),
 
                       // ── ACTION BUTTONS ────────────────────────────────
-                      if (isOwner)
-                        // Owner sees "View Applicants" instead of Apply
-                        _ViewApplicantsButton(jobId: widget.jobId, jobTitle: d['designation'] ?? '')
-                      else
+                      if (!isOwner)
                         Row(
                           children: [
                             Expanded(
-                              child: OutlinedButton(
+                              child: OutlinedButton.icon(
                                 onPressed: _saveJob,
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(color: AppColors.primary),
+                                  padding: const EdgeInsets.symmetric(vertical: 14),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
                                 ),
-                                child: const Text("Save Job",
-                                    style: TextStyle(color: AppColors.primary)),
+                                icon: const Icon(Icons.bookmark_outline,
+                                    size: 18, color: AppColors.primary),
+                                label: const Text("Save Job",
+                                    style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14)),
                               ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
                               child: ElevatedButton.icon(
-                                onPressed: (_hasApplied || _applying)
-                                    ? null
-                                    : () => _applyNow(d),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => JobReferralApplicationScreen(
+                                      jobId: widget.jobId,
+                                      jobData: d,
+                                    ),
+                                  ),
+                                ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: _hasApplied
-                                      ? Colors.grey
-                                      : AppColors.primaryNeon,
+                                  backgroundColor: AppColors.primaryNeon,
                                   foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(vertical: 14),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
+                                  elevation: 2,
                                 ),
-                                icon: _applying
-                                    ? const SizedBox(
-                                        width: 14,
-                                        height: 14,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                            color: Colors.black))
-                                    : Icon(
-                                        _hasApplied
-                                            ? Icons.check_circle
-                                            : Icons.send,
-                                        size: 16),
-                                label: Text(_applying
-                                    ? 'Applying...'
-                                    : _hasApplied
-                                        ? 'Applied ✓'
-                                        : 'Apply Now'),
+                                icon: const Icon(Icons.workspace_premium,
+                                    size: 18, color: Colors.black),
+                                label: const Text("Ask for Referral",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14)),
                               ),
                             ),
                           ],
