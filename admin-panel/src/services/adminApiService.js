@@ -148,6 +148,28 @@ export async function fetchFirebaseUsers(filters = {}) {
   return dataEngine.getFirebaseUsers(filters);
 }
 
+import firestoreUserService from "./firestoreUserService";
+
+export async function fetchFirestoreUsers(filters = {}) {
+  return firestoreUserService.getFilteredUsers(filters);
+}
+
+export async function fetchFirestoreStudents(filters = {}) {
+  return firestoreUserService.getStudents(filters);
+}
+
+export async function fetchFirestoreAlumni(filters = {}) {
+  return firestoreUserService.getAlumni(filters);
+}
+
+export async function fetchFirestoreStaff(filters = {}) {
+  return firestoreUserService.getStaff(filters);
+}
+
+export async function fetchFirestoreUserStats() {
+  return firestoreUserService.getUserStatistics();
+}
+
 export async function loginAdmin(email, password) {
   if (email && password) {
     return { success: true, user: { ...INITIAL_ADMIN_PROFILE, email } };
@@ -158,3 +180,4 @@ export async function loginAdmin(email, password) {
 export async function signupAdmin(adminData) {
   return { success: true, user: { ...INITIAL_ADMIN_PROFILE, ...adminData } };
 }
+
