@@ -2,12 +2,19 @@
 // Serves as the single source of truth supporting full CRUD, live updates, 
 // dynamic KPI recalculation, filtering, and real-time subscription listeners.
 
-import { subscribeToRealtimeData, subscribeToFirestoreCollection } from "./firebase";
-
-// Standby Firestore Service Handlers for dataEngine
-const fetchUsers = async () => [];
-const fetchJobs = async () => [];
-const fetchFirestoreReports = async () => [];
+// Firebase Realtime Database integration
+import {
+  checkFirebaseConnection,
+  seedFirebaseIfEmpty,
+  fbGetUniversities, fbSetUniversities, fbAddUniversity, fbUpdateUniversity, fbDeleteUniversity,
+  fbGetInstitutions, fbSetInstitutions, fbAddInstitution, fbUpdateInstitution, fbDeleteInstitution,
+  fbGetStudents, fbSetStudents, fbAddStudent, fbUpdateStudent, fbDeleteStudent,
+  fbGetCourses, fbSetCourses,
+  fbGetReports, fbAddReport,
+  fbGetSyncLogs, fbAddSyncLog,
+  fbGetAdminUsers, fbAddAdminUser, fbUpdateAdminUser, fbDeleteAdminUser,
+  fbSubscribeToCollection
+} from "./firebaseService";
 
 const STORAGE_KEYS = {
   UNIVERSITIES: "admin_data_universities_v3",
@@ -184,58 +191,83 @@ class AdminDataEngine {
     this.syncLogs = loadStorage(STORAGE_KEYS.SYNC_LOGS, INITIAL_SYNC_LOGS);
     this.adminUsers = loadStorage(STORAGE_KEYS.ADMIN_USERS, INITIAL_ADMIN_USERS);
     this.listeners = new Set();
-    this.initFirebaseListeners();
+    this.fbConnected = false;
+    this._fbUnsubscribers = [];
+    // Bootstrap Firebase connection asynchronously
+    this._initFirebase();
   }
 
-  // Initialize Live Firebase Listeners
-  initFirebaseListeners() {
-    // Listen to Firebase Realtime Database for live students
-    subscribeToRealtimeData("students", (liveStudents, hasData) => {
-      if (hasData && liveStudents && liveStudents.length > 0) {
-        this.students = liveStudents;
-        saveStorage(STORAGE_KEYS.STUDENTS, this.students);
-        this.addSyncLog({
-          entity: "Firebase Realtime Database: Students",
-          source: "alumniconnect-722b6.firebasedatabase.app",
-          recordsProcessed: liveStudents.length,
-          status: "Live Realtime Synced",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-        });
-        this.notify();
-      }
-    });
+  // ---- Firebase Bootstrap ----
+  async _initFirebase() {
+    try {
+      const connected = await checkFirebaseConnection();
+      if (!connected) { console.warn("[DataEngine] Firebase offline — running in local mode"); return; }
+      this.fbConnected = true;
+      console.log("[DataEngine] Firebase RTDB connected ✓");
 
-    // Listen to Firebase Realtime Database for live universities
-    subscribeToRealtimeData("universities", (liveUnivs, hasData) => {
-      if (hasData && liveUnivs && liveUnivs.length > 0) {
-        this.universities = liveUnivs;
-        saveStorage(STORAGE_KEYS.UNIVERSITIES, this.universities);
-        this.notify();
-      }
-    });
+      // Seed data into Firebase if collections are empty
+      const seedResult = await seedFirebaseIfEmpty({
+        UNIVERSITIES: INITIAL_UNIVERSITIES,
+        INSTITUTIONS: INITIAL_INSTITUTIONS,
+        STUDENTS: INITIAL_STUDENTS,
+        COURSES: INITIAL_COURSES,
+        REPORTS: INITIAL_REPORTS,
+        SYNC_LOGS: INITIAL_SYNC_LOGS,
+        ADMIN_USERS: INITIAL_ADMIN_USERS
+      });
+      console.log("[DataEngine] Firebase seed result:", seedResult);
 
-    // Listen to Firebase Realtime Database for live institutions/colleges
-    subscribeToRealtimeData("institutions", (liveInsts, hasData) => {
-      if (hasData && liveInsts && liveInsts.length > 0) {
-        this.institutions = liveInsts;
-        saveStorage(STORAGE_KEYS.INSTITUTIONS, this.institutions);
-        this.notify();
-      }
-    });
+      // Load latest data from Firebase into memory
+      await this._loadFromFirebase();
 
-    // Listen to Firestore 'users' collection
-    subscribeToFirestoreCollection("users", (firestoreUsers, hasData) => {
-      if (hasData && firestoreUsers && firestoreUsers.length > 0) {
-        this.addSyncLog({
-          entity: "Firebase Cloud Firestore: Users",
-          source: "alumniconnect-722b6",
-          recordsProcessed: firestoreUsers.length,
-          status: "Live Realtime Synced",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-        });
-        this.notify();
-      }
+      // Attach real-time listeners for live updates
+      this._attachLiveListeners();
+
+      this.addSyncLog({
+        entity: "Firebase Realtime Database — All India Education Records",
+        source: "Firebase RTDB (asia-southeast1)",
+        recordsProcessed: this.students.length + this.universities.length + this.institutions.length,
+        status: "Validated & Synced",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      });
+      this.notify();
+    } catch (err) {
+      console.warn("[DataEngine] Firebase init failed, running offline:", err.message);
+    }
+  }
+
+  async _loadFromFirebase() {
+    const [univs, insts, studs, crss, reps, logs, admins] = await Promise.all([
+      fbGetUniversities(), fbGetInstitutions(), fbGetStudents(),
+      fbGetCourses(), fbGetReports(), fbGetSyncLogs(), fbGetAdminUsers()
+    ]);
+    if (univs.length)  { this.universities = univs;  saveStorage(STORAGE_KEYS.UNIVERSITIES, univs); }
+    if (insts.length)  { this.institutions = insts;  saveStorage(STORAGE_KEYS.INSTITUTIONS, insts); }
+    if (studs.length)  { this.students = studs;      saveStorage(STORAGE_KEYS.STUDENTS, studs); }
+    if (crss.length)   { this.courses = crss;         saveStorage(STORAGE_KEYS.COURSES, crss); }
+    if (reps.length)   { this.reports = reps;          saveStorage(STORAGE_KEYS.REPORTS, reps); }
+    if (logs.length)   { this.syncLogs = logs;         saveStorage(STORAGE_KEYS.SYNC_LOGS, logs); }
+    if (admins.length) { this.adminUsers = admins;     saveStorage(STORAGE_KEYS.ADMIN_USERS, admins); }
+    console.log(`[DataEngine] Loaded from Firebase: ${studs.length} students, ${univs.length} universities, ${insts.length} institutions`);
+  }
+
+  _attachLiveListeners() {
+    const collectionsToWatch = [
+      { key: "UNIVERSITIES", setter: (data) => { this.universities = data; saveStorage(STORAGE_KEYS.UNIVERSITIES, data); } },
+      { key: "INSTITUTIONS", setter: (data) => { this.institutions = data; saveStorage(STORAGE_KEYS.INSTITUTIONS, data); } },
+      { key: "STUDENTS",     setter: (data) => { this.students = data;     saveStorage(STORAGE_KEYS.STUDENTS, data); } },
+      { key: "COURSES",      setter: (data) => { this.courses = data;      saveStorage(STORAGE_KEYS.COURSES, data); } },
+      { key: "REPORTS",      setter: (data) => { this.reports = data;      saveStorage(STORAGE_KEYS.REPORTS, data); } },
+      { key: "SYNC_LOGS",    setter: (data) => { this.syncLogs = data;     saveStorage(STORAGE_KEYS.SYNC_LOGS, data); } },
+      { key: "ADMIN_USERS",  setter: (data) => { this.adminUsers = data;   saveStorage(STORAGE_KEYS.ADMIN_USERS, data); } }
+    ];
+    collectionsToWatch.forEach(({ key, setter }) => {
+      const unsub = fbSubscribeToCollection(key, (data) => {
+        if (data && data.length > 0) { setter(data); this.notify(); }
+      });
+      this._fbUnsubscribers.push(unsub);
     });
+    console.log("[DataEngine] Real-time Firebase listeners attached for all collections ✓");
   }
 
   // PubSub Listener Setup
@@ -250,23 +282,13 @@ class AdminDataEngine {
     });
   }
 
-  // Sync with Firestore Real Database if Available
+  // Sync with Firebase Realtime Database
   async syncWithFirestore() {
     try {
-      const users = await fetchUsers();
-      if (users && users.length > 0) {
-        const firestoreReports = await fetchFirestoreReports();
-        const firestoreJobs = await fetchJobs();
-        this.addSyncLog({
-          entity: "AlumniConnect Firestore Database",
-          source: "Firebase Cloud Firestore",
-          recordsProcessed: users.length + firestoreJobs.length + firestoreReports.length,
-          status: "Validated & Synced",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        });
-      }
+      await this._loadFromFirebase();
+      this.notify();
     } catch (err) {
-      console.log("Firestore integration standby mode:", err.message);
+      console.log("Firebase sync standby mode:", err.message);
     }
   }
 
@@ -339,6 +361,7 @@ class AdminDataEngine {
     };
     this.institutions.unshift(newInst);
     saveStorage(STORAGE_KEYS.INSTITUTIONS, this.institutions);
+    if (this.fbConnected) fbAddInstitution(newInst).catch(e => console.warn("[FB] addInstitution:", e.message));
     this.notify();
     return newInst;
   }
@@ -348,6 +371,7 @@ class AdminDataEngine {
     if (idx !== -1) {
       this.institutions[idx] = { ...this.institutions[idx], ...updatedFields };
       saveStorage(STORAGE_KEYS.INSTITUTIONS, this.institutions);
+      if (this.fbConnected) fbUpdateInstitution(id, updatedFields).catch(e => console.warn("[FB] updateInstitution:", e.message));
       this.notify();
       return this.institutions[idx];
     }
@@ -356,8 +380,8 @@ class AdminDataEngine {
 
   deleteInstitution(id) {
     this.institutions = this.institutions.filter((i) => i.id !== id);
-    // Also cleanup students associated with this college if needed
     saveStorage(STORAGE_KEYS.INSTITUTIONS, this.institutions);
+    if (this.fbConnected) fbDeleteInstitution(id).catch(e => console.warn("[FB] deleteInstitution:", e.message));
     this.notify();
     return true;
   }
@@ -414,6 +438,7 @@ class AdminDataEngine {
     };
     this.universities.unshift(newUniv);
     saveStorage(STORAGE_KEYS.UNIVERSITIES, this.universities);
+    if (this.fbConnected) fbAddUniversity(newUniv).catch(e => console.warn("[FB] addUniversity:", e.message));
     this.notify();
     return newUniv;
   }
@@ -423,6 +448,7 @@ class AdminDataEngine {
     if (idx !== -1) {
       this.universities[idx] = { ...this.universities[idx], ...updatedFields };
       saveStorage(STORAGE_KEYS.UNIVERSITIES, this.universities);
+      if (this.fbConnected) fbUpdateUniversity(id, updatedFields).catch(e => console.warn("[FB] updateUniversity:", e.message));
       this.notify();
       return this.universities[idx];
     }
@@ -432,6 +458,7 @@ class AdminDataEngine {
   deleteUniversity(id) {
     this.universities = this.universities.filter((u) => u.id !== id);
     saveStorage(STORAGE_KEYS.UNIVERSITIES, this.universities);
+    if (this.fbConnected) fbDeleteUniversity(id).catch(e => console.warn("[FB] deleteUniversity:", e.message));
     this.notify();
     return true;
   }
@@ -587,6 +614,7 @@ class AdminDataEngine {
 
     this.students.unshift(newStudent);
     saveStorage(STORAGE_KEYS.STUDENTS, this.students);
+    if (this.fbConnected) fbAddStudent(newStudent).catch(e => console.warn("[FB] addStudent:", e.message));
     this.notify();
     return newStudent;
   }
@@ -596,6 +624,7 @@ class AdminDataEngine {
     if (idx !== -1) {
       this.students[idx] = { ...this.students[idx], ...fields };
       saveStorage(STORAGE_KEYS.STUDENTS, this.students);
+      if (this.fbConnected) fbUpdateStudent(id, fields).catch(e => console.warn("[FB] updateStudent:", e.message));
       this.notify();
       return this.students[idx];
     }
@@ -607,6 +636,7 @@ class AdminDataEngine {
     this.students = this.students.filter((s) => s.id !== id && s.studentId !== id);
     if (this.students.length < initialCount) {
       saveStorage(STORAGE_KEYS.STUDENTS, this.students);
+      if (this.fbConnected) fbDeleteStudent(id).catch(e => console.warn("[FB] deleteStudent:", e.message));
       this.notify();
       return true;
     }
