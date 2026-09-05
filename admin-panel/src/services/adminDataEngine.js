@@ -2,6 +2,8 @@
 // Serves as the single source of truth supporting full CRUD, live updates, 
 // dynamic KPI recalculation, filtering, and real-time subscription listeners.
 
+import { subscribeToRealtimeData, subscribeToFirestoreCollection } from "./firebase";
+
 // Standby Firestore Service Handlers for dataEngine
 const fetchUsers = async () => [];
 const fetchJobs = async () => [];
@@ -182,6 +184,58 @@ class AdminDataEngine {
     this.syncLogs = loadStorage(STORAGE_KEYS.SYNC_LOGS, INITIAL_SYNC_LOGS);
     this.adminUsers = loadStorage(STORAGE_KEYS.ADMIN_USERS, INITIAL_ADMIN_USERS);
     this.listeners = new Set();
+    this.initFirebaseListeners();
+  }
+
+  // Initialize Live Firebase Listeners
+  initFirebaseListeners() {
+    // Listen to Firebase Realtime Database for live students
+    subscribeToRealtimeData("students", (liveStudents, hasData) => {
+      if (hasData && liveStudents && liveStudents.length > 0) {
+        this.students = liveStudents;
+        saveStorage(STORAGE_KEYS.STUDENTS, this.students);
+        this.addSyncLog({
+          entity: "Firebase Realtime Database: Students",
+          source: "alumniconnect-722b6.firebasedatabase.app",
+          recordsProcessed: liveStudents.length,
+          status: "Live Realtime Synced",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        });
+        this.notify();
+      }
+    });
+
+    // Listen to Firebase Realtime Database for live universities
+    subscribeToRealtimeData("universities", (liveUnivs, hasData) => {
+      if (hasData && liveUnivs && liveUnivs.length > 0) {
+        this.universities = liveUnivs;
+        saveStorage(STORAGE_KEYS.UNIVERSITIES, this.universities);
+        this.notify();
+      }
+    });
+
+    // Listen to Firebase Realtime Database for live institutions/colleges
+    subscribeToRealtimeData("institutions", (liveInsts, hasData) => {
+      if (hasData && liveInsts && liveInsts.length > 0) {
+        this.institutions = liveInsts;
+        saveStorage(STORAGE_KEYS.INSTITUTIONS, this.institutions);
+        this.notify();
+      }
+    });
+
+    // Listen to Firestore 'users' collection
+    subscribeToFirestoreCollection("users", (firestoreUsers, hasData) => {
+      if (hasData && firestoreUsers && firestoreUsers.length > 0) {
+        this.addSyncLog({
+          entity: "Firebase Cloud Firestore: Users",
+          source: "alumniconnect-722b6",
+          recordsProcessed: firestoreUsers.length,
+          status: "Live Realtime Synced",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        });
+        this.notify();
+      }
+    });
   }
 
   // PubSub Listener Setup
